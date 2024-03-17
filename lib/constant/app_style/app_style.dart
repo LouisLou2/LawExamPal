@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 
 class AppStyles {
   static const String headerFontFamily = "Roboto";
+  static const iconTextStyle = TextStyle(
+    fontFamily: headerFontFamily,
+    fontSize: 20,
+    letterSpacing: 0.5,
+  );
   static const TextStyle titleLarge = TextStyle(
     fontFamily: headerFontFamily,
     fontWeight: FontWeight.bold,

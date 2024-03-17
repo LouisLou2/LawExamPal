@@ -7,7 +7,7 @@ class PathManager{
   static late String _tempPath;
   static const String _picLoc = 'camera_awesome_pic';
   static late String _picPath;
-  static List<String> _picPaths = [];
+  static final List<String> _picPaths = [];
   static _initTempDir() async{
     final Directory tempDir = await getTemporaryDirectory();
     PathManager._tempPath = tempDir.path;

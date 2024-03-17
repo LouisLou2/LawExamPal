@@ -1,7 +1,15 @@
 import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:easy_cse/gui/widget/decorations/guide_line.dart';
+import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
+import 'package:easy_cse/service/image_manger.dart';
 import 'package:easy_cse/service/path_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
+
+import '../../constant/app_style/app_color.dart';
+import '../../dev_change/camerawesome/awesome_capture_button.dart';
 class SnapPicPage extends StatefulWidget {
   const SnapPicPage({Key? key}) : super(key: key);
 
@@ -10,7 +18,7 @@ class SnapPicPage extends StatefulWidget {
 }
 
 class _SnapPicPageState extends State<SnapPicPage> {
-   Future<CaptureRequest> pathBuilder(List<Sensor> sensors) async{
+   Future<CaptureRequest> _pathBuilder(List<Sensor> sensors) async{
     if (sensors.length == 1) {
       return SingleCaptureRequest(await PathManager.makePhotoPath(0),sensors.first);
     } else {
@@ -23,15 +31,47 @@ class _SnapPicPageState extends State<SnapPicPage> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return CameraAwesomeBuilder.awesome(
       saveConfig: SaveConfig.photo(
-        pathBuilder: pathBuilder,
+        pathBuilder: _pathBuilder,
       ),
       onMediaTap: (mediaCapture) {
         OpenFile.open(PathManager.lastPicPath);
       },
+      bottomActionsBuilder: (state) => AwesomeBottomActions(
+        state: state,
+        /*修改了camerawesome-2.0.1\lib\src\widgets\buttons\awesome_capture_button.dart源码，
+        因为要使用onPhoto可能需要使用custome模式自定义界面，这里仍然使用插件buildIn UI,但是需要再照片刚刚拍下来，
+        就执行某个逻辑，所以增加了这个属性。
+        */
+        captureButton: AwesomeCaptureButton1(
+          state: state,
+          onPhoto: (request)=>ImageManager.cropImage(PathManager.lastPicPath),
+        ),
+        left: IconTextButton(
+          icon: Icons.folder_copy_outlined,
+          text: 'History',
+          onTap: () {},
+          color: AppColors.white1,
+          size: 150.w,
+        ),
+        right: IconTextButton(
+          icon: Icons.photo_outlined,
+          text: 'Gallery',
+          onTap: ()=>ImageManager.editImgFromGallery(),
+          color: AppColors.white1,
+          size: 150.w,
+        ),
+      ),
+      middleContentBuilder: (state)=>LayoutBuilder(
+        builder: (context, constraints)=>GuideLineWidget(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+        ),
+      ),
     );
   }
 }

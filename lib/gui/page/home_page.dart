@@ -1,8 +1,8 @@
 import 'package:easy_cse/constant/app_style/ui_params.dart';
-import 'package:easy_cse/gui/widget/color_box.dart';
-import 'package:easy_cse/gui/widget/decorated_avatar.dart';
-import 'package:easy_cse/gui/widget/headline.dart';
-import 'package:easy_cse/gui/widget/short_info_tile.dart';
+import 'package:easy_cse/gui/widget/info_display/color_box.dart';
+import 'package:easy_cse/gui/widget/decorations/decorated_avatar.dart';
+import 'package:easy_cse/gui/widget/info_display/headline.dart';
+import 'package:easy_cse/gui/widget/info_display/short_info_tile.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/util/color_util.dart';
@@ -179,6 +179,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.article,
             title: "Read & Write",
             spec: "read and write articles",
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.edit_image),
           ),
         ),
         StaggeredGridTile.count(

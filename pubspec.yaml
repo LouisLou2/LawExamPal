@@ -41,6 +41,9 @@ dependencies:
   camerawesome: ^2.0.0
   open_file: ^3.3.2
   path_provider: ^2.1.2
+  image_picker: ^1.0.7
+  image_cropper: ^5.0.1
+  permission_handler: ^11.3.0
   intl:
 
 dev_dependencies:

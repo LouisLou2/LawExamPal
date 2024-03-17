@@ -1,8 +1,8 @@
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/app_style/app_color.dart';
-import '../../constant/app_style/app_style.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../../constant/app_style/app_style.dart';
 
 class HeadLine extends StatelessWidget {
   final String title;
