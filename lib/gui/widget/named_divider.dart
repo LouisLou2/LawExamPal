@@ -17,7 +17,7 @@ class NamedDivider extends StatelessWidget {
     this.height = 1,
     this.width = 0,
     this.dividerColor = Colors.grey,
-    this.fontSize = 16,
+    this.fontSize = 14,
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.center,
     this.margin=10.0,

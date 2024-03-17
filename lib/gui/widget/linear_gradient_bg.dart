@@ -8,17 +8,20 @@ class LinearGradientBg extends StatelessWidget{
   final bool? withShadow;
   final List<Color>colorGroup;
   final Widget child;
+  final double? borderRadius;
 
   const LinearGradientBg({
     super.key,
     required this.colorGroup,
     required this.child,
     this.withShadow=false,
+    this.borderRadius,
   });
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
+        borderRadius: borderRadius!=null?BorderRadius.circular(borderRadius!):null,
         boxShadow: [
           BoxShadow(
             color: AppColors.freshBlueGroup[0].withOpacity(0.3),

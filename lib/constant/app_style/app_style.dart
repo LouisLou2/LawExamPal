@@ -18,7 +18,7 @@ class AppStyles {
   static TextStyle textBtnOrLinkStyle =const TextStyle(
     fontFamily: headerFontFamily,
     color: AppColors.silentBlue,
-    fontSize: 16,
+    fontSize: 20,
     letterSpacing: 0.5,
   );
   static const textFormFieldBorder = OutlineInputBorder(

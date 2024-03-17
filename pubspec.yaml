@@ -38,6 +38,9 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_staggered_grid_view: ^0.7.0
   google_fonts: ^6.2.1
+  camerawesome: ^2.0.0
+  open_file: ^3.3.2
+  path_provider: ^2.1.2
   intl:
 
 dev_dependencies:

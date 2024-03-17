@@ -4,6 +4,8 @@ import 'package:easy_cse/gui/widget/decorated_avatar.dart';
 import 'package:easy_cse/gui/widget/headline.dart';
 import 'package:easy_cse/gui/widget/short_info_tile.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
+import 'package:easy_cse/service/path_manager.dart';
 import 'package:easy_cse/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,10 @@ class TestHome2 extends StatefulWidget{
   State<TestHome2> createState()=>_TestHomeState();
 }
 class _TestHomeState extends State<TestHome2>{
-
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,6 +168,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: CupertinoIcons.camera,
             title: "Snap to Solve",
             spec: "snap a photo to ask questions",
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.snap_pic),
           ),
         ),
         StaggeredGridTile.count(

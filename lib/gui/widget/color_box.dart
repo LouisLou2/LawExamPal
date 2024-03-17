@@ -12,6 +12,7 @@ class ColorBox extends StatelessWidget {
   final double size;
   final String? spec;
   final bool? isSmall;
+  final VoidCallback? onTap;
   const ColorBox({
     Key? key,
     required this.color,
@@ -19,6 +20,7 @@ class ColorBox extends StatelessWidget {
     required this.title,
     this.spec,
     this.isSmall=false, required this.size,
+    this.onTap,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -38,45 +40,48 @@ class ColorBox extends StatelessWidget {
         gradient: AppStyles.getDarkLinearGradient(color),
         borderRadius: BorderRadius.circular(UIParams.bigBorderR),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size*0.3),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: size*0.55,),
-            Align(
-              alignment: isSmall! ? Alignment.centerLeft : Alignment.center,
-              child: Icon(
-                icon,
-                size: isSmall! ? 100.w : 200.w,
-                color: AppColors.white0,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              title,
-              maxLines: 2,
-              overflow: TextOverflow.fade,
-              style: TextStyle(
-                color: AppColors.white0,
-                fontSize: 40.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            if (spec != null)
-              Text(
-                spec!,
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.7),
-                  fontSize: 27.sp,
-                  fontWeight: FontWeight.w500,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: size*0.3),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: size*0.55,),
+              Align(
+                alignment: isSmall! ? Alignment.centerLeft : Alignment.center,
+                child: Icon(
+                  icon,
+                  size: isSmall! ? 100.w : 200.w,
+                  color: AppColors.white0,
                 ),
               ),
-            SizedBox(height: size*0.05,),
-          ],
+              const Spacer(),
+              Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.fade,
+                style: TextStyle(
+                  color: AppColors.white0,
+                  fontSize: 40.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (spec != null)
+                Text(
+                  spec!,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.7),
+                    fontSize: 27.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              SizedBox(height: size*0.05,),
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
