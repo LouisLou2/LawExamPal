@@ -5,7 +5,6 @@ import 'package:easy_cse/gui/widget/headline.dart';
 import 'package:easy_cse/gui/widget/short_info_tile.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
-import 'package:easy_cse/service/path_manager.dart';
 import 'package:easy_cse/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

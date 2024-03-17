@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:easy_cse/service/path_manager.dart';
 import 'package:flutter/material.dart';
