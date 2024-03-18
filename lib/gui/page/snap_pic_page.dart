@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 
 import '../../constant/app_style/app_color.dart';
-import '../../dev_change/camerawesome/awesome_capture_button.dart';
+import '../../dependency_change/camerawesome/awesome_capture_button.dart';
 class SnapPicPage extends StatefulWidget {
   const SnapPicPage({Key? key}) : super(key: key);
 
@@ -41,9 +41,49 @@ class _SnapPicPageState extends State<SnapPicPage> {
       onMediaTap: (mediaCapture) {
         OpenFile.open(PathManager.lastPicPath);
       },
+      progressIndicator: const Center(
+        child: CircularProgressIndicator.adaptive(
+          valueColor: AlwaysStoppedAnimation(AppColors.silentBlue),
+        ),
+      ),
+      topActionsBuilder: (state) => AwesomeTopActions(
+        state: state,
+        children: [
+          AwesomeFlashButton(state: state),
+          if (state is PhotoCameraState)
+            AwesomeAspectRatioButton(state: state),
+          if (state is PhotoCameraState)
+            Material(
+              color: Colors.transparent,
+              child: SizedBox(
+                width: 150.w,
+                height: 170.w,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Switch(
+                        value: true,
+                        activeColor: AppColors.megaBlue,
+                        activeTrackColor: AppColors.white1,
+                        onChanged: (value) {}
+                    ),
+                    Text(
+                      "无痕",
+                      style: TextStyle(
+                        color: AppColors.white1,
+                        fontSize: 30.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+        ],
+      ),
       bottomActionsBuilder: (state) => AwesomeBottomActions(
         state: state,
-        /*修改了camerawesome-2.0.1\lib\src\widgets\buttons\awesome_capture_button.dart源码，
+        /*修改了camerawesome-2.0.1\lib\src\widgets\buttons\awesome_capture_button.dart源码，到lib/dependency_change/camerawesome/awesome_capture_button.dart
         因为要使用onPhoto可能需要使用custome模式自定义界面，这里仍然使用插件buildIn UI,但是需要再照片刚刚拍下来，
         就执行某个逻辑，所以增加了这个属性。
         */
@@ -70,6 +110,7 @@ class _SnapPicPageState extends State<SnapPicPage> {
         builder: (context, constraints)=>GuideLineWidget(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
+          color: AppColors.white2,
         ),
       ),
     );

@@ -33,4 +33,6 @@ class AppStrings {
   static const String confirmPassword = 'Confirm Password';
   static const String pleaseReEnterPassword = 'Please, Re-Enter Password';
   static const String passwordNotMatched = 'Password not matched!';
+
+  static const String cropImage = 'Crop Image';
 }

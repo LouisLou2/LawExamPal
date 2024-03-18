@@ -1,4 +1,3 @@
-import 'package:easy_cse/gui/page/edit_image.dart';
 import 'package:easy_cse/gui/page/error_page.dart';
 import 'package:easy_cse/gui/page/snap_pic_page.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ class RouteCollector {
   static const String main = '/main';
   static const String about = '/about';
   static const String snap_pic = '/snap_pic';
-  static const String edit_image = '/edit_image';
   static const Set<String> simpleRoutes = {
     sign_in,
     sign_up,
@@ -27,7 +25,6 @@ class RouteCollector {
     '/about': (context) => const ErrorPage(),
     '/main': (context) => const MainTabs(),
     '/snap_pic': (context) => const SnapPicPage(),
-    '/edit_image': (context) => const HomeScreen(),
     // '/sign_in': (context) => const Center(),
     // '/sign_up': (context) => const SignUpPage(),
   };

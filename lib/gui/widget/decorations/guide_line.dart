@@ -18,9 +18,9 @@ class GuideLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = AppColors.darkText2
+      ..color = color??AppColors.darkText2
       ..strokeWidth = strokeWidth??1.2;
-    double margin = 0.02;
+    double margin = 0.01;
     double vbegin=height*margin;
     double h=height*(1-margin);
     // 这里可以自定义绘制逻辑，例如：
@@ -60,13 +60,24 @@ class GuideLinePainter extends CustomPainter {
   }
 }
 class GuideLineWidget extends StatelessWidget {
+  final Color? color;
+  final double? strokeWidth;
   final double width;
   final double height;
-  const GuideLineWidget({Key? key, required this.width, required this.height}) : super(key: key);
+  const GuideLineWidget({Key? key,
+    required this.width,
+    required this.height,
+    this.color, this.strokeWidth
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: GuideLinePainter(width: width, height: height),
+      painter: GuideLinePainter(
+        width: width,
+        height: height,
+        color: color,
+        strokeWidth: strokeWidth,
+      ),
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:easy_cse/constant/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../constant/app_style/app_color.dart';
 
 class ImageManager {
   static ImagePicker imagePicker = ImagePicker();
@@ -48,13 +51,21 @@ class ImageManager {
           CropAspectRatioPreset.ratio16x9
         ],
         uiSettings: [AndroidUiSettings(
-            toolbarTitle: "Image Cropper",
-            toolbarColor: Colors.deepOrange,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+          toolbarTitle: AppStrings.cropImage,
+          toolbarColor: AppColors.silentBlue,
+          toolbarWidgetColor: AppColors.white2,
+          statusBarColor: AppColors.silentBlue,
+          backgroundColor: AppColors.white2,
+          dimmedLayerColor: AppColors.white0.withOpacity(0.3),
+          cropFrameColor: AppColors.white0,
+          activeControlsWidgetColor: AppColors.silentBlue,
+          cropFrameStrokeWidth: 3,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+          hideBottomControls: false,
+        ),
           IOSUiSettings(
-            title: "Image Cropper",
+            title: AppStrings.cropImage,
           )
         ]
     );

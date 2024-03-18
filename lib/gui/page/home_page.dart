@@ -33,7 +33,7 @@ class _TestHomeState extends State<TestHome2>{
       // 这个drawer还没有想到要弄成什么方法
       drawer: _buildDrawer(context),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.h),
+        preferredSize: Size.fromHeight(34.h),
         child: AppBar(
           backgroundColor: AppColors.white1,
           elevation: 0,// 去掉appbar的阴影
@@ -50,9 +50,9 @@ class _TestHomeState extends State<TestHome2>{
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: 45.w,vertical: 8.h),
               child: const Icon(
-                Icons.history,
+                Icons.notifications_active_outlined,
                 size: UIParams.defIconS,
                 color: AppColors.black0,
               ),
@@ -176,10 +176,10 @@ class _TestHomeState extends State<TestHome2>{
           child: ColorBox(
             size: (100/1.3).w,
             color: Colors.orange,
-            icon: Icons.article,
-            title: "Read & Write",
-            spec: "read and write articles",
-            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.edit_image),
+            icon: Icons.history_rounded,
+            title: "History",
+            spec: "history questions",
+            onTap: null,
           ),
         ),
         StaggeredGridTile.count(
