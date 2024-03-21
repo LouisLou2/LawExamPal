@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../service/provider/page_change_provider.dart';
+import '../service/provider/page_change_prov.dart';
 
 class AppBarVault extends StatelessWidget {
   @override
@@ -43,7 +43,7 @@ class AppBarVault extends StatelessWidget {
           ),
         ),
       ],
-      title: Selector<PageChangeProvider, int>(
+      title: Selector<PageChangeProv, int>(
         selector: (context, provider) => provider.currentIndex,
         builder: (context, currentIndex, child)=>const Text(
           "nowPageName",

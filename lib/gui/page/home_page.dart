@@ -202,6 +202,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.school,
             title: "AI Tutor",
             spec: "AI powered tutoring",
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
           ),
         ),
       ],

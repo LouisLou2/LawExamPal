@@ -6,7 +6,7 @@ import 'package:easy_cse/service/widget_helper/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../service/provider/provider_manager.dart';
+import '../../service/provider/prov_manager.dart';
 import 'main_tabs.dart';
 
 class MyApp extends StatefulWidget {
@@ -34,7 +34,10 @@ class _MyAppState extends State<MyApp> {
     // 这里先把provider放在顶层，后面再考虑是否可以放在更低的层级
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: ProviderManager.pageChangeProvider),
+        ChangeNotifierProvider.value(value: ProvManager.pageChangeProvider),
+        ChangeNotifierProvider.value(value: ProvManager.styleProvider),
+        ChangeNotifierProvider.value(value: ProvManager.userInfoProv),
+        ChangeNotifierProvider.value(value: ProvManager.chatStateProv),
       ],
       child: ScreenUtilInit(
         designSize: Size(device.dp1, device.dp2),

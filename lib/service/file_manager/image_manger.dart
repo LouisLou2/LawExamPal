@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../constant/app_style/app_color.dart';
+import '../../constant/app_style/app_color.dart';
 
 class ImageManager {
   static ImagePicker imagePicker = ImagePicker();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PageChangeProvider extends ChangeNotifier {
+class PageChangeProv extends ChangeNotifier {
   final List<String> _pages = ['Home', 'Files', 'Shared','Profile'];
   final List<String> _sharedPages = ['Files','Library'];
   int _currentIndex = 0;
@@ -10,7 +10,7 @@ class PageChangeProvider extends ChangeNotifier {
   String get nowPageName => _pages[_currentIndex];
   String get nowSharedPageName => _sharedPages[_teamIndex];
 
-  PageChangeProvider({int currentIndex = 0, int teamIndex = 0}) {
+  PageChangeProv({int currentIndex = 0, int teamIndex = 0}) {
     _currentIndex = currentIndex;
     _teamIndex = teamIndex;
   }

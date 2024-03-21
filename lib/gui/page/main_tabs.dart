@@ -1,5 +1,5 @@
-import 'package:easy_cse/service/provider/page_change_provider.dart';
-import 'package:easy_cse/service/provider/provider_manager.dart';
+import 'package:easy_cse/service/provider/page_change_prov.dart';
+import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +29,7 @@ class _MainTabsState extends State<MainTabs> {
 
   @override
   Widget build(BuildContext context) {
-    PageChangeProvider pprov=ProviderManager.pageChangeProvider;
+    PageChangeProv pprov=ProvManager.pageChangeProvider;
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
@@ -47,7 +47,7 @@ class _MainTabsState extends State<MainTabs> {
         bottomNavigationBar: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: Container(
-            constraints: BoxConstraints(maxHeight: 55.h,maxWidth: 200.w),
+            constraints: BoxConstraints(maxHeight: 50.h,maxWidth:200.w),
             padding: const EdgeInsets.only(top: 0),
             decoration: const BoxDecoration(
               color: AppColors.white1,
@@ -80,7 +80,7 @@ class _MainTabsState extends State<MainTabs> {
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
                   text: 'Home',
-                  icon: Selector<PageChangeProvider, bool>(
+                  icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==0,
                     builder: (context, selec, child) => selec?const Icon(Icons.home,size: 29):const Icon(Icons.home_outlined,size: 29),
                   ),
@@ -88,7 +88,7 @@ class _MainTabsState extends State<MainTabs> {
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
                   text: 'Practice',
-                  icon: Selector<PageChangeProvider, bool>(
+                  icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==1,
                     builder: (context, selec, child) => selec?const Icon(CupertinoIcons.folder_fill,):const Icon(CupertinoIcons.folder),
                   ),
@@ -96,7 +96,7 @@ class _MainTabsState extends State<MainTabs> {
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
                   text: 'Notes',
-                  icon: Selector<PageChangeProvider, bool>(
+                  icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==2,
                     builder: (context, selec, child) => selec?const Icon(CupertinoIcons.person_2_fill,size: 27):const Icon(CupertinoIcons.person_2,size: 27),
                   ),
@@ -104,7 +104,7 @@ class _MainTabsState extends State<MainTabs> {
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
                   text: 'Profile',
-                  icon: Selector<PageChangeProvider, bool>(
+                  icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==3,
                     builder: (context, selec, child) => selec?const Icon(CupertinoIcons.person_fill):const Icon(CupertinoIcons.person),
                   ),
