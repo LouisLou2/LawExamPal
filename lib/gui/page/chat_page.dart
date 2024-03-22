@@ -1,9 +1,12 @@
 import "package:easy_cse/constant/app_string.dart";
+import "package:easy_cse/constant/app_style/app_style.dart";
 import "package:easy_cse/gui/widget/chat_item.dart";
+import "package:easy_cse/service/file_manager/image_manger.dart";
 import "package:easy_cse/service/provider/chat_state_prov.dart";
 import "package:easy_cse/service/provider/prov_manager.dart";
 import "package:flutter/material.dart";
 import "package:flutter_gemini/flutter_gemini.dart";
+import "package:image_picker/image_picker.dart";
 import "package:provider/provider.dart";
 
 import "../../constant/app_style/app_color.dart";
@@ -32,13 +35,23 @@ class _ChatPageState extends State<ChatPage>{
       );
     });
   }
+  @override
+  void dispose(){
+    queryController.dispose();
+    recordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context){
-    final cprov = ProvManager.chatStateProv;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.aiTutor),
+        title: Text(
+            AppStrings.aiTutor,
+            style:AppStyles.iconTextStyle.copyWith(fontWeight: FontWeight.bold),
+        ),
+        surfaceTintColor: AppColors.discoBallBlue,
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -85,7 +98,7 @@ class _ChatPageState extends State<ChatPage>{
           ),
           ChatInputBox(
             controller: queryController,
-            onCameraClicked: (){},
+            onCameraClicked: pickImage,
             onSendClicked: onSend,
             buttonColor: AppColors.silentBlue,
           ),
@@ -106,6 +119,13 @@ class _ChatPageState extends State<ChatPage>{
       recordController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
+    );
+  }
+  void pickImage() async{
+    await ImageManager.imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50
+    ).then((value) {}
     );
   }
 }

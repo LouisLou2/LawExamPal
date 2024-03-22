@@ -37,7 +37,7 @@ class HeadLine extends StatelessWidget {
           children: [
             Text(title,
               style: TextStyle(
-                fontFamily: AppStyles.headerFontFamily,
+                fontFamily: AppStyles.defFontFamily,
                 fontSize: size,
                 fontWeight: FontWeight.w700,
                 color: AppColors.black0,
@@ -48,7 +48,7 @@ class HeadLine extends StatelessWidget {
             Text( subTitle!,
               style: TextStyle(
                 fontSize: size*0.5,
-                fontFamily: AppStyles.headerFontFamily,
+                fontFamily: AppStyles.defFontFamily,
                 fontWeight: FontWeight.w500,
                 color: AppColors.darkText1,
                 fontStyle: isItalic?FontStyle.italic:FontStyle.normal,

@@ -37,7 +37,7 @@ class AppStrings {
   static const String cropImage = 'Crop Image';
 
   static const String chatBot = 'Chat Bot';
-  static const String user = 'User';
-  static const String aiTutor = 'AI Tutor';
+  static const String user = 'You';
+  static const String aiTutor = '✨AI Tutor';
   static const String defaultChatBotErrorAnswer = '🚨a Error occurred, please try again';
 }

@@ -1,4 +1,4 @@
-import 'package:easy_cse/config/init_affairs.dart';
+import 'package:easy_cse/init_affairs.dart';
 import 'package:flutter/material.dart';
 
 import 'gui/page/myapp.dart';

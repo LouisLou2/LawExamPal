@@ -30,6 +30,7 @@ class AppColors{
   static const Color jadeBlue=Color(0xff00d8d6);
   static const Color megaBlue=Color(0xff4bcffa);
   static const Color discoBallBlue=Color(0xff0fbcf9);
+  static const Color purpleBlue=Color(0xff4169E1);
   static const Color silentBlue=Color(0xff2E86c1);
   static const List<Color> freshBlueGroup=[freshBlue,jadeBlue,discoBallBlue];
 

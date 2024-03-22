@@ -3,25 +3,32 @@ import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
 class AppStyles {
-  static const String headerFontFamily = "Roboto";
+  static const String defFontFamily = "Roboto";
   static const iconTextStyle = TextStyle(
-    fontFamily: headerFontFamily,
+    fontFamily: defFontFamily,
     fontSize: 20,
     letterSpacing: 0.5,
   );
   static const TextStyle titleLarge = TextStyle(
-    fontFamily: headerFontFamily,
+    fontFamily: defFontFamily,
     fontWeight: FontWeight.bold,
     fontSize: 34,
     letterSpacing: 0.5,
   );
-  static const TextStyle bodySmall = TextStyle(
-    fontFamily: headerFontFamily,
-    fontSize: 16,
+  static const titleMedium = TextStyle(
+    fontFamily: defFontFamily,
+    fontSize: 25,
     letterSpacing: 0.5,
   );
+  static const TextStyle bodySmall = TextStyle(
+    fontFamily: defFontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    color: AppColors.white0,
+    letterSpacing: 0.6,
+  );
   static TextStyle textBtnOrLinkStyle =const TextStyle(
-    fontFamily: headerFontFamily,
+    fontFamily: defFontFamily,
     color: AppColors.silentBlue,
     fontSize: 20,
     letterSpacing: 0.5,

@@ -14,7 +14,7 @@ class SnapPicPage extends StatefulWidget {
   const SnapPicPage({Key? key}) : super(key: key);
 
   @override
-  _SnapPicPageState createState() => _SnapPicPageState();
+  State<SnapPicPage> createState() => _SnapPicPageState();
 }
 
 class _SnapPicPageState extends State<SnapPicPage> {

@@ -9,7 +9,7 @@ import '../../constant/app_style/app_color.dart';
 
 class ImageManager {
   static ImagePicker imagePicker = ImagePicker();
-  static int _imageQuality = 50; // 1-100
+  static const int _imageQuality = 50; // 1-100
 
   /*
   * 选择图片
