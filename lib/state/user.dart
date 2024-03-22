@@ -1,10 +1,86 @@
 class User{
-  bool _login = false;
-  bool get isLoggedIn => _login;
-  void login() {
-    _login = true;
+  late int _userId;
+  late String _userName;
+  late String _userAvatar;
+  late String _userEmail;
+  late String _userPhone;
+  late String _userGender;
+  late String _userSignature;
+  late String _userRole;
+  late String _userToken;
+
+  late bool _isLogin;
+  late bool _isFirst;
+
+  void init(){
+    _userId = 10001;
+    _userName = 'leo';
+    _userAvatar = '';
+    _userEmail = '';
+    _userPhone = '';
+    _userGender = '';
+    _userSignature = '';
+    _userRole = '';
+    _userToken = '';
+    _isLogin = false;
+    _isFirst = true;
   }
-  //单例
-  static final User _instance = User();
-  static User get instance => _instance;
+  // setters and getters
+  int get userId => _userId;
+  String get userName => _userName;
+  String get userAvatar => _userAvatar;
+  String get userEmail => _userEmail;
+  String get userPhone => _userPhone;
+  String get userGender => _userGender;
+  String get userSignature => _userSignature;
+  String get userRole => _userRole;
+  String get userToken => _userToken;
+  bool get isLogin => _isLogin;
+  bool get isFirst => _isFirst;
+  set userId(int value) {
+    _userId = value;
+  }
+  set userName(String value) {
+    _userName = value;
+  }
+  set userAvatar(String value) {
+    _userAvatar = value;
+  }
+  set userEmail(String value) {
+    _userEmail = value;
+  }
+  set userPhone(String value) {
+    _userPhone = value;
+  }
+  set userGender(String value) {
+    _userGender = value;
+  }
+  set userSignature(String value) {
+    _userSignature = value;
+  }
+  set userRole(String value) {
+    _userRole = value;
+  }
+  set userToken(String value) {
+    _userToken = value;
+  }
+  set isLogin(bool value) {
+    _isLogin = value;
+  }
+  set isFirst(bool value) {
+    _isFirst = value;
+  }
+  void clear(){
+    _userId = 0;
+    _userName = '';
+    _userAvatar = '';
+    _userEmail = '';
+    _userPhone = '';
+    _userGender = '';
+    _userSignature = '';
+    _userRole = '';
+    _userToken = '';
+    _isLogin = false;
+    _isFirst = true;
+  }
 }

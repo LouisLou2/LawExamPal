@@ -33,12 +33,7 @@ class _MyAppState extends State<MyApp> {
     TestDevice device = TestDeviceCollection.mobile;
     // 这里先把provider放在顶层，后面再考虑是否可以放在更低的层级
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: ProvManager.pageChangeProvider),
-        ChangeNotifierProvider.value(value: ProvManager.styleProvider),
-        ChangeNotifierProvider.value(value: ProvManager.userInfoProv),
-        ChangeNotifierProvider.value(value: ProvManager.chatStateProv),
-      ],
+      providers: ProvManager.getProvList,
       child: ScreenUtilInit(
         designSize: Size(device.dp1, device.dp2),
         minTextAdapt: false,

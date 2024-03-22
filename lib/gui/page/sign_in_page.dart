@@ -4,7 +4,6 @@ import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/decorations/linear_gradient_bg.dart';
 import 'package:easy_cse/gui/widget/layout_helper_widget/named_divider.dart';
-import 'package:easy_cse/service/model_state_manager.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -181,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                         padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12.h)),
                         surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
                       ),
-                      onPressed: ()=>{ allFieldValid()?ModelStateManager.loginAndNav():null},
+                      onPressed: ()=>{null},
                       child: Text(
                         AppStrings.login,
                         style: AppStyles.textBtnOrLinkStyle,

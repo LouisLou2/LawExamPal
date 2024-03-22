@@ -1,7 +1,7 @@
 import 'package:easy_cse/config/test_device.dart';
 import 'package:easy_cse/service/file_manager/path_manager.dart';
-import 'package:easy_cse/service/network_manager/chat_bot.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
+import 'package:easy_cse/state/state_manager.dart';
 import 'package:flutter/material.dart';
 
 Future<void> initAsync() async{
@@ -12,5 +12,6 @@ Future<void> initAsync() async{
 void initMustBeforeRunApp(){
   ProvManager.init();
   TestDeviceCollection.init();
-  ChatBot.init();
+  StateManager.init();
+  //ChatBot.init();
 }

@@ -1,3 +1,4 @@
+import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/service/provider/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
@@ -15,24 +16,25 @@ class ChatItem extends StatefulWidget{
 class _ChatItemState extends State<ChatItem>{
   @override
   Widget build(BuildContext context){
-    final cprov = Provider.of<ChatStateProv>(context, listen: false);
-    final content = cprov.chatRecords[widget.recordIndex];
+    final cprov = ProvManager.chatStateProv;
+    final record = cprov.chatRecords[widget.recordIndex];
     return Card(
       elevation: 0,
-      color: content.role == 'user' ? AppColors.white0 : AppColors.blue1,
+      color: record.role? AppColors.white0 : AppColors.blue1,
       child:Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(content.role ?? 'Unknown Role'),
+            Text(record.role?AppStrings.user:AppStrings.chatBot),
             Selector<ChatStateProv, int>(
-              selector: (context, prov) => prov.chatRecords[widget.recordIndex].parts?.lastOrNull?.text?.length ?? 0,
+              selector: (context, prov) => prov.chatRecords[widget.recordIndex].text.length,
               builder: (context,_, child)=>
               Markdown(
+                controller: ScrollController(),
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                data: cprov.chatRecords[widget.recordIndex].parts?.lastOrNull?.text ?? 'cannot generate data!'
+                physics: const BouncingScrollPhysics(),
+                data: cprov.chatRecords[widget.recordIndex].text,
               ),
             ),
           ],

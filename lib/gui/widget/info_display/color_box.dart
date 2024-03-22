@@ -41,6 +41,7 @@ class ColorBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(UIParams.bigBorderR),
       ),
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,//注意，gestureDetector的范围是内部更小的，这里设置点击区域为整个组件的范围，即使子组件的透明区域也会被视为可点击的区域。
         onTap: onTap,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size*0.3),

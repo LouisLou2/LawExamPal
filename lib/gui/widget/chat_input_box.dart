@@ -66,15 +66,16 @@ class _ChatInputBoxState extends State<ChatInputBox>{
             padding: const EdgeInsets.all(4),
             child: IconButton(
               icon:Selector<ChatStateProv,bool>(
-                selector: (context,prov) => prov.isAllowChatType,
-                builder: (context,allow,child)=>allow?
+                selector: (context,prov) => prov.waitForAnswer,
+                builder: (context,waiting,child)=>waiting?
+                Icon(
+                  CupertinoIcons.paperplane,
+                  color: widget.disableColor??AppColors.silenceColor,
+                ):
                 Icon(CupertinoIcons.paperplane,
                       color: widget.buttonColor??AppColors.silentBlue,
-                  ) : Icon(
-                      CupertinoIcons.paperplane,
-                      color: widget.disableColor??AppColors.silenceColor,
                 ),
-              ), onPressed: ()=>ProvManager.chatStateProv.isAllowChatType?widget.onSendClicked?.call():null,
+              ), onPressed: ()=>ProvManager.chatStateProv.waitForAnswer?null:widget.onSendClicked?.call(),
             ),
           ),
         ],

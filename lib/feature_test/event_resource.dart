@@ -7,6 +7,7 @@ final dio = Dio();
 const String url = 'http://localhost:8099';  // Flask服务的URL
 const String for_stream='/stream';
 const String for_json='/json';
+const String chat='/chat';
 
 
 Future<void> test_stream() async {
@@ -41,19 +42,28 @@ Future<void> test_stream() async {
 }
 Future<void> test_json()async{
   try {
-    Response response = await dio.get(
-      url+for_json,
+    Response response = await dio.post(
+      url+chat,
+      data: {
+        'id': 10001,
+        'ques': '你好',
+      },
+      // queryParameters: {
+      //   'id': 10001,
+      //   'ques': '你好',
+      // },
       options: Options(
         responseType: ResponseType.json, // 指定响应类型为纯文本
       ),
     );
+    final contentType = response.headers.map['content-type'];
     final data=response.data;
     // 当响应为纯文本时，确保使用 UTF-8 解码
-    final responseBody = utf8.decode(data.toString().codeUnits);
+    // final responseBody = utf8.decode(data.toString().codeUnits);
     // 将解码后的字符串解析为 JSON
-    final jsonData = json.decode(responseBody);
-    //print('not any decode, raw data:');
-    //print(data);
+    // final jsonData = json.decode(data);
+    // print('not any decode, raw data:');
+    print(data);
     //print('utf-8 and json decoded:');
     //print(jsonData);
   } catch (e) {
@@ -83,4 +93,5 @@ Future<void> test_json_byte()async{
 }
 void main() async {
   // 测试发现，test_json和test_json_byte的结果几乎是一样的速度
+  await test_json();
 }
