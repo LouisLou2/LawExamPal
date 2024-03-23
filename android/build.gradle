@@ -1,5 +1,6 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    // 此版本的选取很重要，太低自然会出现很多问题，最新1.9.~优惠检测到我使用dart包中非public暴露部分，而不给编译
+    ext.kotlin_version = '1.8.0'
     repositories {
         // google()
         // jcenter()

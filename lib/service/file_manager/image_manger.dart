@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:easy_cse/constant/app_string.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,11 +71,14 @@ class ImageManager {
           )
         ]
     );
-    if (croppedFile != null) {
-      imageCache.clear();
-      print('@@@@@@@@@@@@@@@@@@@@@');
-      print(croppedFile.path);
-      // reload();
-    }
+    if(croppedFile == null)return;
+    imageCache.clear();
+    print('@@@@@@@@@@@@@@@@@@@@@');
+    print(croppedFile.path);
+    NavigationHelper.pushNamed(
+      RouteCollector.explanation,
+      arguments: croppedFile.path,
+    );
+    //reload();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:easy_cse/gui/page/chat_page.dart';
 import 'package:easy_cse/gui/page/error_page.dart';
+import 'package:easy_cse/gui/page/explanation_page.dart';
 import 'package:easy_cse/gui/page/snap_pic_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class RouteCollector {
   static const String about = '/about';
   static const String snap_pic = '/snap_pic';
   static const String chat = '/chat';
+  static const String explanation = '/expalantion';
   static const Set<String> simpleRoutes = {
     sign_in,
     sign_up,

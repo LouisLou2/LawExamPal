@@ -31,8 +31,9 @@ class IconTextButton extends StatelessWidget {
                 color: color,
                 size: size*0.5,
               ),
-              SizedBox(height: size*0.1),
+              SizedBox(height: size*0.06),
               Text(text,
+                maxLines: 2,
                 style: AppStyles.iconTextStyle.copyWith(
                   color: color,
                   fontSize: size*0.2,

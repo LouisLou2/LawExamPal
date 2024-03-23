@@ -23,7 +23,7 @@ class AppStyles {
   static const TextStyle bodySmall = TextStyle(
     fontFamily: defFontFamily,
     fontWeight: FontWeight.w400,
-    fontSize: 16,
+    fontSize: 15,
     color: AppColors.white0,
     letterSpacing: 0.6,
   );
@@ -76,6 +76,20 @@ class AppStyles {
         ),
       ],
       gradient: getLinearGradient(color),
+    );
+  }
+
+  static ButtonStyle defButtonStyle({required Color color,required double height,required double width}){
+    return ButtonStyle(
+      padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+      elevation: MaterialStateProperty.all(2),
+      backgroundColor: MaterialStateProperty.all(color),
+      minimumSize: MaterialStateProperty.all(Size(width, height)),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(UIParams.smallBorderR),
+        ),
+      ),
     );
   }
 }

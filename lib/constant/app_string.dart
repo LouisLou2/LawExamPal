@@ -40,4 +40,16 @@ class AppStrings {
   static const String user = 'You';
   static const String aiTutor = '✨AI Tutor';
   static const String defaultChatBotErrorAnswer = '🚨a Error occurred, please try again';
+  static const String emptyChat = '📭Ask Something!';
+  static const String cancelQuery='❌ You Cancelled the Query';
+  static const String ask='提问';
+
+  static const String explanation = 'Explanation';
+  static const String addToWrongSet = '加入错题本';
+  static const String snapAgain = '再拍一题';
+  static const String question = '题目';
+  static const String idea = '解题思路';
+  static const String answer = '参考答案';
+  static const String askAITutor = '✨ 向AI Tutor提问';
+  static const String AITutorDescription = 'AI Tutor专为考公考研人群打造，可以帮助你梳理知识点，解答问题，提供学习建议';
 }

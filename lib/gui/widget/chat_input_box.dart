@@ -16,9 +16,13 @@ class ChatInputBox extends StatefulWidget{
     this.textFiledColor,
     this.buttonColor,
     this.disableColor,
+    this.onCancelClicked,
+    required this.getIfWaiting,
   });
   final VoidCallback? onSendClicked;
   final VoidCallback? onCameraClicked;
+  final VoidCallback? onCancelClicked;
+  final bool Function() getIfWaiting;
   final Color? textFiledColor;
   final Color? buttonColor;
   final Color? disableColor;
@@ -55,12 +59,12 @@ class _ChatInputBoxState extends State<ChatInputBox>{
               keyboardType: TextInputType.multiline,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-                hintText: 'Message',
+                hintText: ' Message',
                 border: InputBorder.none,
               ),
               onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
               // 意思是点击外部的时候，让键盘消失
-            )
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(4),
@@ -69,13 +73,15 @@ class _ChatInputBoxState extends State<ChatInputBox>{
                 selector: (context,prov) => prov.waitForAnswer,
                 builder: (context,waiting,child)=>waiting?
                 Icon(
-                  CupertinoIcons.paperplane,
-                  color: widget.disableColor??AppColors.silenceColor,
+                  CupertinoIcons.stop_circle,
+                  color: widget.disableColor??AppColors.darkText0,
                 ):
                 Icon(CupertinoIcons.paperplane,
                       color: widget.buttonColor??AppColors.silentBlue,
                 ),
-              ), onPressed: ()=>ProvManager.chatStateProv.waitForAnswer?null:widget.onSendClicked?.call(),
+              ), onPressed: ()=>widget.getIfWaiting.call()?
+                                widget.onCancelClicked?.call():
+                                widget.onSendClicked?.call(),
             ),
           ),
         ],

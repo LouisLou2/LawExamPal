@@ -17,6 +17,7 @@ class AppColors{
   static const Color silenceColor = Colors.grey;
   static const Color lightBorderColor = Colors.black12;
   static const Color linkBlue=Color(0xff17c0eb);
+  static const Color scentBlue=Color(0xff88CCEE);
   static const Color darkText2=Color(0xff3d3d3d);
   static const Color greyText1=Color(0xff718093);
   static const Color orange1=Color(0xfffd9644);

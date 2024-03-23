@@ -3,7 +3,6 @@ import 'package:easy_cse/gui/widget/decorations/guide_line.dart';
 import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
 import 'package:easy_cse/service/file_manager/image_manger.dart';
 import 'package:easy_cse/service/file_manager/path_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
