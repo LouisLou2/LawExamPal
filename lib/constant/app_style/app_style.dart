@@ -27,6 +27,13 @@ class AppStyles {
     color: AppColors.white0,
     letterSpacing: 0.6,
   );
+  static const TextStyle tinyText = TextStyle(
+    fontFamily: defFontFamily,
+    fontSize: 13.5,
+    color: AppColors.white0,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+  );
   static TextStyle textBtnOrLinkStyle =const TextStyle(
     fontFamily: defFontFamily,
     color: AppColors.silentBlue,

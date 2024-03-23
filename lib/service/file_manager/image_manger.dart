@@ -62,7 +62,7 @@ class ImageManager {
           cropFrameColor: AppColors.white0,
           activeControlsWidgetColor: AppColors.silentBlue,
           cropFrameStrokeWidth: 3,
-          initAspectRatio: CropAspectRatioPreset.original,
+          initAspectRatio: CropAspectRatioPreset.square,
           lockAspectRatio: false,
           hideBottomControls: false,
         ),

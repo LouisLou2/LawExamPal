@@ -36,6 +36,7 @@ class AppStrings {
 
   static const String cropImage = 'Crop Image';
 
+  static const String advertAITutor= '🎉 Introducing AI Tutor: Your Personal Study Buddy';
   static const String chatBot = 'Chat Bot';
   static const String user = 'You';
   static const String aiTutor = '✨AI Tutor';
@@ -52,4 +53,11 @@ class AppStrings {
   static const String answer = '参考答案';
   static const String askAITutor = '✨ 向AI Tutor提问';
   static const String AITutorDescription = 'AI Tutor专为考公考研人群打造，可以帮助你梳理知识点，解答问题，提供学习建议';
+
+  static const String morePractice = '更多练习';
+  static const String notYet = '暂未开放,敬请期待';
+
+
+  static const String wrongSet = '错题本';
+  static const String print = '打印';
 }

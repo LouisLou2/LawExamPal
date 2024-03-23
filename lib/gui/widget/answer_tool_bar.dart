@@ -19,14 +19,14 @@ class AnswerToolBar extends StatelessWidget {
           const SizedBox(width: 10),
           IconTextButton(
             icon: Icons.book,
-            text: '错题本',
+            text: AppStrings.wrongSet,
             color: AppColors.darkText0,
             size: 60,
             onTap: () {},
           ),
           IconTextButton(
             icon: Icons.print,
-            text: '打印',
+            text: AppStrings.print,
             color: AppColors.darkText0,
             size: 60,
             onTap: () {},
@@ -34,7 +34,10 @@ class AnswerToolBar extends StatelessWidget {
           SizedBox(width: 100.w),
           const ColorTextButton(text: AppStrings.addToWrongSet),
           SizedBox(width: 30.w),
-          const ColorTextButton(text: AppStrings.snapAgain),
+          ColorTextButton(
+            text: AppStrings.snapAgain,
+            onPressed: ()=>Navigator.of(context).pop(),
+          ),
         ],
       ),
     );

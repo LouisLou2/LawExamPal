@@ -1,6 +1,9 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
+import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,63 +32,17 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
     return SingleChildScrollView(
       child:Column(
         children: [
+          AlertBar(
+            message: AppStrings.advertAITutor,
+            color: AppColors.purpleBlue.withOpacity(0.8),
+            onTap: () => NavigationHelper.pushNamed(RouteCollector.chat),
+          ),
           // 这里不包裹Material会使得ListTile沿用父级Container的背景色
-          Material(
-            child:ListTile(
-              tileColor: AppColors.white0,
-              title: Text(
-                AppStrings.question,
-                style: AppStyles.iconTextStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkText0,
-                ),
-              ),
-              subtitle: Text(
-                widget.question,
-                style: AppStyles.bodySmall.copyWith(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          defAnswerSection(title:AppStrings.question, content:widget.question),
           defDivider(),
-          Material(
-            child:ListTile(
-              tileColor: AppColors.white0,
-              title: Text(
-                AppStrings.idea,
-                style: AppStyles.iconTextStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkText0,
-                ),
-              ),
-              subtitle: Text(
-                widget.idea,
-                style: AppStyles.bodySmall.copyWith(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          defAnswerSection(title:AppStrings.idea, content: widget.idea),
           defDivider(),
-          Material(
-            child:ListTile(
-              tileColor: AppColors.white0,
-              title: Text(
-                AppStrings.answer,
-                style: AppStyles.iconTextStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkText0,
-                ),
-              ),
-              subtitle: Text(
-                widget.answer,
-                style: AppStyles.bodySmall.copyWith(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          defAnswerSection(title:AppStrings.answer, content: widget.answer),
           defDivider(),
           Align(
             alignment: Alignment.centerLeft,
@@ -99,8 +56,9 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
           ),
           Material(
             child:ListTile(
+              onTap: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
               tileColor: AppColors.white0,
-              leading:const CircleAvatar(
+              leading: const CircleAvatar(
                 backgroundColor: AppColors.purpleBlue,
                 child: Text('✨'),
               ),
@@ -142,14 +100,16 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
                   SizedBox(width: 20.w,),
                   ColorTextButton(
                     text: AppStrings.ask,
-                    onPressed: (){},
+                    onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
                     width: 160.w,
                   ),
                 ],
               )
             ),
           ),
-          SizedBox(height: 70.h,)
+          defDivider(),
+          defAnswerSection(title: AppStrings.morePractice, content: AppStrings.notYet),
+          SizedBox(height: 110.h,)
         ],
       ),
     );
@@ -160,5 +120,28 @@ Widget defDivider() {
     color: AppColors.white1,
     height: 26.h,
     thickness: 10.h,
+  );
+}
+Widget defAnswerSection({required String title, required String content}) {
+  return Material(
+    child:ListTile(
+      tileColor: AppColors.white0,
+      title: Padding(
+        padding: EdgeInsets.only(bottom:10.h),
+        child: Text(
+          title,
+          style: AppStyles.iconTextStyle.copyWith(
+            fontWeight: FontWeight.bold,
+            color: AppColors.darkText0,
+          ),
+        ),
+      ),
+      subtitle: Text(
+        content,
+        style: AppStyles.bodySmall.copyWith(
+          color: Colors.black,
+        ),
+      ),
+    ),
   );
 }
