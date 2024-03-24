@@ -34,9 +34,14 @@ class AppStrings {
   static const String pleaseReEnterPassword = 'Please, Re-Enter Password';
   static const String passwordNotMatched = 'Password not matched!';
 
+  static const String answerTitle = 'Answer';
+  static const String hitTopics = 'Hit Topics';
+  static const String notes = 'Notes';
+
   static const String cropImage = 'Crop Image';
 
   static const String advertAITutor= '🎉 Introducing AI Tutor: Your Personal Study Buddy';
+  static const String shortDescAI = 'AI powered tutoring';
   static const String chatBot = 'Chat Bot';
   static const String user = 'You';
   static const String aiTutor = '✨AI Tutor';
@@ -57,7 +62,9 @@ class AppStrings {
   static const String morePractice = '更多练习';
   static const String notYet = '暂未开放,敬请期待';
 
-
   static const String wrongSet = '错题本';
   static const String print = '打印';
+
+  static const String recentNotes = '📒最近笔记';
+  static const String allNotes = '所有笔记';
 }

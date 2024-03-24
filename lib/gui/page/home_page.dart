@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../constant/app_string.dart';
 import '../../constant/app_style/app_color.dart';
 import '../widget/circle_gradient_icon.dart';
+import '../widget/info_display/headline2.dart';
 
 
 class TestHome2 extends StatefulWidget{
@@ -33,7 +35,7 @@ class _TestHomeState extends State<TestHome2>{
       // 这个drawer还没有想到要弄成什么方法
       drawer: _buildDrawer(context),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(34.h),
+        preferredSize: Size.fromHeight(30.h),
         child: AppBar(
           backgroundColor: AppColors.white1,
           elevation: 0,// 去掉appbar的阴影
@@ -76,16 +78,16 @@ class _TestHomeState extends State<TestHome2>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeadLine(
-                  title: "Answer",
-                  size: 65.sp,
-                  subTitle: "AI powered tutoring",
+                HeadLine2(
+                  title: AppStrings.answerTitle,
+                  size: 70.sp,
+                  subTitle: AppStrings.shortDescAI,
                 ),
-                SizedBox(height: 15.h,),
+                SizedBox(height: 5.h,),
                 buildGrid(),
                 SizedBox(height: 25.h,),
                 HeadLine(
-                  title: "Hit Topics",
+                  title: AppStrings.hitTopics,
                   size: 50.sp,
                 ),
                 SizedBox(height: 10.h,),

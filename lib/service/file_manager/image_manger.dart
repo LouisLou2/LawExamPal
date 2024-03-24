@@ -4,6 +4,7 @@ import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,6 +14,7 @@ class ImageManager {
   static ImagePicker imagePicker = ImagePicker();
   static const int _imageQuality = 50; // 1-100
 
+  static const int _compressQuality = 20; // 1-100
   /*
   * 选择图片
   * fromGallery: true 从相册选择，false 从相机选择
@@ -80,5 +82,17 @@ class ImageManager {
       arguments: croppedFile.path,
     );
     //reload();
+  }
+  // 2. compress file and get file.
+  // 这里会返回一个压缩后的文件，targetPath是压缩后的文件路径，应该存储
+  Future<File> testCompressAndGetFile(File file, String targetPath) async {
+    var result = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path, targetPath,
+      quality: _compressQuality,
+      rotate: 0,
+    );
+    print(file.lengthSync());
+    print(await result?.length());
+    return File(result!.path);
   }
 }

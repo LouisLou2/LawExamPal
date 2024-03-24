@@ -9,6 +9,7 @@ Future<PersistentBottomSheetController> showCustomBottomSheet(
     {double? height,
       Widget? child,
       VoidCallback? onClosing,
+      Widget? toolBar,
     }
 ) async {
   return showBottomSheet(
@@ -69,13 +70,14 @@ Future<PersistentBottomSheetController> showCustomBottomSheet(
               child??const SizedBox(),
             ]),
           ),
-          const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child:  AnswerToolBar(),
-          ),
-        ],
+          if (toolBar != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: toolBar,
+            ),
+          ],
       );
     },
   );

@@ -93,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
       body:Container(
         margin: EdgeInsets.symmetric(horizontal: 18.w,vertical: 4.h),
         child:ListView(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(top: 20.h),
           children: [
             LinearGradientBg(
               borderRadius: 20.w,
@@ -109,9 +109,9 @@ class _SignInPageState extends State<SignInPage> {
                   Text(
                     AppStrings.signInToYourAccount,
                     style: AppStyles.bodySmall.copyWith(color: AppColors.white1),
-                  )
-                ]
-              )
+                  ),
+                ],
+              ),
             ),
             Form(
               key:_formKey,
@@ -169,7 +169,7 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: (){},
                           child: const Text(
                               AppStrings.forgotPassword,
-                              style: TextStyle(color: AppColors.silentBlue)
+                              style: TextStyle(color: AppColors.silentBlue),
                           ),
                         ),
                       ],
@@ -177,7 +177,7 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(height: 5.h,),
                     ElevatedButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 12.h)),
+                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
                         surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
                       ),
                       onPressed: ()=>{null},
@@ -186,8 +186,8 @@ class _SignInPageState extends State<SignInPage> {
                         style: AppStyles.textBtnOrLinkStyle,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 13.h,
                     ),
                     NamedDivider(
                       height: 20.h,

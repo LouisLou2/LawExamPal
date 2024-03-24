@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/app_string.dart';
-
+// !!!!注意这个只是将页面分出的类，不是可以复用的组件！！！！！！
 class AnswerToolBar extends StatelessWidget {
   const AnswerToolBar({Key? key}) : super(key: key);
 

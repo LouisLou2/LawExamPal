@@ -9,6 +9,8 @@ import '../../constant/app_style/app_color.dart';
 import '../../constant/app_style/app_style.dart';
 import 'dart:io' show File;
 
+import '../widget/answer_tool_bar.dart';
+
 class ExplanationPage extends StatefulWidget {
   final String imgPath;
   const ExplanationPage({Key? key, required this.imgPath}) : super(key: key);
@@ -47,7 +49,8 @@ class _ExplainationPageState extends State<ExplanationPage> {
               ],
             ),
           ),
-        )
+        ),
+        toolBar:const AnswerToolBar(),
       );
       con.closed.then((value) {
         if (kDebugMode) {

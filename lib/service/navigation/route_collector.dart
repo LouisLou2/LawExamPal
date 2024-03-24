@@ -1,6 +1,7 @@
 import 'package:easy_cse/gui/page/chat_page.dart';
 import 'package:easy_cse/gui/page/error_page.dart';
 import 'package:easy_cse/gui/page/explanation_page.dart';
+import 'package:easy_cse/gui/page/sign_in_page.dart';
 import 'package:easy_cse/gui/page/snap_pic_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,7 @@ class RouteCollector {
     main: (context) => const MainTabs(),
     snap_pic: (context) => const SnapPicPage(),
     chat: (context) => const ChatPage(),
+    sign_in: (context) => const SignInPage(),
     // '/sign_in': (context) => const Center(),
     // '/sign_up': (context) => const SignUpPage(),
   };

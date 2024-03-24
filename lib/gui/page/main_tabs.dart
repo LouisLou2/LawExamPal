@@ -1,3 +1,7 @@
+import 'package:easy_cse/gui/page/chat_page.dart';
+import 'package:easy_cse/gui/page/note_page.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/service/provider/page_change_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,14 +39,19 @@ class _MainTabsState extends State<MainTabs> {
       length: 4,
       child: Scaffold(
         appBar: null,
-        body: const TabBarView(
-          physics: NeverScrollableScrollPhysics(), // 禁止滑动
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(), // 禁止滑动
           children: <Widget>[
-              TestHome2(),
-              Center(child: Text('Files')),
-              NestedTabBar('Shared'),
-              Center(child: Text('Profile')),
-            ],
+            const TestHome2(),
+            const Center(child: Text('Files')),
+            const NotePage(),
+            Center(
+              child: ElevatedButton(
+                onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.sign_in),
+                child: const Center(child: Text('Profile'),),
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(20)),

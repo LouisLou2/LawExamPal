@@ -29,7 +29,6 @@ class ShortInfoTile extends StatelessWidget {
   }) : super(key: key){
     assert(completePercent==null||completePercent!>=0&&completePercent!<=100);
   }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -126,94 +125,6 @@ class ShortInfoTile extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-
-
-class OnGoingTask extends StatelessWidget {
-  const OnGoingTask({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20,),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      width: 100.w,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            width: 60.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Startup Website Design with Responsive",
-                  style: TextStyle(
-                    color: Colors.blueGrey[700],
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.timelapse,
-                      color: Colors.purple[300],
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "10:00 AM - 12:30PM",
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.purple[50],
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: const Text(
-                    "Complete - 80%",
-                    style: TextStyle(
-                      color: Colors.purple,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Icon(
-            Icons.rocket_rounded,
-            size: 60.w,
-            color: AppColors.orange1,
-          )
-        ],
       ),
     );
   }

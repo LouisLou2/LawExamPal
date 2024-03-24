@@ -8,6 +8,9 @@ class PathManager{
   static const String _picLoc = 'camera_awesome_pic';
   static late String _picPath;
   static final List<String> _picPaths = [];
+
+  static String get lastPicPath => _picPaths.last;
+
   static _initTempDir() async{
     final Directory tempDir = await getTemporaryDirectory();
     PathManager._tempPath = tempDir.path;
@@ -18,9 +21,11 @@ class PathManager{
     }
     _inited = true;
   }
+
   static init() async {
     _initTempDir();
   }
+
   static Future<String> makePhotoPath(int sensorPos) async {
     // sensorPos: 0 for back, 1 for front
     if(!_inited) await _initTempDir();
@@ -28,5 +33,9 @@ class PathManager{
     print('@@@@@@@@@@@@@picPaths: ${_picPaths.last}');
     return _picPaths.last;
   }
-  static String get lastPicPath => _picPaths.last;
+
+  static Future<String> makeCompressImgPath() async {
+    if(!_inited) await _initTempDir();// 这里基本上不会执行
+    return '$_tempPath/compressImg/${DateTime.now().millisecondsSinceEpoch}.jpg';
+  }
 }

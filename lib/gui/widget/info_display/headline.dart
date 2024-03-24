@@ -66,17 +66,16 @@ class HeadLine extends StatelessWidget {
                 color: iconColor??AppColors.iconBlue,
               ),
             )
-          else
-            InkWell(
-              onTap: onTap,
-              child: Text(
-                iconText!,
-                style: TextStyle(
-                  fontSize: iconSize??UIParams.defIconS,
-                  color: iconColor??AppColors.iconBlue,
-                ),
-              ),
+          else InkWell(
+            onTap: onTap,
+            child: Text(
+              iconText!,
+              style: TextStyle(
+                fontSize: iconSize??UIParams.defIconS,
+                color: iconColor??AppColors.iconBlue,
             ),
+          ),
+        ),
       ],
     );
   }
