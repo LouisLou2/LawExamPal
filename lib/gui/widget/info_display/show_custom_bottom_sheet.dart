@@ -1,4 +1,3 @@
-import 'package:easy_cse/gui/widget/answer_tool_bar.dart';
 import 'package:easy_cse/gui/widget/decorations/color_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -49,15 +48,16 @@ Future<PersistentBottomSheetController> showCustomBottomSheet(
           child: Column(
             children: [
               SizedBox(
-                height: 40,
+                height: 30,
                 child: Stack(
                   textDirection: TextDirection.rtl,
                   children: [
                     Center(
                       child: ColorBar(
-                        width: MediaQuery.of(context).size.width / 5,
+                        width: MediaQuery.of(context).size.width / 7,
                         height: 5,
                         radius: 20,
+                        color: AppColors.darkText1,
                       ),
                     ),
                     IconButton(

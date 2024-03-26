@@ -109,11 +109,6 @@ flutter:
             weight: 700
           - asset: assets/fonts/Roboto/Roboto-Light.ttf
             weight: 300
-   - family: Unkempt
-     fonts:
-       - asset: assets/fonts/Unkempt/Unkempt-Regular.ttf
-         style: normal
-         weight: 400
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

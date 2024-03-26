@@ -1,15 +1,15 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
 import 'package:easy_cse/gui/widget/info_display/title_with_image.dart';
+import 'package:easy_cse/util/color_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/app_string.dart';
 import '../../constant/app_style/app_color.dart';
 import '../../constant/app_style/ui_params.dart';
-import '../widget/info_display/headline.dart';
 import '../widget/info_display/headline2.dart';
-import '../widget/info_display/short_info_tile.dart';
 
 class NotePage extends StatefulWidget{
   const NotePage({Key? key}) : super(key: key);
@@ -77,7 +77,47 @@ class _NotePageState extends State<NotePage>{
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=>showCustomBottomSheet(context),
+        onPressed: () {
+          double sheeth=MediaQuery.of(context).size.height / 3.6;
+          double sheetw=MediaQuery.of(context).size.width;
+          showCustomBottomSheet(
+              context,
+              height: sheeth,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 35.w),
+                    child: HeadLine2(
+                      title: AppStrings.addNote,
+                      size: 50.sp,
+                    ),
+                  ),
+                  SizedBox(height: 5.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      getSeleCard(
+                        title: AppStrings.fromCamera,
+                        height: sheeth/2.5,
+                        width: sheetw/2.5,
+                        color: AppColors.iconBlue,
+                        icon: CupertinoIcons.camera,
+                        onTap: () => Navigator.pop(context),
+                      ),
+                      getSeleCard(
+                        title: AppStrings.fromGallery,
+                        height: sheeth/2.5,
+                        width: sheetw/2.5,
+                        color: AppColors.oilGreen,
+                        icon: Icons.photo,
+                        onTap: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+          );
+        },
         backgroundColor: AppColors.iconBlue,
         child: const Icon(
           Icons.add,
@@ -87,4 +127,39 @@ class _NotePageState extends State<NotePage>{
       ),
     );
   }
+}
+
+Widget getSeleCard({String? title, required double height,required double width,required Color color,required IconData icon,VoidCallback? onTap}) {
+  return Card(
+    color: color,
+    elevation: 5,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(5),
+    ),
+    child: SizedBox(
+      width: width,
+      height: height,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: width/4,
+              color: AppColors.white0,
+            ),
+            SizedBox(height: 1.h),
+            Text(
+              title!,
+              style: TextStyle(
+                fontSize: 38.sp,
+                color: AppColors.white0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

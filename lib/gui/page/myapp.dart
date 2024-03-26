@@ -2,7 +2,7 @@ import 'package:easy_cse/config/test_device.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/service/navigation/route_generator.dart';
-import 'package:easy_cse/service/widget_helper/snackbar_helper.dart';
+import 'package:easy_cse/gui/widget/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

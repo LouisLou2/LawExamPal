@@ -67,4 +67,7 @@ class AppStrings {
 
   static const String recentNotes = '📒最近笔记';
   static const String allNotes = '所有笔记';
+  static const String addNote = '✏️添加笔记';
+  static const String fromCamera = '从相机';
+  static const String fromGallery = '从相册';
 }

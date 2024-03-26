@@ -1,6 +1,7 @@
 // S:size, R:radius, W:width, H:height, C:color, B:border, I:icon,
 class UIParams{
   static const double defIconS=32;
+  static const double defTextSize=16;
   static const double defShadowBlurR=5;
   static const double apparentShadowBlurR=10;
   static const double defBorderR=12;
