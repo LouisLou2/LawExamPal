@@ -1,7 +1,8 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
 import 'package:easy_cse/gui/widget/info_display/title_with_image.dart';
-import 'package:easy_cse/util/color_util.dart';
+import 'package:easy_cse/service/file_manager/image_manger.dart';
+import 'package:easy_cse/util/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class _NotePageState extends State<NotePage>{
           ),
           Divider(
             color: AppColors.silenceColor,
-            thickness: 2.5.w,
+            thickness: 0.5.h,
             height: 3.h,
             indent: 20.w,
             endIndent: 20.w,
@@ -78,8 +79,8 @@ class _NotePageState extends State<NotePage>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          double sheeth=MediaQuery.of(context).size.height / 3.6;
-          double sheetw=MediaQuery.of(context).size.width;
+          double sheeth=context.heightFraction(fraction: 0.28);
+          double sheetw=context.widthFraction();
           showCustomBottomSheet(
               context,
               height: sheeth,
@@ -102,7 +103,7 @@ class _NotePageState extends State<NotePage>{
                         width: sheetw/2.5,
                         color: AppColors.iconBlue,
                         icon: CupertinoIcons.camera,
-                        onTap: () => Navigator.pop(context),
+                        onTap: ()=>ImageManager.editImg(false),
                       ),
                       getSeleCard(
                         title: AppStrings.fromGallery,
@@ -110,7 +111,7 @@ class _NotePageState extends State<NotePage>{
                         width: sheetw/2.5,
                         color: AppColors.oilGreen,
                         icon: Icons.photo,
-                        onTap: () => Navigator.pop(context),
+                        onTap: ()=>ImageManager.editImg(true),
                       ),
                     ],
                   ),
@@ -136,28 +137,31 @@ Widget getSeleCard({String? title, required double height,required double width,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(5),
     ),
-    child: SizedBox(
-      width: width,
-      height: height,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: width/4,
-              color: AppColors.white0,
-            ),
-            SizedBox(height: 1.h),
-            Text(
-              title!,
-              style: TextStyle(
-                fontSize: 38.sp,
+    child: InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: width/4,
                 color: AppColors.white0,
-                fontWeight: FontWeight.bold,
               ),
-            ),
-          ],
+              SizedBox(height: 1.h),
+              Text(
+                title!,
+                style: TextStyle(
+                  fontSize: 38.sp,
+                  color: AppColors.white0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     ),

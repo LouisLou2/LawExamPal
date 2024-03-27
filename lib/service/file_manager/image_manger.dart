@@ -13,8 +13,8 @@ import '../../constant/app_style/app_color.dart';
 class ImageManager {
   static ImagePicker imagePicker = ImagePicker();
   static const int _imageQuality = 50; // 1-100
-
   static const int _compressQuality = 20; // 1-100
+  static late String lastImgPath;// 仅仅用于测试
   /*
   * 选择图片
   * fromGallery: true 从相册选择，false 从相机选择
@@ -77,6 +77,7 @@ class ImageManager {
     imageCache.clear();
     print('@@@@@@@@@@@@@@@@@@@@@');
     print(croppedFile.path);
+    lastImgPath = croppedFile.path;
     NavigationHelper.pushNamed(
       RouteCollector.explanation,
       arguments: croppedFile.path,

@@ -193,6 +193,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.article,
             title: "Review",
             spec: "review articles",
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.file_preview),
           ),
         ),
         StaggeredGridTile.count(

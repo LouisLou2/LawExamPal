@@ -14,7 +14,8 @@ class RouteCollector {
   static const String about = '/about';
   static const String snap_pic = '/snap_pic';
   static const String chat = '/chat';
-  static const String explanation = '/expalantion';
+  static const String explanation = '/explanation';
+  static const String file_preview = '/file_preview';
   static const Set<String> simpleRoutes = {
     sign_in,
     sign_up,

@@ -1,4 +1,5 @@
 import 'package:easy_cse/gui/widget/decorations/color_bar.dart';
+import 'package:easy_cse/util/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constant/app_style/app_color.dart';
@@ -44,7 +45,7 @@ Future<PersistentBottomSheetController> showCustomBottomSheet(
               topRight: Radius.circular(20.0),
             ),
           ),
-          height: height??MediaQuery.of(context).size.height / 1.5,
+          height: height??context.heightFraction(fraction: 0.66),
           child: Column(
             children: [
               SizedBox(
@@ -54,7 +55,7 @@ Future<PersistentBottomSheetController> showCustomBottomSheet(
                   children: [
                     Center(
                       child: ColorBar(
-                        width: MediaQuery.of(context).size.width / 7,
+                        width: context.widthFraction(fraction: 0.143),
                         height: 5,
                         radius: 20,
                         color: AppColors.darkText1,
