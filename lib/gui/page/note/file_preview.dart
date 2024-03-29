@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:easy_cse/constant/app_icons.dart';
 import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
-import 'package:easy_cse/service/file_manager/image_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +9,7 @@ import 'package:printing/printing.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import '../../constant/app_style/app_color.dart';
+import '../../../constant/app_style/app_color.dart';
 
 class FilePreviewPage extends StatefulWidget {
   const FilePreviewPage({Key? key}) : super(key: key);

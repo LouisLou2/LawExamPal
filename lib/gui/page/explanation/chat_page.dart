@@ -10,10 +10,10 @@ import "package:flutter/material.dart";
 import "package:image_picker/image_picker.dart";
 import "package:provider/provider.dart";
 
-import "../../constant/app_style/app_color.dart";
-import "../../service/network/chat_bot.dart";
-import "../widget/chat_input_box.dart";
-import "../widget/empty_chat_widget.dart";
+import "../../../constant/app_style/app_color.dart";
+import "../../../service/network/chat_bot.dart";
+import "../../widget/chat_input_box.dart";
+import "../../widget/empty_chat_widget.dart";
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

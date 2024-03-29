@@ -10,9 +10,10 @@ class ColorTextButton extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? color;
+  final Color? borderColors;
   final VoidCallback? onPressed;
 
-  const ColorTextButton({super.key, required this.text, this.color, this.onPressed, this.height, this.width});
+  const ColorTextButton({super.key, required this.text, this.color, this.onPressed, this.height, this.width, this.borderColors});
 
   @override
   Widget build(BuildContext context) {

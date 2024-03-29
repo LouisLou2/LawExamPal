@@ -27,7 +27,7 @@ class AlertBar extends StatelessWidget {
             Expanded(
               child: Text(
                 message,
-                style: AppStyles.tinyText
+                style: AppStyles.tinyText.copyWith(color: AppColors.white0),
               ),
             ),
           ],

@@ -11,10 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../constant/app_string.dart';
-import '../../constant/app_style/app_color.dart';
-import '../widget/circle_gradient_icon.dart';
-import '../widget/info_display/headline2.dart';
+import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../widget/circle_gradient_icon.dart';
+import '../../widget/info_display/headline2.dart';
 
 
 class TestHome2 extends StatefulWidget{

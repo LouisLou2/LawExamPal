@@ -1,9 +1,9 @@
-import 'package:easy_cse/gui/page/chat_page.dart';
-import 'package:easy_cse/gui/page/do_problems_page.dart';
-import 'package:easy_cse/gui/page/error_page.dart';
-import 'package:easy_cse/gui/page/explanation_page.dart';
-import 'package:easy_cse/gui/page/sign_in_page.dart';
-import 'package:easy_cse/gui/page/snap_pic_page.dart';
+import 'package:easy_cse/gui/page/explanation/chat_page.dart';
+import 'package:easy_cse/gui/page/ques/do_questions_page.dart';
+import 'package:easy_cse/gui/page/error/error_page.dart';
+import 'package:easy_cse/gui/page/explanation/explanation_page.dart';
+import 'package:easy_cse/gui/page/user/sign_in_page.dart';
+import 'package:easy_cse/gui/page/explanation/snap_pic_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../gui/page/main_tabs.dart';
@@ -37,7 +37,7 @@ class RouteCollector {
     snap_pic: (context) => const SnapPicPage(),
     chat: (context) => const ChatPage(),
     sign_in: (context) => const SignInPage(),
-    do_problems: (context) => const DoProblemsPage(),
+    do_problems: (context) => const DoQuestionPage(),
     // '/sign_in': (context) => const Center(),
     // '/sign_up': (context) => const SignUpPage(),
   };

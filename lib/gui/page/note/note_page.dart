@@ -7,12 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../constant/app_string.dart';
-import '../../constant/app_style/app_color.dart';
-import '../../constant/app_style/ui_params.dart';
-import '../../service/navigation/navigation_helper.dart';
-import '../../service/navigation/route_collector.dart';
-import '../widget/info_display/headline2.dart';
+import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../../constant/app_style/ui_params.dart';
+import '../../../service/navigation/navigation_helper.dart';
+import '../../../service/navigation/route_collector.dart';
+import '../../widget/info_display/headline2.dart';
 
 class NotePage extends StatefulWidget{
   const NotePage({Key? key}) : super(key: key);

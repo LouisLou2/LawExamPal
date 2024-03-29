@@ -73,4 +73,11 @@ class AppStrings {
 
   static const String doProblems = '巩固练习';
   static const String problemTheme='专项智能练习';
+  static const String AIChoose='📖AI智能精选—多知识点一次练会';
+  static const String tryQuestion='开始练习';
+
+  static const String singleChoice = '单选题';
+  static const String multipleChoice = '多选题';
+  static const String shortAnswer = '简答题';
+  static const String viewAnswer = '查看答案';
 }

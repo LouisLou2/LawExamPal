@@ -28,6 +28,13 @@ class AppStyles {
     color: AppColors.white0,
     letterSpacing: 0.6,
   );
+  static const TextStyle bodySmallDark = TextStyle(
+    fontFamily: defFontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 15,
+    color: AppColors.darkText0,
+    letterSpacing: 0.6,
+  );
   static const TextStyle tinyText = TextStyle(
     fontFamily: defFontFamily,
     fontSize: 13.5,
@@ -53,12 +60,12 @@ class AppStyles {
     borderSide: BorderSide(color: AppColors.lightBorderColor, width: 1.6),
   );
 
-  static LinearGradient getLinearGradient(MaterialColor color) {
+  static LinearGradient getLinearGradient(MaterialColor color,{bool reverse=false}){
     return LinearGradient(
       begin: Alignment.bottomLeft,
       end: Alignment.topRight,
-      colors: [color[400]!, color[200]!, color[100]!,],
-      stops: const [0.4, 0.7, 0.9,],
+      colors: !reverse?[color[400]!, color[200]!, color[100]!,]:[color[100]!, color[200]!, color[400]!,],
+      stops: const [0.4, 0.6, 0.9,],
     );
   }
 

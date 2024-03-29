@@ -1,21 +1,21 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/page/problem_page.dart';
+import 'package:easy_cse/gui/page/ques/question_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-import '../../constant/app_string.dart';
-import '../../constant/app_style/app_color.dart';
+import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_color.dart';
 
-class DoProblemsPage extends StatefulWidget{
-  const DoProblemsPage({Key? key}):super(key:key);
+class DoQuestionPage extends StatefulWidget{
+  const DoQuestionPage({Key? key}):super(key:key);
   @override
-  State<DoProblemsPage> createState()=>_DoProblemsPageState();
+  State<DoQuestionPage> createState()=>_DoQuestionPageState();
 }
-class _DoProblemsPageState extends State<DoProblemsPage>{
+class _DoQuestionPageState extends State<DoQuestionPage>{
   final _pageController = PageController(
-    initialPage: 2,
+    initialPage: 0,
     viewportFraction: 1.0,
   );
   final problemTheme='言语理解与表达';
@@ -30,7 +30,7 @@ class _DoProblemsPageState extends State<DoProblemsPage>{
         ),
         title: Text(
           AppStrings.doProblems,
-          style: AppStyles.iconTextStyle.copyWith(color: AppColors.darkText1),
+          style: AppStyles.iconTextStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         actions: [
@@ -55,7 +55,7 @@ class _DoProblemsPageState extends State<DoProblemsPage>{
               children: [
                 Text(
                   '${AppStrings.problemTheme}($problemTheme)',
-                  style: AppStyles.microText,
+                  style: AppStyles.tinyText,
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -71,14 +71,14 @@ class _DoProblemsPageState extends State<DoProblemsPage>{
               ],
             ),
           ),
-          Expanded( // 使用 Expanded 包裹 PageView.custom
+          Flexible( // 使用 Expanded 包裹 PageView.custom
             child: PageView.custom(
               controller: _pageController,
               childrenDelegate: SliverChildBuilderDelegate(
                     (context, index) {
-                  return ProblemDetailPage(index: index);
+                  return QuestionDetailPage(index: index);
                 },
-                childCount: 10,
+                childCount: 2,
               ),
             ),
           ),

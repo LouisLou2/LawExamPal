@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 
-import '../../constant/app_style/app_color.dart';
-import '../../dependency_change/camerawesome/awesome_capture_button.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../../dependency_change/camerawesome/awesome_capture_button.dart';
 class SnapPicPage extends StatefulWidget {
   const SnapPicPage({Key? key}) : super(key: key);
 

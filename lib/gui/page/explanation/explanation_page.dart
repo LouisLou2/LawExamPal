@@ -1,15 +1,15 @@
-import 'package:easy_cse/constant/test_data.dart';
 import 'package:easy_cse/gui/widget/info_display/answer_display.dart';
 import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/app_string.dart';
-import '../../constant/app_style/app_color.dart';
-import '../../constant/app_style/app_style.dart';
+import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../../constant/app_style/app_style.dart';
 import 'dart:io' show File;
 
-import '../widget/answer_tool_bar.dart';
+import '../../../test_data/test_data.dart';
+import '../../widget/answer_tool_bar.dart';
 
 class ExplanationPage extends StatefulWidget {
   final String imgPath;
@@ -28,25 +28,13 @@ class _ExplainationPageState extends State<ExplanationPage> {
       PersistentBottomSheetController con=await showCustomBottomSheet(
         innerWidget.context,
         height:MediaQuery.of(context).size.height / 1.2,
-        onClosing: () {
-          Navigator.of(context).pop();
-        },
         child:const DefaultTabController(
           length: 2,
           child: Expanded(
-            child: TabBarView(
-              children: <Widget>[
-                AnswerDisplay(
-                    question: TestData.ques,
-                    idea: TestData.idea,
-                    answer: TestData.ans,
-                ),
-                AnswerDisplay(
-                  question: TestData.ques,
-                  idea: TestData.idea,
-                  answer: TestData.ans,
-                ),
-              ],
+            child: AnswerDisplay(
+              question: TestData.quesDetail,
+              idea: TestData.idea,
+              answer: TestData.ans,
             ),
           ),
         ),

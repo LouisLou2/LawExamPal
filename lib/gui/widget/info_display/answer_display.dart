@@ -2,6 +2,8 @@ import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
 import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
+import 'package:easy_cse/gui/widget/info_display/summary_card.dart';
+import 'package:easy_cse/gui/widget/info_display/text_section.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,11 +40,11 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
             onTap: () => NavigationHelper.pushNamed(RouteCollector.chat),
           ),
           // 这里不包裹Material会使得ListTile沿用父级Container的背景色
-          defAnswerSection(title:AppStrings.question, content:widget.question),
+          TextSection(title:AppStrings.question, content:widget.question),
           defDivider(),
-          defAnswerSection(title:AppStrings.idea, content: widget.idea),
+          TextSection(title:AppStrings.idea, content: widget.idea),
           defDivider(),
-          defAnswerSection(title:AppStrings.answer, content: widget.answer),
+          TextSection(title:AppStrings.answer, content: widget.answer),
           defDivider(),
           Align(
             alignment: Alignment.centerLeft,
@@ -108,8 +110,24 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
             ),
           ),
           defDivider(),
-          defAnswerSection(title: AppStrings.morePractice, content: AppStrings.notYet),
-          SizedBox(height: 110.h,)
+          defAnswerSection(
+            title: AppStrings.morePractice,
+            child: SummaryCard(
+              title: AppStrings.AIChoose,
+              points: const [
+                '分总结构',
+                '关键词法',
+                '类比推理',
+              ],
+              color: AppColors.purpleBlue,
+              action: ColorTextButton(
+                text: AppStrings.tryQuestion,
+                onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.do_problems),
+                color: AppColors.purpleBlue,
+              ),
+            )
+          ),
+          SizedBox(height: 110.h,),
         ],
       ),
     );
@@ -122,7 +140,7 @@ Widget defDivider() {
     thickness: 10.h,
   );
 }
-Widget defAnswerSection({required String title, required String content}) {
+Widget defAnswerSection({required String title,Widget?child}) {
   return Material(
     child:ListTile(
       tileColor: AppColors.white0,
@@ -136,12 +154,7 @@ Widget defAnswerSection({required String title, required String content}) {
           ),
         ),
       ),
-      subtitle: Text(
-        content,
-        style: AppStyles.bodySmall.copyWith(
-          color: Colors.black,
-        ),
-      ),
+      subtitle: child,
     ),
   );
 }

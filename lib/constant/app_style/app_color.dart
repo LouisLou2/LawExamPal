@@ -16,6 +16,7 @@ class AppColors{
   static const Color iconBlue = Color(0xff0099e5);
   static const Color silenceColor = Colors.grey;
   static const Color lightBorderColor = Colors.black12;
+  static const Color deepBlue = Color(0xff002663);
   static const Color linkBlue=Color(0xff17c0eb);
   static const Color scentBlue=Color(0xff88CCEE);
   static const Color darkText2=Color(0xff3d3d3d);
