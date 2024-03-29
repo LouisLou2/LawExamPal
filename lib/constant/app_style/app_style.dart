@@ -18,6 +18,8 @@ class AppStyles {
   );
   static const titleMedium = TextStyle(
     fontFamily: defFontFamily,
+    fontWeight: FontWeight.normal,
+    color: AppColors.darkText0,
     fontSize: 25,
     letterSpacing: 0.5,
   );

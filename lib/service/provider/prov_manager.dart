@@ -2,6 +2,7 @@ import 'package:easy_cse/service/provider/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/page_change_prov.dart';
 import 'package:easy_cse/service/provider/question_prov.dart';
 import 'package:easy_cse/service/provider/user_info_prov.dart';
+import 'package:easy_cse/service/provider/veri_code_prov.dart';
 import 'package:easy_cse/vault/style_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -12,6 +13,7 @@ class ProvManager {
   static late UserInfoProv userInfoProv;
   static late ChatStateProv chatStateProv;
   static late QuestionProv questionProv;
+  static late VeriCodeProv veriCodeProv;
   // static late Map<String,ChangeNotifier> providerMap;
   static void init(){
     pageChangeProvider = PageChangeProv();
@@ -19,6 +21,7 @@ class ProvManager {
     userInfoProv = UserInfoProv();
     chatStateProv = ChatStateProv();
     questionProv = QuestionProv();
+    veriCodeProv = VeriCodeProv();
   }
   // 必须是List<SingleChildWidget>
   static List<SingleChildWidget> get getProvList{
@@ -28,6 +31,7 @@ class ProvManager {
       ChangeNotifierProvider.value(value: userInfoProv),
       ChangeNotifierProvider.value(value: chatStateProv),
       ChangeNotifierProvider.value(value: questionProv),
+      ChangeNotifierProvider.value(value: veriCodeProv),
     ];
   }
 }

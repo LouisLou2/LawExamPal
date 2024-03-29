@@ -3,10 +3,8 @@ import 'package:easy_cse/gui/page/ques/question_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../constant/app_string.dart';
-import '../../../constant/app_style/app_color.dart';
 
 class DoQuestionPage extends StatefulWidget{
   const DoQuestionPage({Key? key}):super(key:key);

@@ -1,53 +1,51 @@
 class AppStrings {
   const AppStrings._();
 
-  static const String loginAndRegister = 'Login and Register UI';
-  static const String uhOhPageNotFound = 'uh-oh!\nPage not found';
-  static const String register = 'Register';
-  static const String login = 'Login';
-  static const String createYourAccount = 'Create your account';
-  static const String doNotHaveAnAccount = "Don't have an account?";
+  static const String pageNotFound = '页面未找到';
+  static const String signup = '注册';
+  static const String login = '登录';
+  static const String doNotHaveAnAccount = "没有账号？";
   static const String facebook = 'Facebook';
   static const String google = 'Google';
-  static const String signInToYourNAccount = 'Sign in to your\nAccount';
-  static const String signInToYourAccount = 'Sign in to your Account';
-  static const String iHaveAnAccount = 'I have an account?';
-  static const String forgotPassword = 'Forgot Password?';
-  static const String orLoginWith = 'or Login with';
+  static const String signInToYourAccount = '登录到您的账户';
+  static const String signUpAccount= '注册账户以开始学习';
+  static const String iHaveAnAccount = '已有账户?';
+  static const String forgotPassword = '忘记密码?';
+  static const String orLoginWith = '或使用以下方式登录';
 
-  static const String loggedIn = 'Logged In!';
-  static const String registrationComplete = 'Registration Complete!';
+  static const String loggedIn = '已经登陆!';
+  static const String registrationComplete = '注册成功!';
 
-  static const String name = 'Name';
-  static const String pleaseEnterName = 'Please, Enter Name';
-  static const String invalidName = 'Invalid Name';
+  static const String name = '名字';
+  static const String pleaseEnterName = '请输入名字';
+  static const String invalidName = '无效名字';
 
-  static const String email = 'Email';
-  static const String pleaseEnterEmailAddress = 'Please, Enter Email Address';
-  static const String invalidEmailAddress = 'Invalid Email Address';
+  static const String email = '邮箱';
+  static const String pleaseEnterEmailAddress = '请输入邮箱地址';
+  static const String invalidEmailAddress = '无效邮箱地址';
 
-  static const String password = 'Password';
-  static const String pleaseEnterPassword = 'Please, Enter Password';
-  static const String invalidPassword = 'Invalid Password';
+  static const String password = '密码';
+  static const String pleaseEnterPassword = '请输入密码';
+  static const String invalidPassword = '无效密码';
 
-  static const String confirmPassword = 'Confirm Password';
-  static const String pleaseReEnterPassword = 'Please, Re-Enter Password';
-  static const String passwordNotMatched = 'Password not matched!';
+  static const String confirmPassword = '确认密码';
+  static const String pleaseReEnterPassword = '请重新输入密码';
+  static const String passwordNotMatched = '密码不匹配!';
 
-  static const String answerTitle = 'Answer';
-  static const String hitTopics = 'Hit Topics';
-  static const String notes = 'Notes';
+  static const String answerTitle = '答疑';
+  static const String hitTopics = '热门话题';
+  static const String notes = '笔记';
 
-  static const String cropImage = 'Crop Image';
+  static const String cropImage = '裁剪图片';
 
-  static const String advertAITutor= '🎉 Introducing AI Tutor: Your Personal Study Buddy';
-  static const String shortDescAI = 'AI powered tutoring';
+  static const String advertAITutor= '🎉 AI Tutor上线啦！';
+  static const String shortDescAI = 'AI驱动的智能学习伙伴';
   static const String chatBot = 'Chat Bot';
-  static const String user = 'You';
+  static const String user = '你';
   static const String aiTutor = '✨AI Tutor';
-  static const String defaultChatBotErrorAnswer = '🚨a Error occurred, please try again';
-  static const String emptyChat = '📭Ask Something!';
-  static const String cancelQuery='❌ You Cancelled the Query';
+  static const String defaultChatBotErrorAnswer = '🚨出错了，请再试一次';
+  static const String emptyChat = '📭问些什么!';
+  static const String cancelQuery='❌ 你中断了本次提问';
   static const String ask='提问';
 
   static const String explanation = 'Explanation';
@@ -61,6 +59,7 @@ class AppStrings {
 
   static const String morePractice = '更多练习';
   static const String notYet = '暂未开放,敬请期待';
+
 
   static const String wrongSet = '错题本';
   static const String print = '打印';

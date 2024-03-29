@@ -1,45 +1,48 @@
-import 'package:easy_cse/constant/app_pic.dart';
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/decorations/linear_gradient_bg.dart';
-import 'package:easy_cse/gui/widget/layout_helper_widget/named_divider.dart';
-import 'package:easy_cse/service/navigation/navigation_helper.dart';
-import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
-class SignInPage extends StatefulWidget{
-  const SignInPage({Key? key}): super(key: key);
+import '../../../service/navigation/navigation_helper.dart';
+import '../../../service/navigation/route_collector.dart';
+
+class SignUpPage extends StatefulWidget{
+  const SignUpPage({Key? key}): super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   //使用它，可以在表单组件的外部使用表单状态
   final _formKey = GlobalKey<FormState>();
 
-  final ValueNotifier<bool> pwdVisibleNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> pwdVisibleNotifier1 = ValueNotifier(true);
+  final ValueNotifier<bool> pwdVisibleNotifier2 = ValueNotifier(true);
   bool idenValid=false;
   bool pwdValid=false;
 
   late final TextEditingController idenController;
-  late final TextEditingController pwdController;
+  late final TextEditingController pwdController1;
+  late final TextEditingController pwdController2;
 
   void initializeControllers() {
     //listener在文本更改时会被调用
     idenController = TextEditingController()
       ..addListener(controllerListener);
-    pwdController = TextEditingController()
+    pwdController1 = TextEditingController()
+      ..addListener(controllerListener);
+    pwdController2 = TextEditingController()
       ..addListener(controllerListener);
   }
 
   void disposeControllers() {
     idenController.dispose();
-    pwdController.dispose();
+    pwdController1.dispose();
+    pwdController2.dispose();
   }
 
   bool allFieldValid(){
@@ -49,7 +52,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   String? validateEmail(String? value){
-  print("validateEmail");
+    print("validateEmail");
     if(value==null||value.isEmpty){
       idenValid=false;
       return AppStrings.pleaseEnterEmailAddress;
@@ -61,7 +64,6 @@ class _SignInPageState extends State<SignInPage> {
     return null;
   }
   String? validatePwd(String? value){
-    print("validatePwd");
     if(value==null||value.isEmpty){
       pwdValid=false;
       return AppStrings.pleaseEnterPassword;
@@ -71,6 +73,10 @@ class _SignInPageState extends State<SignInPage> {
     }
     pwdValid=true;
     return null;
+  }
+  String? validatePwd2(String? value){
+    // 对比两次密码是否一致
+    return pwdController1.text==value?null:AppStrings.passwordNotMatched;
   }
   void controllerListener() {
     //validate此方法是结合表单所有validator得出的结果，返回true或false
@@ -104,17 +110,18 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children:[
                   Text(
-                    AppStrings.login,
-                    style: AppStyles.titleLarge.copyWith(color: AppColors.white1)
+                      AppStrings.signup,
+                      style: AppStyles.titleLarge.copyWith(color: AppColors.white1)
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    AppStrings.signInToYourAccount,
+                    AppStrings.signUpAccount,
                     style: AppStyles.bodySmall.copyWith(color: AppColors.white1),
                   ),
                 ],
               ),
             ),
+            SizedBox(height: 10.h),
             Form(
               key:_formKey,
               child: Padding(
@@ -128,18 +135,18 @@ class _SignInPageState extends State<SignInPage> {
                         labelText: AppStrings.email,
                         hintText: AppStrings.email,
                         prefixIcon: Icon(Icons.email),
-                        border: AppStyles.textFormFieldBorder
+                        border: AppStyles.textFormFieldBorder,
                       ),
                       keyboardType: TextInputType.emailAddress,
                       controller: idenController,
                       validator: validateEmail,
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 15.h),
                     ValueListenableBuilder(
-                      valueListenable: pwdVisibleNotifier,
+                      valueListenable: pwdVisibleNotifier1,
                       builder: (_, pwdObscure, __)=>TextFormField(
                         obscureText: pwdObscure,
-                        controller: pwdController,
+                        controller: pwdController1,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.visiblePassword,
                         validator: validatePwd,
@@ -154,7 +161,7 @@ class _SignInPageState extends State<SignInPage> {
                               color: Colors.black,
                               size: 20,
                             ),
-                            onPressed: () => pwdVisibleNotifier.value = !pwdObscure,
+                            onPressed: () => pwdVisibleNotifier1.value = !pwdObscure,
                             style: IconButton.styleFrom(
                               minimumSize: const Size.square(48),
                             ),
@@ -163,20 +170,36 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 5.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: (){},
-                          child: Text(
-                            AppStrings.forgotPassword,
-                            style: AppStyles.textBtnOrLinkStyle,
+                    SizedBox(height: 15.h),
+                    ValueListenableBuilder(
+                      valueListenable: pwdVisibleNotifier2,
+                      builder: (_, pwdObscure, __)=>TextFormField(
+                        obscureText: pwdObscure,
+                        controller: pwdController2,
+                        textInputAction: TextInputAction.done,
+                        keyboardType: TextInputType.visiblePassword,
+                        validator: validatePwd2,
+                        //onChanged: (_) => _formKey.currentState?.validate(),
+                        decoration: InputDecoration(
+                          labelText: AppStrings.confirmPassword,
+                          hintText: AppStrings.confirmPassword,
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              pwdObscure ? Icons.visibility : Icons.visibility_off,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                            onPressed: () => pwdVisibleNotifier2.value = !pwdObscure,
+                            style: IconButton.styleFrom(
+                              minimumSize: const Size.square(48),
+                            ),
                           ),
+                          border: AppStyles.textFormFieldBorder,
                         ),
-                      ],
+                      ),
                     ),
-                    SizedBox(height: 5.h,),
+                    SizedBox(height: 15.h),
                     ElevatedButton(
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
@@ -184,72 +207,35 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       onPressed: ()=>{null},
                       child: Text(
-                        AppStrings.login,
+                        AppStrings.signup,
                         style: AppStyles.textBtnOrLinkStyle,
                       ),
                     ),
-                    SizedBox(
-                      height: 13.h,
-                    ),
-                    NamedDivider(
-                      height: 20.h,
-                      name: AppStrings.orLoginWith,
-                      dividerHeight: 1,
-                      dividerColor: AppColors.silenceColor,
-                      textColor: AppColors.silenceColor,
-                    ),
-                    SizedBox(height: 8.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: (){},
-                            icon: SvgPicture.asset(AppPic.google, width: 14),
-                            label: const Text(
-                                AppStrings.facebook,
-                                style: TextStyle(color: Colors.black)
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: (){},
-                            icon: SvgPicture.asset(AppPic.facebook, width: 14),
-                            label: const Text(
-                              AppStrings.facebook,
-                              style: TextStyle(color: AppColors.darkText0),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 10.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          AppStrings.doNotHaveAnAccount,
+                          AppStrings.iHaveAnAccount,
                           style: AppStyles.bodySmall.copyWith(color: AppColors.darkText0),
                         ),
                         const SizedBox(width: 4),
                         TextButton(
-                          onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_up),
+                          onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_in),
                           child: Text(
-                            AppStrings.signup,
+                            AppStrings.login,
                             style: AppStyles.bodySmall.copyWith(color: AppColors.silentBlue),
                           ),
                         ),
                       ],
-                    )
-                  ]
-                )
-              )
-            )
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-      )
+      ),
     );
   }
 }
