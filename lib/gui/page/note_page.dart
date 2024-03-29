@@ -10,6 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constant/app_string.dart';
 import '../../constant/app_style/app_color.dart';
 import '../../constant/app_style/ui_params.dart';
+import '../../service/navigation/navigation_helper.dart';
+import '../../service/navigation/route_collector.dart';
 import '../widget/info_display/headline2.dart';
 
 class NotePage extends StatefulWidget{
@@ -70,7 +72,7 @@ class _NotePageState extends State<NotePage>{
                   title: "Note $index",
                   subTitle: DateTime.now().toString(),
                   imagePath: "assets/images/avatar1.png",
-                  onTap: ()=>print("Note $index"),
+                  onTap: ()=>NavigationHelper.pushNamed(RouteCollector.file_preview),
                 );
               },
             ),

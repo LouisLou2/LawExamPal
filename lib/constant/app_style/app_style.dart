@@ -3,11 +3,12 @@ import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
 class AppStyles {
-  static const String defFontFamily = "Roboto";
+  static const String defFontFamily = "NotoSansSC";
   static const iconTextStyle = TextStyle(
     fontFamily: defFontFamily,
     fontSize: 20,
     letterSpacing: 0.5,
+    color: AppColors.darkText1,
   );
   static const TextStyle titleLarge = TextStyle(
     fontFamily: defFontFamily,
@@ -30,7 +31,14 @@ class AppStyles {
   static const TextStyle tinyText = TextStyle(
     fontFamily: defFontFamily,
     fontSize: 13.5,
-    color: AppColors.white0,
+    color: AppColors.darkText1,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+  );
+  static const TextStyle microText = TextStyle(
+    fontFamily: defFontFamily,
+    fontSize: 11,
+    color: AppColors.darkText1,
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
   );

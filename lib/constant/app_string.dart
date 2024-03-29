@@ -70,4 +70,7 @@ class AppStrings {
   static const String addNote = '✏️添加笔记';
   static const String fromCamera = '从相机';
   static const String fromGallery = '从相册';
+
+  static const String doProblems = '巩固练习';
+  static const String problemTheme='专项智能练习';
 }

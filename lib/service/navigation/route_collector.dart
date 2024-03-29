@@ -1,4 +1,5 @@
 import 'package:easy_cse/gui/page/chat_page.dart';
+import 'package:easy_cse/gui/page/do_problems_page.dart';
 import 'package:easy_cse/gui/page/error_page.dart';
 import 'package:easy_cse/gui/page/explanation_page.dart';
 import 'package:easy_cse/gui/page/sign_in_page.dart';
@@ -16,12 +17,14 @@ class RouteCollector {
   static const String chat = '/chat';
   static const String explanation = '/explanation';
   static const String file_preview = '/file_preview';
+  static const String do_problems = '/do_problems';
   static const Set<String> simpleRoutes = {
     sign_in,
     sign_up,
     about,
     snap_pic,
     chat,
+    do_problems,
   };
 
   // specialRoutes中的路由不会在路由表中注册，而是在RouteGenerator中动态生成,因为这些路由需要用户满足某种条件才能跳转
@@ -34,6 +37,7 @@ class RouteCollector {
     snap_pic: (context) => const SnapPicPage(),
     chat: (context) => const ChatPage(),
     sign_in: (context) => const SignInPage(),
+    do_problems: (context) => const DoProblemsPage(),
     // '/sign_in': (context) => const Center(),
     // '/sign_up': (context) => const SignUpPage(),
   };

@@ -6,6 +6,7 @@ import 'package:easy_cse/gui/widget/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import '../../service/provider/prov_manager.dart';
 import 'main_tabs.dart';
 
@@ -38,14 +39,16 @@ class _MyAppState extends State<MyApp> {
         designSize: Size(device.dp1, device.dp2),
         minTextAdapt: false,
         splitScreenMode: true,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: RouteCollector.simpleRouteMap,
-          //initialRoute: RouteCollector.main, // 这里如果使用initialRoute，会在home的基础上再跳转一次。
-          navigatorKey: NavigationHelper.key,
-          onGenerateRoute: RouteGenerator.generateRoute,
-          scaffoldMessengerKey: SnackbarHelper.key,
-          home: _buildHome(),
+        child: ShadApp.material(
+          home: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            routes: RouteCollector.simpleRouteMap,
+            //initialRoute: RouteCollector.main, // 这里如果使用initialRoute，会在home的基础上再跳转一次。
+            navigatorKey: NavigationHelper.key,
+            onGenerateRoute: RouteGenerator.generateRoute,
+            scaffoldMessengerKey: SnackbarHelper.key,
+            home: _buildHome(),
+          ),
         ),
       ),
     );

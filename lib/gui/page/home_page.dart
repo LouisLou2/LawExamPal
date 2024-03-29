@@ -181,7 +181,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.history_rounded,
             title: "History",
             spec: "history questions",
-            onTap: null,
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.do_problems),
           ),
         ),
         StaggeredGridTile.count(
@@ -193,7 +193,6 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.article,
             title: "Review",
             spec: "review articles",
-            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.file_preview),
           ),
         ),
         StaggeredGridTile.count(
