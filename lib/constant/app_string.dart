@@ -32,6 +32,11 @@ class AppStrings {
   static const String pleaseReEnterPassword = '请重新输入密码';
   static const String passwordNotMatched = '密码不匹配!';
 
+  static const String veriCodeSended = '一条验证码已发送到';
+  static const String enterVeriCode = '输入验证码';
+  static const String sendAgain = '重新发送';
+  static const String secondsToResend = '秒后重新发送';
+
   static const String answerTitle = '答疑';
   static const String hitTopics = '热门话题';
   static const String notes = '笔记';

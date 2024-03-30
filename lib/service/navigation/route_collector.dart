@@ -43,15 +43,11 @@ class RouteCollector {
     chat: (context) => const ChatPage(),
     sign_in: (context) => const SignInPage(),
     sign_up: (context) => const SignUpPage(),
-    enter_veriCode: (context) => CodeInputContainer(
+    enter_veriCode: (context) =>EnterVeriCodePage(
       count: 6,
-      phone: '12345678901',
-      onResult: (code) {
-        print('code: $code');
-      },
-      onRestart: () async {
-        return true;
-      },
+      email: 'lsk@163.com',
+      onResult: (String code) {print('code: $code');},
+      onRestart: () async {print('restart'); return true;},
     ),
     do_problems: (context) => const DoQuestionPage(),
     // '/sign_in': (context) => const Center(),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// 验证码输入框
-class CodeInputContainer extends StatefulWidget {
+class CodeInputContainerr extends StatefulWidget {
   final int count;
   final String phone;
   final Function(String code) onResult;
@@ -13,7 +13,7 @@ class CodeInputContainer extends StatefulWidget {
   /// [return] 是否发起"获取验证码"操作成功
   final Future<bool> Function() onRestart;
 
-  const CodeInputContainer({
+  const CodeInputContainerr({
     super.key,
     required this.count,
     required this.phone,
@@ -25,7 +25,7 @@ class CodeInputContainer extends StatefulWidget {
   State createState() => _CodeInputContainerState();
 }
 
-class _CodeInputContainerState extends State<CodeInputContainer> with WidgetsBindingObserver {
+class _CodeInputContainerState extends State<CodeInputContainerr> with WidgetsBindingObserver {
   late final ValueNotifier<String> code = ValueNotifier('');
   late FocusNode inputFocus = FocusNode();
 
