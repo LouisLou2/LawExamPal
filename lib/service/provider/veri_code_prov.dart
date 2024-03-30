@@ -33,6 +33,7 @@ class VeriCodeProv extends ChangeNotifier {
     pauseInterval=0;
     // 计算距离上次发送验证码的时间
     left=gap;
+    print("@@@@@@@@@@@@@@@@ new timer instance");
     timer=Timer.periodic(const Duration(seconds: 1), (timer) {
       if(pauseInterval!=0){
         left-=pauseInterval;
@@ -55,6 +56,9 @@ class VeriCodeProv extends ChangeNotifier {
     notifyListeners();
   }
   void allowNext(bool allow){
+    if(allowNextSend==allow){
+      return;
+    }
     // 将显示“重新发送”的按钮
     allowNextSend=allow;
     if(!allow){

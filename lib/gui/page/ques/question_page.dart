@@ -26,7 +26,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
     return Scaffold(
       backgroundColor: AppColors.white1,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 20.h),
+        padding: EdgeInsets.symmetric(horizontal: 40.w,vertical: 6.h),
         child: Column(
           children: [
             Row(
@@ -35,10 +35,12 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
                 ShadBadge.secondary(
                   text: Text(ques.isChoice?AppStrings.singleChoice:AppStrings.shortAnswer),
                   backgroundColor: AppColors.purpleBlue,
+                  foregroundColor: AppColors.white2,
                   hoverBackgroundColor: AppColors.purpleBlue,
                 ),
               ],
             ),
+            SizedBox(height: 5.h),
             SelectableText(
               ques.question,
               style: AppStyles.bodySmallDark

@@ -33,28 +33,33 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
 
   @override
   void initState(){
+    print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _inputFocus.requestFocus();
       ProvManager.veriCodeProv.startTimer();
+      ProvManager.veriCodeProv.allowNext(false);
     });
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state){
     final vprov = ProvManager.veriCodeProv;
     if(state==AppLifecycleState.resumed){
+      print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage resumed');
       if(vprov.lastPauseTime!=null){
         vprov.pauseInterval += (DateTime.now().millisecondsSinceEpoch-vprov.lastPauseTime!)~/1000;
         vprov.lastPauseTime=null;
       }
     }
     else if(state==AppLifecycleState.paused){
+      print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage paused');
       vprov.lastPauseTime=DateTime.now().millisecondsSinceEpoch;
     }
   }
   @override
   void dispose(){
+    print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage dispose');
     WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     _inputFocus.dispose();
@@ -151,24 +156,23 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
       shrinkWrap: true,
       crossAxisSpacing: 20.w,
       childAspectRatio: 0.95,
-      children: [
-      for(int i=0;i<widget.count;++i)
-        Selector<VeriCodeProv,bool>(
-          key: ValueKey(i),
-          selector: (_,prov)=>prov.index==i,
+      children: List.generate(
+        widget.count,
+        (index) => Selector<VeriCodeProv,bool>(
+          key: ValueKey(index),
+          selector: (_,prov)=>prov.index==index,
           builder: (_,now,__)=>Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: AppColors.scentBlue.withOpacity(0.5),
-              border: now?Border.all(
-                color: AppColors.purpleBlue,
-                width: 2,
-              ):null,
-              borderRadius: BorderRadius.circular(5)
+                color: AppColors.scentBlue.withOpacity(0.5),
+                border: now?Border.all(
+                  color: AppColors.purpleBlue,
+                  width: 2,
+                ):null,
+                borderRadius: BorderRadius.circular(5)
             ),
             child: Selector<VeriCodeProv,String>(
-              key: ValueKey(i),
-              selector: (_,prov)=>prov.getCharAt(i),
+              selector: (_,prov)=>prov.getCharAt(index),
               builder: (_,codeChar,__)=>AppRule.isCharValid(codeChar)?Text(
                 codeChar,
                 style:AppStyles.titleMedium,
@@ -176,7 +180,7 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
             ),
           ),
         ),
-      ]
+      ),
     );
   }
   void tyingCode(String code){
@@ -191,5 +195,10 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
         ProvManager.veriCodeProv.allowNext(false);
       }
     });
+  }
+  bool Function(int) equal(i){
+    return (x){
+      return x==i;
+    };
   }
 }
