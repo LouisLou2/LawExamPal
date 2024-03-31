@@ -3,10 +3,14 @@ import "package:easy_cse/constant/app_style/app_style.dart";
 import "package:easy_cse/gui/widget/buttons/jump_button.dart";
 import "package:easy_cse/gui/widget/chat_item.dart";
 import "package:easy_cse/gui/widget/config/floating_location.dart";
+import "package:easy_cse/gui/widget/layout_helper_widget/named_divider.dart";
 import "package:easy_cse/service/file_manager/image_manger.dart";
 import "package:easy_cse/service/provider/chat_state_prov.dart";
 import "package:easy_cse/service/provider/prov_manager.dart";
+import "package:easy_cse/util/extensions.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:image_picker/image_picker.dart";
 import "package:provider/provider.dart";
 
@@ -26,11 +30,13 @@ class _ChatPageState extends State<ChatPage>{
 
   final queryController = TextEditingController();
   final recordController = ScrollController();
+  late final double screenH;
 
   @override
   void initState(){
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      screenH = context.heightFraction();
       if(recordController.hasClients) {
         recordController.jumpTo(
           recordController.position.maxScrollExtent,
@@ -49,6 +55,12 @@ class _ChatPageState extends State<ChatPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         title: Text(
             AppStrings.aiTutor,
             style:AppStyles.iconTextStyle.copyWith(fontWeight: FontWeight.bold),
@@ -57,6 +69,7 @@ class _ChatPageState extends State<ChatPage>{
         centerTitle: true,
         toolbarHeight: 50,
       ),
+      drawer: const ChatDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -150,10 +163,9 @@ class _ChatPageState extends State<ChatPage>{
     );
   }
   bool onNotification(ScrollEndNotification notification){
-    int bear=600;
-    // 这里的逻辑是当向上滑动超过100像素时，显示一个按钮，点击按钮后才滚动到底部
+    // 这里的逻辑是当向上滑动超过x像素时，显示一个按钮，点击按钮后才滚动到底部
     // pixels是当前滚动的位置，maxScrollExtent是最大滚动位置
-    if(notification.metrics.pixels<notification.metrics.maxScrollExtent-bear){
+    if(notification.metrics.pixels<notification.metrics.maxScrollExtent-screenH){
       ProvManager.chatStateProv.showJumpButton=true;
     }else{
       ProvManager.chatStateProv.showJumpButton=false;
@@ -162,5 +174,61 @@ class _ChatPageState extends State<ChatPage>{
   }
   void onCancel(){
     ChatBot.cancelQuery();
+  }
+}
+
+class ChatDrawer extends StatefulWidget{
+  const ChatDrawer({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _ChatDrawerState();
+}
+class _ChatDrawerState extends State<ChatDrawer>{
+  @override
+  Widget build(BuildContext context){
+    return Drawer(
+      width: 0.7.sw,
+      child: Column(
+        children: [
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            leading: const CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage("assets/images/avatar1.png"),
+            ),
+            title: Text(
+              AppStrings.newChat,
+              style: AppStyles.bodySmallDark.copyWith(fontWeight: FontWeight.bold),
+            ),
+            trailing: const Icon(
+              Icons.edit_note_rounded,
+              size: 30,
+            ),
+            onTap: (){},
+          ),
+          NamedDivider(
+            name: AppStrings.history,
+            textColor: AppColors.darkText2,
+            height: 20,
+            fontSize: 40.sp,
+            dividerHeight: 1,
+          ),
+          Expanded(
+            child:ListView.builder(
+              itemBuilder: (context, index){
+                return ListTile(
+                  title: Text(
+                    "Item $index",
+                    style: AppStyles.bodySmallDark,
+                  ),
+                  onTap: (){},
+                );
+              },
+              itemCount: 20,
+            ),
+          ),
+        ],
+      )
+    );
   }
 }

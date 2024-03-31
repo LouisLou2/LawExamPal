@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constant/app_style/app_style.dart';
+
 class NamedDivider extends StatelessWidget {
   final String name;
   final double height;
@@ -43,6 +45,7 @@ class NamedDivider extends StatelessWidget {
           Text(
             name,
             style: TextStyle(
+              fontFamily: AppStyles.defFontFamily,
               color: textColor,
               fontSize: fontSize,
               fontWeight: fontWeight,

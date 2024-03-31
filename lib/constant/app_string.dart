@@ -52,6 +52,8 @@ class AppStrings {
   static const String emptyChat = '📭问些什么!';
   static const String cancelQuery='❌ 你中断了本次提问';
   static const String ask='提问';
+  static const String history='历史记录';
+  static const String newChat='新对话';
 
   static const String explanation = 'Explanation';
   static const String addToWrongSet = '加入错题本';
