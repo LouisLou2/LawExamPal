@@ -8,7 +8,7 @@ class AppStyles {
     fontFamily: defFontFamily,
     fontSize: 20,
     letterSpacing: 0.5,
-    color: AppColors.darkText1,
+    color: AppColors.darkText0,
   );
   static const TextStyle titleLarge = TextStyle(
     fontFamily: defFontFamily,
@@ -51,7 +51,7 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     letterSpacing: 0.5,
   );
-  static TextStyle textBtnOrLinkStyle =const TextStyle(
+  static const TextStyle textBtnOrLinkStyle = TextStyle(
     fontFamily: defFontFamily,
     color: AppColors.silentBlue,
     fontSize: 20,

@@ -8,7 +8,6 @@ import "package:easy_cse/service/file_manager/image_manger.dart";
 import "package:easy_cse/service/provider/chat_state_prov.dart";
 import "package:easy_cse/service/provider/prov_manager.dart";
 import "package:easy_cse/util/extensions.dart";
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:image_picker/image_picker.dart";
