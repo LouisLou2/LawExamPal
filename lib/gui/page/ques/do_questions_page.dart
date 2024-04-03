@@ -1,10 +1,14 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
+import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:easy_cse/gui/page/ques/question_page.dart';
+import 'package:easy_cse/util/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_color.dart';
+import '../../widget/decorations/color_bar.dart';
 
 class DoQuestionPage extends StatefulWidget{
   const DoQuestionPage({Key? key}):super(key:key);
@@ -32,6 +36,10 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
         ),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.all_inbox),
+            onPressed: showAllQuesSheet,
+          ),
           IconButton(
             icon: const Icon(CupertinoIcons.bookmark),
             onPressed: (){},
@@ -78,6 +86,50 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
                 },
                 childCount: 2,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  void showAllQuesSheet(){
+    showModalBottomSheet(
+      context: context,
+      builder: (context)=>Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 5.h,bottom: 10.h),
+          child: ColorBar(
+            width: context.widthFraction(fraction: 0.143),
+            height: 5,
+            radius: 20,
+            color: AppColors.darkText1,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 50.w),
+          height: 200.h,
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15,
+            ),
+            itemBuilder: (context,index)=>TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(AppColors.purpleBlue),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(UIParams.defBorderR))),
+              ),
+              onPressed: (){
+                Navigator.of(context).pop();
+                _pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.bounceIn);
+              },
+              child:Text(
+                '${index+1}',
+                style: AppStyles.iconTextStyle.copyWith(color: AppColors.white0),
+              ),
+            ),
+            itemCount: 30,
             ),
           ),
         ],

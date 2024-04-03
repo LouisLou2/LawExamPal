@@ -1,5 +1,6 @@
 import 'package:easy_cse/config/test_device.dart';
 import 'package:easy_cse/gui/page/onboarding.dart';
+import 'package:easy_cse/gui/page/ques/do_questions_page.dart';
 import 'package:easy_cse/gui/page/user/edit_account_page.dart';
 import 'package:easy_cse/gui/page/user/profile_page.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
     //return const MainTabs();
     //return const OnBoardingPage();
     //return const ProfilePage();
-    return const EditAccountScreen();
+    //return const EditAccountScreen();
+    return DoQuestionPage();
   }
 }
