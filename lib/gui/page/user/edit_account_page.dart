@@ -1,9 +1,7 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
@@ -17,6 +15,20 @@ class EditAccountScreen extends StatefulWidget {
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
   bool gender = false;
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1901, 1),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +37,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.white1,
         leading: IconButton(
-          iconSize: 70.w,
+          iconSize: 20.h,
           onPressed: () {print('这里就是暂时不编写');},
           icon: const Icon(Icons.close_rounded),
         ),
@@ -61,7 +73,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
               color: AppColors.white0,
               borderRadius: BorderRadius.circular(UIParams.smallBorderR),
             ),
-            child:Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 EditItem(
@@ -76,14 +88,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       ),
                       TextButton(
                         onPressed: () {},
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.lightBlueAccent,
-                        ),
                         child: Text(
                           AppStrings.uploadImage,
-                          style: AppStyles.textBtnOrLinkStyle.copyWith(fontSize: 15),
+                          style: AppStyles.bodySmall.copyWith(color:AppColors.purpleBlue),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -93,17 +102,19 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   thickness: 1,
                 ),
                 EditItem(
-                  title: AppStrings.name,
-                  widget: ShadInput(
-                    inputDecoration: const InputDecoration(
-                      border: AppStyles.textFormFieldBorder,
-                    ),
-                    style: AppStyles.bodySmallDark,
-                    cursorColor: AppColors.purpleBlue,
-                    selectionColor: AppColors.purpleBlue,
-                    placeholder: Text(
-                      AppStrings.pleaseEnterName,
-                      style: AppStyles.bodySmall.copyWith(color:AppColors.silenceColor),
+                  title:AppStrings.name,
+                  widget: SizedBox(
+                    width: 300.w,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: AppStyles.textFormFieldBorder,
+                        focusedBorder: AppStyles.textFormFieldBorder,
+                        enabledBorder: AppStyles.textFormFieldBorder,
+                        errorBorder: AppStyles.textFormFieldBorder,
+                        focusedErrorBorder: AppStyles.textFormFieldBorder,
+                        hintText: AppStrings.pleaseEnterName,
+                        hintStyle: AppStyles.bodySmall.copyWith(color:AppColors.silenceColor),
+                      ),
                     ),
                   ),
                 ),
@@ -113,8 +124,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   thickness: 1,
                 ),
                 EditItem(
-                  title: AppStrings.gender,
-                  widget: Row(
+                  title:AppStrings.gender,
+                  widget:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
@@ -130,6 +141,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           color: gender? AppColors.white0 : AppColors.darkText0,
                         ),
                       ),
+                      SizedBox(width: 50.w), // 10.w = 10 * ScreenUtil().scaleWidth
                       IconButton(
                         onPressed: () {},
                         style: IconButton.styleFrom(
@@ -152,75 +164,70 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   thickness: 1,
                 ),
                 EditItem(
-                  title: AppStrings.age,
-                  widget: ShadInput(
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    keyboardType: TextInputType.datetime,
+                  title:AppStrings.role,
+                  widget: SizedBox(
+                    width: 300.w,
+                    child: TextButton(
+                      onPressed: () => _selectDate(context),
+                      style: TextButton.styleFrom(
+                        side: const BorderSide(color: AppColors.lightBorderColor),
+                      ),
+                      child: Text(
+                        '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
+                        style: AppStyles.bodySmallDark,
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(
+                  height: 40,
+                  color: AppColors.lightBorderColor,
+                  thickness: 1,
+                ),
+                EditItem(
+                  title:AppStrings.role,
+                  widget: SizedBox(
+                    width: 150.w,
+                    child: DropdownButton<String>(
+                      value: '学生',
+                      icon: const Icon(Icons.arrow_drop_down),
+                      iconSize: 50.sp,
+                      elevation: 8,
+                      style: AppStyles.bodySmallDark,
+                      underline: Container(
+                        height: 3,
+                        color: AppColors.purpleBlue,
+                      ),
+                      onChanged: (String? newValue) {},
+                      items: <String>['学生', '教师', '其他']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                const Divider(
+                  height: 40,
+                  color: AppColors.lightBorderColor,
+                  thickness: 1,
+                ),
+                ListTile(
+                  title: const Text(
+                    AppStrings.goal,
                     style: AppStyles.bodySmallDark,
-                    cursorColor: AppColors.purpleBlue,
-                    selectionColor: AppColors.purpleBlue,
-                    placeholder: Text(
-                      AppStrings.pleaseEnterAge,
-                      style: AppStyles.bodySmall.copyWith(color:AppColors.silenceColor),
-                    ),
                   ),
-                ),
-                const Divider(
-                  height: 40,
-                  color: AppColors.lightBorderColor,
-                  thickness: 1,
-                ),
-                const EditItem(
-                  title: AppStrings.role,
-                  widget: DropdownMenu<int>(
-                    textStyle: AppStyles.bodySmallDark,
-                    menuStyle: MenuStyle(
-                      surfaceTintColor: MaterialStatePropertyAll(AppColors.scentBlue),
-                    ),
-                    dropdownMenuEntries: [
-                      DropdownMenuEntry(
-                        value: 0,
-                        label: 'Student',
-                      ),
-                      DropdownMenuEntry(
-                        value: 1,
-                        label: 'Student',
-                      ),
-                      DropdownMenuEntry(
-                        value: 2,
-                        label: 'Student',
-                      ),
-                    ],
+                  subtitle: Text(
+                    '山东省公务员考试',
+                    style: AppStyles.tinyText.copyWith(color: AppColors.silenceColor),
                   ),
-                ),
-                const Divider(
-                  height: 40,
-                  color: AppColors.lightBorderColor,
-                  thickness: 1,
-                ),
-                const EditItem(
-                  title: AppStrings.goal,
-                  widget: DropdownMenu<int>(
-                    textStyle: AppStyles.bodySmallDark,
-                    menuStyle: MenuStyle(
-                      surfaceTintColor: MaterialStatePropertyAll(AppColors.scentBlue),
-                    ),
-                    dropdownMenuEntries: [
-                      DropdownMenuEntry(
-                        value: 0,
-                        label: 'Student',
-                      ),
-                      DropdownMenuEntry(
-                        value: 1,
-                        label: 'Student',
-                      ),
-                      DropdownMenuEntry(
-                        value: 2,
-                        label: 'Student',
-                      ),
-                    ],
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_forward_ios_rounded),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -231,8 +238,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 }
 
 class EditItem extends StatelessWidget {
-  final Widget widget;
   final String title;
+  final Widget widget;
   const EditItem({
     super.key,
     required this.widget,
@@ -241,20 +248,18 @@ class EditItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(
-          title,
-          style: AppStyles.bodySmallDark,
-        ),
-        SizedBox(width: 200.w), // 10.w = 10 * ScreenUtil().scaleWidth
-        Expanded(
-          flex:2,
-          child: widget,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: AppStyles.bodySmallDark,
+          ),
+          widget,
+        ],
+      ),
     );
   }
 }
