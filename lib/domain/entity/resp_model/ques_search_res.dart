@@ -10,6 +10,7 @@ class QuesSearchRes{
   });
 
   QuesSearchRes.fromJson(Map<String, dynamic> json):
+    quesId=json['quesId'],
     ques = json['ques'],
     idea = json['idea'],
     ans = json['ans'];

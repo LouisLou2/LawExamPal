@@ -65,35 +65,35 @@ class TestData {
     Question(
       isChoice: false,
       quesId: 123,
-      question: '三年前家里卖的玉米.有10万多元.卖给了当地的一个羊场. 一直不给钱请问如何才能有效的把钱要回来？',
+      ques: '三年前家里卖的玉米.有10万多元.卖给了当地的一个羊场. 一直不给钱请问如何才能有效的把钱要回来？',
       options: null,
-      answerIndex: null,
+      ans: null,
     ),
     Question(
       isChoice: false,
       quesId: 123,
-      question: '在离婚的时候，借出去的钱，写的借条或者合同，借条和合同的照片能作为财产的证据吗',
+      ques: '在离婚的时候，借出去的钱，写的借条或者合同，借条和合同的照片能作为财产的证据吗',
       options: null,
-      answerIndex: null,
+      ans: null,
     ),
     Question(
       isChoice: false,
       quesId: 123,
-      question: '债务纠纷扣留营运车如何要回可以让公安局给要吗?',
+      ques: '债务纠纷扣留营运车如何要回可以让公安局给要吗?',
       options: null,
-      answerIndex: null,
+      ans: null,
     ),
     Question(
       isChoice: true,
       quesId: 123,
-      question: '德国人凯尔和中国人刘畅因感情破裂离婚，向经常居住地浙江省宁波市法院提起诉讼，请求分割价值 1000 万元人民币的财产。关于本案的管辖权和法律适用问题，下列说法正确的是?',
+      ques: '德国人凯尔和中国人刘畅因感情破裂离婚，向经常居住地浙江省宁波市法院提起诉讼，请求分割价值 1000 万元人民币的财产。关于本案的管辖权和法律适用问题，下列说法正确的是?',
       options: [
         '由于本案是涉外离婚诉讼，应该由宁波市中级人民法院进行管辖',
         '双方可以约定财产分割问题适用德国法',
         '可以分别约定中国法和德国法解决离婚和财产分割问题',
         '如果离婚调解协议，当事人可以请求法院按照调解协议制作并发给判决书'
       ],
-      answerIndex: 3,
+      ans: 3,
     ),
   ];
   static List<QuesSearchRes> quesSearchResList=[

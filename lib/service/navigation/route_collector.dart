@@ -29,7 +29,7 @@ class RouteCollector {
   static const String chat = '/chat';
   static const String explanation = '/explanation';
   static const String file_preview = '/file_preview';
-  static const String do_problems = '/do_problems';
+  static const String do_questions = '/do_problems';
   static const Set<String> simpleRoutes = {
     onboarding,
     sign_in,
@@ -40,7 +40,7 @@ class RouteCollector {
     snap_pic,
     ques_history,
     chat,
-    do_problems,
+    do_questions,
     enter_veriCode,
   };
 
@@ -61,6 +61,6 @@ class RouteCollector {
     edit_profile: (context) => const EditAccountPage(),
     profile: (context) => const ProfilePage(),
     enter_veriCode: (context) =>const EnterVeriCodePage(),
-    do_problems: (context) => const DoQuestionPage(),
+    do_questions: (context) => const DoQuestionPage(),
   };
 }

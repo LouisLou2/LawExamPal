@@ -16,6 +16,7 @@ class NetworkPathCollector {
   static const String updateUserInfo = "$account/update_info";
   // ques
   static const String searchQues = "$ques/search_ques";
+  static const String searchQuesByQuesId = "$ques/search_quesId";
   static const String recommendQues= '$ques/recommend';
   // note
   // chat

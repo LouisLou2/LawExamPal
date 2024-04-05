@@ -9,11 +9,16 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_style.dart';
+import '../../../constant/situation_enum.dart';
+import '../../../service/handler/ques_handler.dart';
+import '../../../service/provider/ques/explanation_provider.dart';
 import '../../../service/provider/ques/question_prov.dart';
 import '../../widget/answer_tool_bar.dart';
 import '../../widget/buttons/colored_text_botton.dart';
 import '../../widget/info_display/answer_display.dart';
 import '../../widget/info_display/show_custom_bottom_sheet.dart';
+import '../../widget/try_again.dart';
+import '../../widget/ui_kitbag.dart';
 
 class QuestionDetailPage extends StatefulWidget{
   final int index;
@@ -47,7 +52,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
             ),
             SizedBox(height: 5.h),
             SelectableText(
-              ques.question,
+              ques.ques,
               style: AppStyles.bodySmallDark
             ),
             if(ques.isChoice)
@@ -68,7 +73,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
             SizedBox(height: 20.h),
             ColorTextButton(
               text: AppStrings.viewAnswer,
-              onPressed: ()=>showQuesAnswer(widget.index),
+              onPressed: ()=>QuesHandler.getRcmdQuesWithQuesId(widget.index, ()=>showQuesAnswer(widget.index),),
               color: AppColors.purpleBlue,
             ),
           ],
@@ -83,15 +88,31 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
       child: Text(String.fromCharCode(65+index)),
     );
   }
+
   Future<void> showQuesAnswer(int ind) async {
     PersistentBottomSheetController con=await showCustomBottomSheet(
       Pagecontext,
       height:MediaQuery.of(context).size.height / 1.2,
-      child:  Expanded(
-        child: AnswerDisplay(
-          question: TestData.quesSearchResList[ind].ques,
-          idea: TestData.quesSearchResList[ind].idea,
-          answer: TestData.quesSearchResList[ind].ans,
+      child:Expanded(
+        child: Selector<QuestionProv,int>(
+            selector: (_,prov)=>prov.quesPageStates[ind],
+            builder: (_,sta,__){
+              switch(sta){
+                case UIStateEnum.LOADING: return const Center(
+                  child: UIKitBag.blue_loadingIndicator,
+                );
+                case UIStateEnum.FAIL: return TryAgainWidget(
+                  onTryAgain: null,
+                );
+                case UIStateEnum.DONE: return AnswerDisplay(
+                  question: qprov.getQuestion(ind).ques,
+                  idea: qprov.searchResList[ind]!.idea,
+                  answer: qprov.searchResList[ind]!.ans,
+                );
+                default:
+                  return const Text(AppStrings.debugError);
+              }
+            }
         ),
       ),
       toolBar:const AnswerToolBar(),

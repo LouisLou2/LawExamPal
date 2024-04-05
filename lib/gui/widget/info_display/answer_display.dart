@@ -5,13 +5,17 @@ import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
 import 'package:easy_cse/gui/widget/info_display/summary_card.dart';
 import 'package:easy_cse/gui/widget/info_display/text_section.dart';
 import 'package:easy_cse/service/handler/chat_handler.dart';
+import 'package:easy_cse/service/handler/ques_handler.dart';
 import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
+import 'package:easy_cse/service/provider/prov_manager.dart';
+import 'package:easy_cse/service/provider/ques/question_prov.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../constant/app_string.dart';
+import '../../../service/provider/ques/explanation_provider.dart';
 
 class AnswerDisplay extends StatefulWidget {
   final String question;
@@ -30,6 +34,8 @@ class AnswerDisplay extends StatefulWidget {
 }
 
 class _AnswerDisplayState extends State<AnswerDisplay> {
+  final QuestionProv qprov=ProvManager.questionProv;
+  final ExplanationProv cprov=ProvManager.explanationProv;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +127,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
               color: AppColors.purpleBlue,
               action: ColorTextButton(
                 text: AppStrings.tryQuestion,
-                onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.do_problems),
+                onPressed: ()=>QuesHandler.executeGetRecommendQues(cprov.latestQuesRes),
                 color: AppColors.purpleBlue,
               ),
             )

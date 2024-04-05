@@ -202,7 +202,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.article,
             title: AppStrings.review,
             spec: AppStrings.reviewDesc,
-            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.enter_veriCode),
+            onTap:null,
           ),
         ),
         StaggeredGridTile.count(

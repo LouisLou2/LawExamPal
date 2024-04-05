@@ -2,15 +2,15 @@
 class Question {
   final bool isChoice; // 是否为单选题
   final int quesId; // 问题id
-  final String question;
+  final String ques;
   final List<String>? options; // 选项
-  final int? answerIndex; // 从0开始
+  final int? ans; // 从0开始
 
   Question({
     required this.quesId,
-    required this.question,
+    required this.ques,
     required this.options,
-    required this.answerIndex,
+    required this.ans,
     this.isChoice = false,
   });
 
@@ -18,10 +18,10 @@ class Question {
     bool isCho = json['isChoice'];
     return Question(
       isChoice: isCho,
-      question: json['question'],
+      ques: json['ques'],
       quesId: json['quesId'],
       options: isCho? List<String>.from(json['options']) : null,
-      answerIndex: isCho ? json['answerIndex'] : null,
+      ans: isCho ? json['ans'] : null,
     );
   }
 }
