@@ -4,6 +4,7 @@ import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
 import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
 import 'package:easy_cse/gui/widget/info_display/summary_card.dart';
 import 'package:easy_cse/gui/widget/info_display/text_section.dart';
+import 'package:easy_cse/service/handler/chat_handler.dart';
 import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
@@ -59,7 +60,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
           ),
           Material(
             child:ListTile(
-              onTap: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
+              onTap: ()=>ChatHandler.newChatPage(true),
               tileColor: AppColors.white0,
               leading: const CircleAvatar(
                 backgroundColor: AppColors.purpleBlue,
@@ -95,7 +96,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
                           borderSide: BorderSide.none, // 边框颜色为透明
                         ),
                         contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-                        hintText: '  Message',
+                        hintText: '  ${AppStrings.message}',
                       ),
                       onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                       // 意思是点击外部的时候，让键盘消失
@@ -104,7 +105,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
                   SizedBox(width: 20.w,),
                   ColorTextButton(
                     text: AppStrings.ask,
-                    onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
+                    onPressed:  ()=>ChatHandler.newChatPage(true),
                     width: 160.w,
                   ),
                 ],

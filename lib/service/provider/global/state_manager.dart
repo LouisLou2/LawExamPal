@@ -1,7 +1,7 @@
 import 'package:easy_cse/service/repository/db_handler.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../domain/entity/persistence_kind/user.dart';
+import '../../../domain/entity/persistence_kind/user.dart';
 
 class StateManagerProv extends ChangeNotifier{
   bool canLogin=false;
@@ -38,9 +38,12 @@ class StateManagerProv extends ChangeNotifier{
     user.lastLoginTime=DateTime.now();
   }
 
-  void copyUserToTmp(){
+  void _copyUserToTmp(){
     //每次到达个人信息页面时，都会将user的值赋给tmpUser
     tmpUser=user.copyWith();
+  }
+  void prepareEditInfo(){
+    _copyUserToTmp();
   }
 
   void updateUser(){
@@ -66,16 +69,14 @@ class StateManagerProv extends ChangeNotifier{
   }
 
   // setter for user
-  set avatar(String path){
+  set setAvatar(String path){
     user.avatar=path;
     notifyListeners();
   }
-  set birthday(DateTime? date) {
+  set setBirthday(DateTime? date) {
     user.birthday = date;
     notifyListeners();
   }
-  //getter for user
-  DateTime? get birthday => user.birthday;
 
   // setter for tmp
   set tmpAvatar(String path){

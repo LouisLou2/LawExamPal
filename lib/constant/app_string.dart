@@ -29,6 +29,7 @@ class AppStrings {
   // static const String feature_note_desc = '轻松记录重点知识、做题经验等内容，智能整理并提供复习提醒，帮助你更好地巩固学习成果';
   static const String passwordRule = '密码8-20位，必须包含数字与字母';
 
+  static const String incogUserName = '匿名用户';
 
   static const String pageNotFound = '页面未找到';
   static const String signup = '注册';
@@ -50,6 +51,19 @@ class AppStrings {
   static const String gender = '性别';
   static const String role = '身份';
   static const String goal = '目标';
+
+  static const String bindPhone = '绑定手机';
+  static const String enableNotification = '开启通知';
+
+  static const String updateInfo = '更改信息';
+  static const String activity = '活动';
+  static const String notification = '通知';
+  static const String plan = '计划';
+  static const String logout = '退出登录';
+
+  static const String goToAddInfo = '去完善';
+  static const String goBind = '去绑定';
+  static const String goEnable = '去开启';
 
 
   static const String loggedIn = '已经登陆';
@@ -97,6 +111,7 @@ class AppStrings {
   static const String aiTutor = 'AI 助教';
   static const String aiTutorEmoji = '✨$aiTutor';
   static const String defaultChatBotErrorAnswer = '🚨出错了，请再试一次';
+  static const String tellMeYourQuestion = '我已查看该题目，请问有什么问题？';
   static const String emptyChat = '📭问些什么!';
   static const String cancelQuery='❌ 你中断了本次提问';
   static const String ask='提问';
@@ -110,6 +125,7 @@ class AppStrings {
   static const String idea = '解题思路';
   static const String answer = '参考答案';
   static const String askAITutor = '✨ 向AI Tutor提问';
+  static const String message = '消息';
   static const String AITutorDescription = 'AI Tutor专为考公考研人群打造，可以帮助你梳理知识点，解答问题，提供学习建议';
 
   static const String morePractice = '更多练习';
@@ -145,6 +161,8 @@ class AppStrings {
   static const String viewAnswer = '查看答案';
 
   static const String cancelled = '已取消';
+
+  static const String selfInfo='个人信息';
 
   static const String success = '成功';
   static const String finish = '操作已完成';

@@ -43,7 +43,7 @@ class UserDetail{
       if(gender!=null)
       'gender':gender,
       if(birthday!=null)
-      'birthday':FormatTool.utcDateScaleString(birthday!),
+      'birthday':FormatTool.utcDateScaleStr(birthday!),
       if(avatar!=null)
       'avatar':avatar,
       if(role!=null)

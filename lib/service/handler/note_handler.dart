@@ -12,9 +12,9 @@ import '../navigation/navigation_helper.dart';
 import '../navigation/route_collector.dart';
 import '../network/note_worker.dart';
 import '../network/resp_res_enum.dart';
-import '../provider/note_prov.dart';
+import '../provider/note/note_prov.dart';
 import '../provider/prov_manager.dart';
-import '../provider/state_manager.dart';
+import '../provider/global/state_manager.dart';
 import '../repository/db_handler.dart';
 
 class NoteHandler{

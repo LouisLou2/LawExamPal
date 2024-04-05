@@ -1,4 +1,5 @@
 class QuesSearchRes{
+  int? quesId;
   String ques;
   String idea;
   String ans;

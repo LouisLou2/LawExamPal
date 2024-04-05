@@ -1,7 +1,7 @@
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
-import 'package:easy_cse/service/provider/chat_state_prov.dart';
+import 'package:easy_cse/service/provider/chat/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';

@@ -1,10 +1,10 @@
 class ChatSession{
-  int id;
+  int chatId;
   String title;
   DateTime lastChatTime;
 
   ChatSession({
-    required this.id,
+    required this.chatId,
     required this.title,
     required this.lastChatTime,
   });

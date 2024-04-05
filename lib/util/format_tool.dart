@@ -9,15 +9,23 @@ class FormatTool {
   static bool isPwdValid(String password) {
     return pwdRegex.hasMatch(password);
   }
-  static String dateScaleString(DateTime date){
-    return '${date.year}-${date.month}-${date.day}';
+
+  static String _twoDigit(int num) {
+    return num < 10 ? '0$num' : '$num';
   }
-  // 2024-4-10并且是Utc时间
-  static String utcDateScaleString(DateTime date){
-    DateTime utc = date.toUtc();
-    return '${utc.year}-${utc.month}-${utc.day}';
+  // 用于展示(都是本地时间，数字不足两位会补全)
+  static String dateScaleStr(DateTime date){
+    // 需要0补足
+    return '${date.year}-${_twoDigit(date.month)}-${_twoDigit(date.day)}';
   }
   static String secScaleStr(DateTime date){
-    return '${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}:${date.second}';
+    return '${date.year}-${_twoDigit(date.month)}-${_twoDigit(date.day)} ${_twoDigit(date.hour)}:${_twoDigit(date.minute)}:${_twoDigit(date.second)}';
+  }
+  // 用于传输(都是utc时间,数字不足两位会补全)
+  static String utcDateScaleStr(DateTime date){
+    return dateScaleStr(date.toUtc());
+  }
+  static String utcSecScaleStr(DateTime date){
+    return secScaleStr(date.toUtc());
   }
 }

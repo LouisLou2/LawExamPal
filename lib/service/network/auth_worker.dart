@@ -8,7 +8,7 @@ import 'package:easy_cse/service/network/resp_res_enum.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../domain/entity/request_model/req_veri_code_param.dart';
-import '../../domain/entity/response_body.dart';
+import '../../domain/entity/resp_model/response_body.dart';
 import 'network_manager.dart';
 
 class AuthWorker{

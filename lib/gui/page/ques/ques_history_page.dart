@@ -8,7 +8,7 @@ import "package:easy_cse/gui/widget/config/floating_location.dart";
 import "package:easy_cse/gui/widget/ui_kitbag.dart";
 import "package:easy_cse/service/handler/history_handler.dart";
 import "package:easy_cse/service/provider/prov_manager.dart";
-import "package:easy_cse/service/provider/ques_history_prov.dart";
+import "package:easy_cse/service/provider/ques/ques_history_prov.dart";
 import "package:easy_cse/util/extensions.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";

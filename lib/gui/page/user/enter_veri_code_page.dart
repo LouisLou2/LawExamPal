@@ -3,7 +3,7 @@ import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/info_display/headline2.dart';
 import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
-import 'package:easy_cse/service/provider/veri_code_prov.dart';
+import 'package:easy_cse/service/provider/user/veri_code_prov.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

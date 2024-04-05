@@ -1,5 +1,5 @@
-import '../domain/entity/ques_search_res.dart';
-import '../domain/entity/question.dart';
+import '../domain/entity/resp_model/ques_search_res.dart';
+import '../domain/entity/resp_model/question.dart';
 
 class TestData {
   static const String quesDetail='“给定资料1”中说“夜色难免黑凉，前行必有曙光”，“给定资料2”中说“我们的改革之所以成功，离不开务实的精神和理性的思考”。请深入理解这两句话的含义，参考给定资料，联系实际，自拟题目，写一篇文章。（35分）要求：（1）观点明确，见解深刻；（2）参考“给定资料”，但不拘泥于“给定资料”；（3）思路清晰，语言流畅；（4）字数1000～1200字。';
@@ -84,7 +84,7 @@ class TestData {
       answerIndex: null,
     ),
     Question(
-      isChoice: false,
+      isChoice: true,
       quesId: 123,
       question: '德国人凯尔和中国人刘畅因感情破裂离婚，向经常居住地浙江省宁波市法院提起诉讼，请求分割价值 1000 万元人民币的财产。关于本案的管辖权和法律适用问题，下列说法正确的是?',
       options: [

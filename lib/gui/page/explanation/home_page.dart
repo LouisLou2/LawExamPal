@@ -3,10 +3,10 @@ import 'package:easy_cse/gui/widget/info_display/color_box.dart';
 import 'package:easy_cse/gui/widget/decorations/decorated_avatar.dart';
 import 'package:easy_cse/gui/widget/info_display/headline.dart';
 import 'package:easy_cse/gui/widget/info_display/short_info_tile.dart';
-import 'package:easy_cse/service/handler/history_handler.dart';
+import 'package:easy_cse/service/handler/chat_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
-import 'package:easy_cse/service/provider/state_manager.dart';
+import 'package:easy_cse/service/provider/global/state_manager.dart';
 import 'package:easy_cse/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -214,7 +214,7 @@ class _TestHomeState extends State<TestHome2>{
             icon: Icons.school,
             title: AppStrings.aiTutor,
             spec: AppStrings.shortDescAI,
-            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
+            onTap: ()=>ChatHandler.newChatPage(false),
           ),
         ),
       ],

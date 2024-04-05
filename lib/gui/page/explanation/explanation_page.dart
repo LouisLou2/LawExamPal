@@ -3,8 +3,8 @@ import 'package:easy_cse/gui/widget/info_display/answer_display.dart';
 import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
 import 'package:easy_cse/gui/widget/try_again.dart';
 import 'package:easy_cse/gui/widget/ui_kitbag.dart';
-import 'package:easy_cse/service/handler/content_handler.dart';
-import 'package:easy_cse/service/provider/content_provider.dart';
+import 'package:easy_cse/service/handler/ques_handler.dart';
+import 'package:easy_cse/service/provider/ques/explanation_provider.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,17 +27,17 @@ class ExplanationPage extends StatefulWidget {
 class _ExplainationPageState extends State<ExplanationPage> {
   // 这里又弄了一个内部类，为了防止sheet出错
   final innerWidget = InnerWidget();
-  late final ContentProv cprov;
+  late final ExplanationProv cprov;
   @override
   void initState() {
-    cprov=ProvManager.contentProv;
+    cprov=ProvManager.explanationProv;
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       PersistentBottomSheetController con=await showCustomBottomSheet(
         innerWidget.context,
         height:MediaQuery.of(context).size.height / 1.2,
         child:Expanded(
-          child: Selector<ContentProv,int>(
+          child: Selector<ExplanationProv,int>(
               selector: (_,prov)=>prov.quesSearchState,
               builder: (_,sta,__){
                 switch(sta){
@@ -45,7 +45,7 @@ class _ExplainationPageState extends State<ExplanationPage> {
                     child: UIKitBag.blue_loadingIndicator,
                   );
                   case UIStateEnum.FAIL: return TryAgainWidget(
-                    onTryAgain: () =>ContentHandler.executeSearchQuesAgain(widget.imgPath),
+                    onTryAgain: () =>QuesHandler.executeSearchQuesAgain(widget.imgPath),
                   );
                   case UIStateEnum.DONE: return AnswerDisplay(
                     question: cprov.latestQuesRes.ques,
@@ -61,9 +61,6 @@ class _ExplainationPageState extends State<ExplanationPage> {
         toolBar:const AnswerToolBar(),
       );
       con.closed.then((value) {
-        if (kDebugMode) {
-          print('@@@@@@@@@@closed');
-        }
         Navigator.of(context).pop();
       });
     });

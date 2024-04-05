@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:easy_cse/domain/entity/ques_search_res.dart';
+import 'package:easy_cse/domain/entity/resp_model/ques_search_res.dart';
 import 'package:easy_cse/service/network/network_route_collector.dart';
 import 'package:easy_cse/service/network/resp_res_enum.dart';
 import 'package:tuple/tuple.dart';
 import '../../domain/entity/request_model/ques_search_param.dart';
-import '../../domain/entity/response_body.dart';
+import '../../domain/entity/resp_model/response_body.dart';
 import 'network_manager.dart';
 
-class ContentWorker{
+class QuesWorker{
   static final Dio authDio = NetWorkWorker.normalWorker;
   static const bool debug = true;
   static late CancelToken _cancelToken;// 因为这三个请求不会同时进行，所以只需要一个CancelToken引用，注意如果是并发请求，每个请求CancelToken都要独立的对象
@@ -50,4 +50,6 @@ class ContentWorker{
       return const Tuple2(ResultCode.DEBUG_ERROR, null);
     }
   }
+
+  /*请求相似题目*/
 }

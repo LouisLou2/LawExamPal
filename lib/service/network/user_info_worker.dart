@@ -6,7 +6,7 @@ import 'package:easy_cse/service/network/network_route_collector.dart';
 import 'package:easy_cse/service/network/resp_res_enum.dart';
 
 import '../../domain/entity/persistence_kind/user.dart';
-import '../../domain/entity/response_body.dart';
+import '../../domain/entity/resp_model/response_body.dart';
 import 'network_manager.dart';
 
 class UserInfoWorker{

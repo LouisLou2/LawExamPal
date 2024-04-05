@@ -12,7 +12,6 @@ class Note {
 
   String? imagePath;
 
-  @Index(unique: true,)
   String filePath;
 
   @Index(unique: true,)

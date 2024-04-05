@@ -1,13 +1,13 @@
 import 'package:easy_cse/domain/entity/persistence_kind/ques_history.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/situation_enum.dart';
-import '../../domain/entity/ques_search_res.dart';
+import '../../../constant/situation_enum.dart';
+import '../../../domain/entity/resp_model/ques_search_res.dart';
 
-class ContentProv extends ChangeNotifier {
+class ExplanationProv extends ChangeNotifier {
 
 
-  ContentProv() {
+  ExplanationProv() {
     _quesSearchState=UIStateEnum.LOADING;
   }
 

@@ -44,12 +44,7 @@ class NamedDivider extends StatelessWidget {
           ),
           Text(
             name,
-            style: TextStyle(
-              fontFamily: AppStyles.defFontFamily,
-              color: textColor,
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-            ),
+            style: AppStyles.bodyMedium,
             textAlign: textAlign,
           ),
           Expanded(

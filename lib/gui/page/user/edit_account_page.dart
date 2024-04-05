@@ -4,7 +4,7 @@ import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:easy_cse/service/handler/user_info_handler.dart';
 import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
-import 'package:easy_cse/service/provider/state_manager.dart';
+import 'package:easy_cse/service/provider/global/state_manager.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +30,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
   @override
   void initState() {
     sprov = ProvManager.stateProv;
-    sprov.copyUserToTmp();
+    sprov.prepareEditInfo();
     super.initState();
   }
 
@@ -208,7 +208,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
                       child: Selector<StateManagerProv,DateTime?>(
                         selector: (_, prov)=>prov.tmpUser.birthday,
                         builder: (_, birthday, __) => Text(
-                          birthday!=null?FormatTool.dateScaleString(birthday):AppStrings.pleaseChoose,
+                          birthday!=null?FormatTool.dateScaleStr(birthday):AppStrings.pleaseChoose,
                           style: AppStyles.bodySmallDark,
                         ),
                       ),

@@ -1,5 +1,5 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
-import 'package:easy_cse/domain/entity/question.dart';
+import 'package:easy_cse/domain/entity/resp_model/question.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:easy_cse/test_data/test_data.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_style.dart';
-import '../../../service/provider/question_prov.dart';
+import '../../../service/provider/ques/question_prov.dart';
 import '../../widget/answer_tool_bar.dart';
 import '../../widget/buttons/colored_text_botton.dart';
 import '../../widget/info_display/answer_display.dart';
@@ -23,10 +23,10 @@ class QuestionDetailPage extends StatefulWidget{
 }
 class _QuestionDetailPageState extends State<QuestionDetailPage>{
   late BuildContext Pagecontext;
+  final QuestionProv qprov=ProvManager.questionProv;
   @override
   Widget build(BuildContext context){
     Pagecontext=context;
-    final QuestionProv qprov=ProvManager.questionProv;
     final Question ques=qprov.getQuestion(widget.index);
     return Scaffold(
       backgroundColor: AppColors.white1,

@@ -4,16 +4,25 @@ import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/helper/dialog_helper.dart';
 import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/provider/global/state_manager.dart';
+import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/app_string.dart';
+import '../../../constant/app_style/app_pic.dart';
 import '../../../service/navigation/route_collector.dart';
+import '../../widget/decorations/decorated_avatar.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState()=>_ProfileState();
+}
+class _ProfileState extends State<ProfilePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +31,10 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         foregroundColor: AppColors.darkText0,
         surfaceTintColor: Colors.transparent,
-        title: const Text("个人信息"),
+        title: const Text(
+          AppStrings.selfInfo,
+          style: AppStyles.iconTextStyle,
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -39,23 +51,26 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         children: [
           // COLUMN THAT WILL CONTAIN THE PROFILE
-          const Column(
+          Column(
             children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                  "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80",
+              Selector<StateManagerProv,String?>(
+                selector: (_,prov)=>prov.user.avatar,
+                builder: (_,prov,__)=>
+                DecoratedAvatar(
+                  image: ProvManager.stateProv.user.avatar ?? AppPic.defaultAvatar,
+                  fromAssets: ProvManager.stateProv.user.avatar==null,
+                  radius: 50,
+                  onTap: null,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
-                "Rachael Wagne",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              Selector<StateManagerProv,String?>(
+                selector:  (_,prov)=>prov.user.name,
+                builder: (_,name,__)=> Text(
+                  name??AppStrings.incogUserName,
+                  style: AppStyles.bodyMedium,
                 ),
               ),
-              Text("Junior Product Designer")
             ],
           ),
           const SizedBox(height: 25),
@@ -64,18 +79,12 @@ class ProfilePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: 5),
                 child: Text(
-                  "Complete your profile",
+                  AppStrings.detailInfo,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              Text(
-                "(1/5)",
-                style: TextStyle(
-                  color: Colors.blue,
-                ),
-              )
             ],
           ),
           const SizedBox(height: 10),
@@ -140,7 +149,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 35),
           ...List.generate(
             customListTiles.length,
-              (index) {
+                (index) {
               final tile = customListTiles[index];
               return Padding(
                 padding: const EdgeInsets.only(bottom: 5),
@@ -165,7 +174,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
 void logout() {
   DialogHelper.showAskDialog(
     title: AppStrings.sureToLogout,
@@ -190,19 +198,19 @@ class ProfileCompletionCard {
 
 List<ProfileCompletionCard> profileCompletionCards = [
   ProfileCompletionCard(
-    title: "Set Your Profile Details",
+    title: AppStrings.detailInfo,
     icon: const Icon(CupertinoIcons.person_circle),
-    buttonText: "Continue",
+    buttonText: AppStrings.goToAddInfo,
   ),
   ProfileCompletionCard(
-    title: "Upload your resume",
-    icon: const Icon(CupertinoIcons.doc),
-    buttonText: "Upload",
+    title: AppStrings.bindPhone,
+    icon: const Icon(CupertinoIcons.device_phone_portrait),
+    buttonText: AppStrings.goBind,
   ),
   ProfileCompletionCard(
-    title: "Add your skills",
-    icon: const Icon(CupertinoIcons.square_list),
-    buttonText: "Add",
+    title: AppStrings.enableNotification,
+    icon: const Icon(CupertinoIcons.bell),
+    buttonText: AppStrings.goEnable,
   ),
 ];
 
@@ -220,23 +228,23 @@ class CustomListTile {
 List<CustomListTile> customListTiles = [
   CustomListTile(
     icon: const Icon(Icons.person),
-    title: "个人信息",
+    title: AppStrings.updateInfo,
     onTap: ()=>NavigationHelper.pushNamed(RouteCollector.edit_profile),
   ),
   CustomListTile(
     icon: const Icon(Icons.insights),
-    title: "Activity",
+    title: AppStrings.activity,
   ),
   CustomListTile(
-    icon: const Icon(Icons.location_on_outlined),
-    title: "Location",
+    icon: const Icon(CupertinoIcons.square_list),
+    title: AppStrings.plan,
   ),
   CustomListTile(
-    title: "Notifications",
+    title: AppStrings.notification,
     icon: const Icon(CupertinoIcons.bell),
   ),
   CustomListTile(
-    title: "Logout",
+    title: AppStrings.logout,
     icon: const Icon(
       Icons.exit_to_app,
       color: AppColors.thickRed,

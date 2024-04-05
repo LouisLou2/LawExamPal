@@ -1,8 +1,8 @@
 import 'package:easy_cse/constant/app_rule.dart';
 import 'package:easy_cse/domain/entity/persistence_kind/ques_history.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
-import 'package:easy_cse/service/provider/ques_history_prov.dart';
-import 'package:easy_cse/service/provider/state_manager.dart';
+import 'package:easy_cse/service/provider/ques/ques_history_prov.dart';
+import 'package:easy_cse/service/provider/global/state_manager.dart';
 import 'package:easy_cse/service/repository/db_handler.dart';
 
 class HistoryHandler{

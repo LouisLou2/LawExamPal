@@ -39,6 +39,13 @@ class AppStyles {
     color: AppColors.darkText0,
     letterSpacing: 0.6,
   );
+  static const TextStyle bodyMedium = TextStyle(
+    fontFamily: defFontFamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 17,
+    color: AppColors.darkText0,
+    letterSpacing: 0.6,
+  );
   static const TextStyle tinyText = TextStyle(
     fontFamily: defFontFamily,
     fontSize: 13.5,

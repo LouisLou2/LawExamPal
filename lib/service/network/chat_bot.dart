@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:easy_cse/constant/app_string.dart';
-import 'package:easy_cse/domain/entity/response_body.dart';
+import 'package:easy_cse/domain/entity/request_model/new_chat_param.dart';
+import 'package:easy_cse/domain/entity/request_model/ongoing_chat_param.dart';
+import 'package:easy_cse/domain/entity/resp_model/new_chat_resp.dart';
+import 'package:easy_cse/domain/entity/resp_model/response_body.dart';
 import 'package:easy_cse/service/network/network_route_collector.dart';
 import 'package:easy_cse/service/network/network_manager.dart';
 import 'package:easy_cse/service/network/resp_res_enum.dart';
-import 'package:easy_cse/service/provider/prov_manager.dart';
-import 'package:easy_cse/test_data/test_data.dart';
+import 'package:tuple/tuple.dart';
 
 class ChatBot{
   static final Dio bot=NetWorkWorker.chatWorker;
@@ -22,32 +23,65 @@ class ChatBot{
       _cancelToken.cancel(['User Canceled it']);
     }
   }
-  static Future<String?> getAnswer(String query) async{
+  static Future<Tuple2<int,NewChatResp?>> sendFirstQues(String token,String ques,bool fromQues) async{
     _cancelToken=CancelToken();
-    // dio请求，向localhost请求
+    try {
+      Response response = await bot.post(
+        NetworkPathCollector.newChat,
+        data: NewChatParam(
+            token: token,
+            ques: ques,
+            fromQues: fromQues,
+        ).toJson(),
+        options: NetWorkWorker.json_json,
+        cancelToken: _cancelToken,
+      );
+      RespBody respBody=RespBody.fromJson(response.data);
+      if(respBody.code!=ResultCode.SUCCESS){
+        return Tuple2(respBody.code,null);
+      }
+      NewChatResp newChatResp=NewChatResp.fromJson(respBody.data);
+      return Tuple2(respBody.code,newChatResp);
+    } on DioException catch (e) {
+      if(e.type == DioExceptionType.cancel){
+        return const Tuple2(ResultCode.USER_CANCELED,null);
+      }
+      else if(isTimeOutException(e)){
+        return const Tuple2(ResultCode.TIME_OUT, null);
+      }
+      return const Tuple2(ResultCode.ERROR,null);
+    } on Exception catch (e) {
+      return const Tuple2(ResultCode.DEBUG_ERROR,null);
+    } finally{}
+  }
+  static Future<Tuple2<int,String?>> getAnswer(String token,int chatId,String ques) async{
+    _cancelToken=CancelToken();
     try {
       Response response = await bot.post(
         NetworkPathCollector.chat,
-        data: {
-          'token': ProvManager.stateProv.user.token,
-          'ques': query,
-        },
-        options: Options(
-          responseType: ResponseType.json, // 指定响应类型为纯文本
-        ),
+        data: OngoingChatParam(
+            token: token,
+            chatId: chatId,
+            ques: ques,
+        ).toJson(),
+        options: NetWorkWorker.json_json,
         cancelToken: _cancelToken,
       );
-      final data=response.data;
-      RespBody respBody=RespBody.fromJson(data);
+      RespBody respBody=RespBody.fromJson(response.data);
       if(respBody.code!=ResultCode.SUCCESS){
-        return null;
+        return Tuple2(respBody.code,null);
       }
-      return respBody.data as String;
+      return Tuple2(respBody.code,respBody.data['ans'] as String);
     } on DioException catch (e) {
       if(e.type == DioExceptionType.cancel){
-        return AppStrings.cancelQuery;
+        return const Tuple2(ResultCode.USER_CANCELED,null);
       }
-      return TestData.talkList[(nowTestInd++)%(TestData.talkList.length)];
+      else if(isTimeOutException(e)){
+        return const Tuple2(ResultCode.TIME_OUT, null);
+      }
+      return const Tuple2(ResultCode.ERROR,null);
+    } on Exception catch (e) {
+      return const Tuple2(ResultCode.DEBUG_ERROR,null);
     } finally{}
   }
 }

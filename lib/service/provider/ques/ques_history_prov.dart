@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constant/situation_enum.dart';
-import '../../domain/entity/persistence_kind/ques_history.dart';
+import '../../../constant/situation_enum.dart';
+import '../../../domain/entity/persistence_kind/ques_history.dart';
 
 class QuesHistoryProv with ChangeNotifier {
   late int _searchHistoryState;
