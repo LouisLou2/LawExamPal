@@ -84,7 +84,7 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
                     (context, index) {
                   return QuestionDetailPage(index: index);
                 },
-                childCount: 2,
+                childCount: 4,
               ),
             ),
           ),

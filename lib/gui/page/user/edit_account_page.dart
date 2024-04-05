@@ -1,32 +1,53 @@
+import 'dart:io';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
+import 'package:easy_cse/service/handler/user_info_handler.dart';
+import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/provider/state_manager.dart';
+import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
+import '../../../constant/app_style/app_pic.dart';
+import '../../../service/navigation/route_collector.dart';
+import '../../../service/provider/prov_manager.dart';
 
-class EditAccountScreen extends StatefulWidget {
-  const EditAccountScreen({super.key});
+class EditAccountPage extends StatefulWidget {
+  const EditAccountPage({super.key});
 
   @override
-  State<EditAccountScreen> createState() => _EditAccountScreenState();
+  State<EditAccountPage> createState() => _EditAccountPageState();
 }
 
-class _EditAccountScreenState extends State<EditAccountScreen> {
+class _EditAccountPageState extends State<EditAccountPage> {
   bool gender = false;
-  DateTime selectedDate = DateTime.now();
+  late StateManagerProv sprov;
+
+  @override
+  void initState() {
+    sprov = ProvManager.stateProv;
+    sprov.copyUserToTmp();
+    super.initState();
+  }
+
+  void finishAddingInfo() {
+    sprov.firstAddInfo = false;
+    NavigationHelper.pushReplacementNamed(RouteCollector.main);
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: sprov.user.birthday??DateTime.now(),
         firstDate: DateTime(1901, 1),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
+        lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      sprov.tmpBirthday = picked;
     }
   }
 
@@ -36,11 +57,19 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       backgroundColor: AppColors.white1,
       appBar: AppBar(
         backgroundColor: AppColors.white1,
-        leading: IconButton(
-          iconSize: 20.h,
-          onPressed: () {print('这里就是暂时不编写');},
-          icon: const Icon(Icons.close_rounded),
-        ),
+        leading: sprov.firstAddInfo?
+            TextButton(
+              onPressed: finishAddingInfo,
+              child: const Text(
+                AppStrings.skip,
+                style: AppStyles.bodySmallDark,
+              ),
+            )
+            :IconButton(
+              iconSize: 20.h,
+              onPressed: NavigationHelper.pop,
+              icon: const Icon(Icons.close_rounded),
+            ),
         title: const Text(
           AppStrings.detailInfo,
           style: AppStyles.titleMedium,
@@ -50,7 +79,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             child: IconButton(
-              onPressed: () {},
+              onPressed: ()=>UserInfoHandler.updateUserInfo(isfirst: sprov.firstAddInfo),
               style: IconButton.styleFrom(
                 backgroundColor: AppColors.purpleBlue,
                 shape: RoundedRectangleBorder(
@@ -80,14 +109,15 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   title: AppStrings.avatar,
                   widget: Column(
                     children: [
-                      const CircleAvatar(
-                        radius: 40,
-                        backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80",
+                      Selector<StateManagerProv,String?>(
+                        selector: (_, prov) => prov.tmpUser.avatar,
+                        builder: (_, avatar, __) => CircleAvatar(
+                          radius: 50,
+                          backgroundImage: (avatar != null) ? FileImage(File(avatar)) as ImageProvider : const AssetImage(AppPic.defaultAvatar),
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: UserInfoHandler.prepareAvatar,
                         child: Text(
                           AppStrings.uploadImage,
                           style: AppStyles.bodySmall.copyWith(color:AppColors.purpleBlue),
@@ -106,6 +136,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   widget: SizedBox(
                     width: 300.w,
                     child: TextField(
+                      onChanged: (String value) => sprov.tmpName = value,
                       decoration: InputDecoration(
                         border: AppStyles.textFormFieldBorder,
                         focusedBorder: AppStyles.textFormFieldBorder,
@@ -128,33 +159,35 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   widget:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      IconButton(
-                        onPressed: () {},
-                        style: IconButton.styleFrom(
-                          backgroundColor: gender
-                              ? AppColors.purpleBlue
-                              : AppColors.white2,
-                          fixedSize: const Size(50, 50),
-                        ),
-                        icon: Icon(
-                          Icons.male,
-                          color: gender? AppColors.white0 : AppColors.darkText0,
+                      Selector<StateManagerProv,bool?>(
+                        selector: (_, prov)=>prov.tmpUser.gender,
+                        builder:(__,gender,___)=>IconButton(
+                            onPressed: ()=>sprov.tmpGender = true,
+                            style: IconButton.styleFrom(
+                            backgroundColor: gender==true? AppColors.purpleBlue : AppColors.white2,
+                            fixedSize: const Size(50, 50),
+                          ),
+                          icon: Icon(
+                            Icons.male,
+                            color: gender==true? AppColors.white0 : AppColors.darkText0,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 50.w), // 10.w = 10 * ScreenUtil().scaleWidth
-                      IconButton(
-                        onPressed: () {},
-                        style: IconButton.styleFrom(
-                          backgroundColor: !gender
-                              ? AppColors.purpleBlue
-                              : AppColors.white2,
-                          fixedSize: const Size(50, 50),
+                      SizedBox(width: 50.w),
+                      Selector<StateManagerProv,bool?>(
+                        selector: (_, prov)=>prov.tmpUser.gender,
+                        builder:(__,gender,___)=>IconButton(
+                          onPressed: ()=>sprov.tmpGender = false,
+                          style: IconButton.styleFrom(
+                            backgroundColor: gender==false? AppColors.purpleBlue : AppColors.white2,
+                            fixedSize: const Size(50, 50),
+                          ),
+                          icon: Icon(
+                            Icons.female,
+                            color: gender==false? AppColors.white0 : AppColors.darkText0,
+                          ),
                         ),
-                        icon: Icon(
-                          Icons.female,
-                          color: !gender? AppColors.white0 : AppColors.darkText0,
-                        ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -164,7 +197,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   thickness: 1,
                 ),
                 EditItem(
-                  title:AppStrings.role,
+                  title:AppStrings.age,
                   widget: SizedBox(
                     width: 300.w,
                     child: TextButton(
@@ -172,9 +205,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       style: TextButton.styleFrom(
                         side: const BorderSide(color: AppColors.lightBorderColor),
                       ),
-                      child: Text(
-                        '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}',
-                        style: AppStyles.bodySmallDark,
+                      child: Selector<StateManagerProv,DateTime?>(
+                        selector: (_, prov)=>prov.tmpUser.birthday,
+                        builder: (_, birthday, __) => Text(
+                          birthday!=null?FormatTool.dateScaleString(birthday):AppStrings.pleaseChoose,
+                          style: AppStyles.bodySmallDark,
+                        ),
                       ),
                     ),
                   ),
@@ -187,25 +223,30 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 EditItem(
                   title:AppStrings.role,
                   widget: SizedBox(
-                    width: 150.w,
-                    child: DropdownButton<String>(
-                      value: '学生',
-                      icon: const Icon(Icons.arrow_drop_down),
-                      iconSize: 50.sp,
-                      elevation: 8,
-                      style: AppStyles.bodySmallDark,
-                      underline: Container(
-                        height: 3,
-                        color: AppColors.purpleBlue,
+                    width: 350.w,
+                    child: Selector<StateManagerProv,int?>(
+                      selector: (_, prov)=>prov.tmpUser.role,
+                      builder: (_, role, __) => DropdownButton<String>(
+                        value: sprov.tmpUser.role!=null?BasicKnowledge.getRole(sprov.tmpUser.role!):BasicKnowledge.roleList.last,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        iconSize: 50.sp,
+                        elevation: 8,
+                        style: AppStyles.bodySmallDark,
+                        underline: Container(
+                          height: 3,
+                          color: AppColors.purpleBlue,
+                        ),
+                        onChanged: (String? newValue) {
+                          sprov.tmpRole = BasicKnowledge.getRoleIndex(newValue!);
+                        },
+                        items: BasicKnowledge.roleList.map<DropdownMenuItem<String>>(
+                          (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                      onChanged: (String? newValue) {},
-                      items: <String>['学生', '教师', '其他']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
                     ),
                   ),
                 ),
@@ -220,11 +261,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     style: AppStyles.bodySmallDark,
                   ),
                   subtitle: Text(
-                    '山东省公务员考试',
+                    AppStrings.pleaseChoose,
                     style: AppStyles.tinyText.copyWith(color: AppColors.silenceColor),
                   ),
                   trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {},// TODO: add goal
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
                   ),
                 )

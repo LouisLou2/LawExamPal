@@ -7,9 +7,9 @@ class ThemeBank{
   static bool isDarkMode = false;
   // 各个Theme均没有启用
   static final ThemeData _themeData2 =ThemeData(
-    primaryColor: AppColors.primaryColor,
+    primaryColor: AppColors.white0,
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.getBgColor(false),
+      backgroundColor: AppColors.white1,
       iconTheme: IconThemeData(
         color: Colors.grey[500],
       ),
@@ -32,15 +32,15 @@ class ThemeBank{
         fontWeight: FontWeight.w600,
       ),
     ),
-    scaffoldBackgroundColor: AppColors.getBgColor(false),
+    scaffoldBackgroundColor: AppColors.white1,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.transparent,
     ),
-    colorScheme: const ColorScheme.light().copyWith(background: AppColors.getBgColor(false)),
+    colorScheme: const ColorScheme.light().copyWith(background: AppColors.white1),
   );
   static final ThemeData _themeData1 = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: AppColors.primaryColor,
+    colorSchemeSeed: AppColors.white1,
     scaffoldBackgroundColor: Colors.white,
     textTheme: const TextTheme(
       titleLarge: TextStyle(
@@ -76,7 +76,7 @@ class ThemeBank{
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.iconPink,
         padding: const EdgeInsets.all(4),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -86,7 +86,7 @@ class ThemeBank{
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.primaryColor,
+        foregroundColor: AppColors.iconPink,
         minimumSize: const Size(double.infinity, 50),
         side: BorderSide(color: Colors.grey.shade200),
         shape: const RoundedRectangleBorder(
@@ -97,7 +97,7 @@ class ThemeBank{
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         foregroundColor: Colors.black,
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.iconPink,
         disabledBackgroundColor: Colors.grey.shade300,
         minimumSize: const Size(double.infinity, 52),
         shape: const RoundedRectangleBorder(

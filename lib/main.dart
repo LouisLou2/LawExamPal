@@ -5,8 +5,8 @@ import 'gui/page/myapp.dart';
 
 /// Flutter code sample for [TabBar].
 
-void main(){
-  initMustBeforeRunApp();
+void main() async{
+  await initMustBeforeRunApp();
   initAsync();
   runApp(const MyApp());
 }

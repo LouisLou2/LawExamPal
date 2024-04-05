@@ -8,10 +8,7 @@ class QuestionProv extends ChangeNotifier {
   late int quesIndex;
   late List<int> userChoice;
   void init(){
-    quesList = [
-      Question.fromJson(TestData.ques1),
-      Question.fromJson(TestData.ques2),
-    ];
+    quesList = TestData.quesList;
     quesIndex = 0;
     userChoice = List<int>.filled(quesList.length, -1);
   }

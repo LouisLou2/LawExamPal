@@ -5,7 +5,6 @@ import 'package:easy_cse/service/provider/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/app_style/app_style.dart';

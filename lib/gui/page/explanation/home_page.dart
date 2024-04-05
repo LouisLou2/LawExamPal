@@ -3,17 +3,21 @@ import 'package:easy_cse/gui/widget/info_display/color_box.dart';
 import 'package:easy_cse/gui/widget/decorations/decorated_avatar.dart';
 import 'package:easy_cse/gui/widget/info_display/headline.dart';
 import 'package:easy_cse/gui/widget/info_display/short_info_tile.dart';
+import 'package:easy_cse/service/handler/history_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
+import 'package:easy_cse/service/provider/state_manager.dart';
 import 'package:easy_cse/util/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
-import '../../widget/circle_gradient_icon.dart';
+import '../../../constant/app_style/app_pic.dart';
+import '../../widget/decorations/circle_gradient_icon.dart';
 import '../../widget/info_display/headline2.dart';
 
 
@@ -44,11 +48,16 @@ class _TestHomeState extends State<TestHome2>{
           leading:null,
           title: Padding(
             padding: EdgeInsets.only(left: 0,right: 10.h),
-            child: DecoratedAvatar(
-              image: "assets/images/avatar1.png",
-              radius: (UIParams.defSmallAvatarR).h,
-              onTap: ()=>NavigationHelper.pushNamed("/sign_in"),
-            ),
+            child: Selector<StateManagerProv,String?>(
+              selector: (_,prov)=>prov.user.avatar,
+              builder: (_,path,__)=>
+                DecoratedAvatar(
+                  image: path ?? AppPic.defaultAvatar,
+                  fromAssets: path==null,
+                  radius: (UIParams.defSmallAvatarR).h,
+                  onTap: null,
+                ),
+            )
           ),
           actions: [
             Padding(
@@ -56,7 +65,7 @@ class _TestHomeState extends State<TestHome2>{
               child: const Icon(
                 Icons.notifications_active_outlined,
                 size: UIParams.defIconS,
-                color: AppColors.black0,
+                color: AppColors.darkText0,
               ),
             )
           ],
@@ -167,8 +176,8 @@ class _TestHomeState extends State<TestHome2>{
             size: 100.w,
             color: AppColors.iconPink,
             icon: CupertinoIcons.camera,
-            title: "Snap to Solve",
-            spec: "snap a photo to ask questions",
+            title: AppStrings.snapToSearch,
+            spec: AppStrings.snapDesc,
             onTap: ()=>NavigationHelper.pushNamed(RouteCollector.snap_pic),
           ),
         ),
@@ -179,9 +188,9 @@ class _TestHomeState extends State<TestHome2>{
             size: (100/1.3).w,
             color: Colors.orange,
             icon: Icons.history_rounded,
-            title: "History",
-            spec: "history questions",
-            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.do_problems),
+            title: AppStrings.history,
+            spec: AppStrings.snapHistory,
+            onTap: ()=>NavigationHelper.pushNamed(RouteCollector.ques_history),
           ),
         ),
         StaggeredGridTile.count(
@@ -191,8 +200,8 @@ class _TestHomeState extends State<TestHome2>{
             size: 100.w,
             color: AppColors.basicGreen,
             icon: Icons.article,
-            title: "Review",
-            spec: "review articles",
+            title: AppStrings.review,
+            spec: AppStrings.reviewDesc,
             onTap: ()=>NavigationHelper.pushNamed(RouteCollector.enter_veriCode),
           ),
         ),
@@ -203,8 +212,8 @@ class _TestHomeState extends State<TestHome2>{
             size: (100/1.3).w,
             color: MaterialColorGenerator.from(Colors.blue),
             icon: Icons.school,
-            title: "AI Tutor",
-            spec: "AI powered tutoring",
+            title: AppStrings.aiTutor,
+            spec: AppStrings.shortDescAI,
             onTap: ()=>NavigationHelper.pushNamed(RouteCollector.chat),
           ),
         ),

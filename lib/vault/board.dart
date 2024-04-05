@@ -37,7 +37,7 @@ class OnBoardingPage1 extends StatelessWidget {
       bottomButtonBorderRadius: BorderRadius.circular(8),
       onPressed: (){print('onPressed');},
       bottomButtonChild: const Text(
-        AppStrings.login,
+        AppStrings.signin,
       ),
       widgetAboveBottomButton: Padding(
         padding: const EdgeInsets.only(

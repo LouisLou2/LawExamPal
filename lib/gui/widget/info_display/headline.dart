@@ -40,7 +40,7 @@ class HeadLine extends StatelessWidget {
                 fontFamily: AppStyles.defFontFamily,
                 fontSize: size,
                 fontWeight: FontWeight.w700,
-                color: AppColors.black0,
+                color: AppColors.darkText0,
                 fontStyle: isItalic?FontStyle.italic:FontStyle.normal,
               ),
             ),

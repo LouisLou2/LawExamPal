@@ -3,6 +3,7 @@ import 'package:easy_cse/gui/page/onboarding.dart';
 import 'package:easy_cse/gui/page/ques/do_questions_page.dart';
 import 'package:easy_cse/gui/page/error/error_page.dart';
 import 'package:easy_cse/gui/page/explanation/explanation_page.dart';
+import 'package:easy_cse/gui/page/ques/ques_history_page.dart';
 import 'package:easy_cse/gui/page/user/edit_account_page.dart';
 import 'package:easy_cse/gui/page/user/enter_veri_code_page.dart';
 import 'package:easy_cse/gui/page/user/sign_in_page.dart';
@@ -24,6 +25,7 @@ class RouteCollector {
   static const String main = '/main';
   static const String about = '/about';
   static const String snap_pic = '/snap_pic';
+  static const String ques_history = '/ques_history';
   static const String chat = '/chat';
   static const String explanation = '/explanation';
   static const String file_preview = '/file_preview';
@@ -36,6 +38,7 @@ class RouteCollector {
     edit_profile,
     about,
     snap_pic,
+    ques_history,
     chat,
     do_problems,
     enter_veriCode,
@@ -43,26 +46,21 @@ class RouteCollector {
 
   // specialRoutes中的路由不会在路由表中注册，而是在RouteGenerator中动态生成,因为这些路由需要用户满足某种条件才能跳转
   static const Set<String> specialRoutes = {
-    main,
+    explanation,// 需要传递参数
+    file_preview,
   };
   static Map<String, WidgetBuilder> simpleRouteMap = {
     onboarding: (context) => const OnBoardingPage(),
     about: (context) => const ErrorPage(),
     main: (context) => const MainTabs(),
     snap_pic: (context) => const SnapPicPage(),
+    ques_history: (context) => const QuesHistoryPage(),
     chat: (context) => const ChatPage(),
     sign_in: (context) => const SignInPage(),
     sign_up: (context) => const SignUpPage(),
+    edit_profile: (context) => const EditAccountPage(),
     profile: (context) => const ProfilePage(),
-    explanation: (context) => const EditAccountScreen(),
-    enter_veriCode: (context) =>EnterVeriCodePage(
-      count: 6,
-      email: 'lsk@163.com',
-      onResult: (String code) {print('code: $code');},
-      onRestart: () async {print('restart'); return true;},
-    ),
+    enter_veriCode: (context) =>const EnterVeriCodePage(),
     do_problems: (context) => const DoQuestionPage(),
-    // '/sign_in': (context) => const Center(),
-    // '/sign_up': (context) => const SignUpPage(),
   };
 }

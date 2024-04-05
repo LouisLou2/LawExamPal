@@ -1,16 +1,19 @@
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:easy_cse/gui/widget/decorations/guide_line.dart';
 import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
+import 'package:easy_cse/gui/widget/ui_kitbag.dart';
 import 'package:easy_cse/service/file_manager/image_manger.dart';
 import 'package:easy_cse/service/file_manager/path_manager.dart';
+import 'package:easy_cse/service/handler/content_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 
+import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
 import '../../../dependency_change/camerawesome/awesome_capture_button.dart';
 class SnapPicPage extends StatefulWidget {
-  const SnapPicPage({Key? key}) : super(key: key);
+  const SnapPicPage({super.key});
 
   @override
   State<SnapPicPage> createState() => _SnapPicPageState();
@@ -38,12 +41,10 @@ class _SnapPicPageState extends State<SnapPicPage> {
         pathBuilder: _pathBuilder,
       ),
       onMediaTap: (mediaCapture) {
-        OpenFile.open(PathManager.lastPicPath);
+        OpenFile.open(PathManager.lastRawPicPath);
       },
       progressIndicator: const Center(
-        child: CircularProgressIndicator.adaptive(
-          valueColor: AlwaysStoppedAnimation(AppColors.silentBlue),
-        ),
+        child: UIKitBag.blue_loadingIndicator,
       ),
       topActionsBuilder: (state) => AwesomeTopActions(
         state: state,
@@ -62,13 +63,13 @@ class _SnapPicPageState extends State<SnapPicPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Switch(
-                        value: true,
+                        value: false,
                         activeColor: AppColors.megaBlue,
                         activeTrackColor: AppColors.white1,
                         onChanged: (value) {}
                     ),
                     Text(
-                      "无痕",
+                      AppStrings.incognito,
                       style: TextStyle(
                         color: AppColors.white1,
                         fontSize: 30.sp,
@@ -77,7 +78,7 @@ class _SnapPicPageState extends State<SnapPicPage> {
                   ],
                 ),
               ),
-            )
+            ),
         ],
       ),
       bottomActionsBuilder: (state) => AwesomeBottomActions(
@@ -88,19 +89,19 @@ class _SnapPicPageState extends State<SnapPicPage> {
         */
         captureButton: AwesomeCaptureButton1(
           state: state,
-          onPhoto: (request)=>ImageManager.cropImage(PathManager.lastPicPath),
+          onPhoto: ContentHandler.executeSearchQues,
         ),
         left: IconTextButton(
           icon: Icons.folder_copy_outlined,
-          text: 'History',
+          text: AppStrings.history,
           onTap: () {},
           color: AppColors.white1,
           size: 150.w,
         ),
         right: IconTextButton(
           icon: Icons.photo_outlined,
-          text: 'Gallery',
-          onTap: ()=>ImageManager.editImgFromGallery(),
+          text: AppStrings.gallery,
+          onTap: ImageManager.editImgFromGallery,
           color: AppColors.white1,
           size: 150.w,
         ),

@@ -1,10 +1,12 @@
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
 
 class NavigationHelper{
-  // 此类不应该被实例化
   const NavigationHelper._();
+  // 此类不应该被实例化
   static final _key=GlobalKey<NavigatorState>();
   static GlobalKey<NavigatorState> get key=>_key;
+  
   static Future<T?>? pushNamed<T extends Object>(String routeName,{Object? arguments,}){
     return _key.currentState?.pushNamed<T?>(
       routeName,
@@ -19,5 +21,11 @@ class NavigationHelper{
   }
   static void pop<T extends Object?>([T? result]){
     return _key.currentState?.pop(result);
+  }
+  static Future<Object?>? popAllAndPushNamed(String routeName){
+    return _key.currentState?.pushNamedAndRemoveUntil(routeName, (route) => false);
+  }
+  static Future<Object?>? popAllAndBoard(){
+    return popAllAndPushNamed(RouteCollector.onboarding,);
   }
 }

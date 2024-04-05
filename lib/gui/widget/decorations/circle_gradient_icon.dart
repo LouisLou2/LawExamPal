@@ -1,7 +1,7 @@
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/app_style/app_style.dart';
+import '../../../constant/app_style/app_style.dart';
 
 class CircleGradientIcon extends StatelessWidget {
   final VoidCallback onTap;

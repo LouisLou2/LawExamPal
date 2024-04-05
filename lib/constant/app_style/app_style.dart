@@ -2,6 +2,8 @@ import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
+import '../../gui/widget/helper/snackbar_helper.dart';
+
 class AppStyles {
   static const String defFontFamily = "NotoSansSC";
   static const iconTextStyle = TextStyle(
@@ -116,4 +118,21 @@ class AppStyles {
       ),
     );
   }
+
+  static const ColorGroup ErrorColorGroup= ColorGroup(
+    backC: AppColors.thickRed,
+    foreC: AppColors.white0,
+    hoverC: AppColors.rustyRed,
+  );
+  static const ColorGroup InfoColorGroup= ColorGroup(
+    backC: AppColors.white1,
+    foreC: AppColors.darkText0,
+    hoverC: AppColors.white2,
+  );
+  static const ColorGroup SuccessColorGroup= ColorGroup(
+    backC: AppColors.silentGreen,
+    foreC: AppColors.white0,
+    hoverC: AppColors.oilGreen,
+  );
+
 }

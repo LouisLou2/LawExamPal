@@ -65,20 +65,23 @@ class ColorBox extends StatelessWidget {
                 overflow: TextOverflow.fade,
                 style: TextStyle(
                   color: AppColors.white0,
-                  fontSize: 40.sp,
+                  fontSize: 45.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               if (spec != null)
-                Text(
-                  spec!,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 27.sp,
-                    fontWeight: FontWeight.w500,
+                Padding(
+                  padding: EdgeInsets.only(top: size*0.08),
+                  child: Text(
+                    spec!,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.7),
+                      fontSize: 27.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              SizedBox(height: size*0.05,),
+              SizedBox(height: size*0.1,),
             ],
           ),
         ),

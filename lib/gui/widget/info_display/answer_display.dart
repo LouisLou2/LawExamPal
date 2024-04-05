@@ -4,9 +4,9 @@ import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
 import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
 import 'package:easy_cse/gui/widget/info_display/summary_card.dart';
 import 'package:easy_cse/gui/widget/info_display/text_section.dart';
+import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +21,7 @@ class AnswerDisplay extends StatefulWidget {
     Key? key,
     required this.question,
     required this.idea,
-    required this.answer
+    required this.answer,
   }) : super(key: key);
 
   @override
@@ -29,6 +29,7 @@ class AnswerDisplay extends StatefulWidget {
 }
 
 class _AnswerDisplayState extends State<AnswerDisplay> {
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -80,6 +81,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
                 children: [
                   Expanded(
                     child: TextField(
+                      enabled: false,
                       minLines: 1,
                       maxLines: 6,
                       cursorColor: AppColors.scentBlue,
@@ -114,11 +116,7 @@ class _AnswerDisplayState extends State<AnswerDisplay> {
             title: AppStrings.morePractice,
             child: SummaryCard(
               title: AppStrings.AIChoose,
-              points: const [
-                '分总结构',
-                '关键词法',
-                '类比推理',
-              ],
+              points: BasicKnowledge.typicalPoints,
               color: AppColors.purpleBlue,
               action: ColorTextButton(
                 text: AppStrings.tryQuestion,

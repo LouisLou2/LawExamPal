@@ -3,12 +3,21 @@ import 'package:easy_cse/constant/app_properties.dart';
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingPage extends StatelessWidget {
+class OnBoardingPage extends StatefulWidget {
+
   const OnBoardingPage({super.key});
+
   @override
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
+}
+
+class _OnBoardingPageState extends State<OnBoardingPage> {
+
   @override
   Widget build(BuildContext context) {
     List<Widget> features = [
@@ -20,7 +29,7 @@ class OnBoardingPage extends StatelessWidget {
         ),
         title: Text(AppProperties.features[0].title),
         description: Text(
-            AppProperties.features[0].desc,
+          AppProperties.features[0].desc,
         ),
       ),
       WhatsNewFeature(
@@ -52,10 +61,12 @@ class OnBoardingPage extends StatelessWidget {
     return CupertinoOnboarding(
       bottomButtonColor: AppColors.discoBallBlue,
       bottomButtonBorderRadius: BorderRadius.circular(8),
-      onPressed: (){print('onPressed');},
-      onPressedOnLastPage: (){print('onPressedOnLastPage');},
+
+      onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_up),
+      onPressedOnLastPage: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_in),
+
       bottomButtonChild: Text(
-        AppStrings.login,
+        AppStrings.signin,
         style:btnStyle,
       ),
       widgetAboveBottomButton: Padding(
@@ -68,7 +79,7 @@ class OnBoardingPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: AppColors.iconPink,
           padding: const EdgeInsets.all(16),
-          onPressed: (){},
+          onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_up),
           child: DefaultTextStyle(
             style: btnStyle,
             child: const Row(
@@ -100,7 +111,6 @@ class OnBoardingPage extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(height: 25),
             itemCount: features.length,
             itemBuilder: (context, index) {
-              print('index: $index');
               return features[index];
             },
           ),

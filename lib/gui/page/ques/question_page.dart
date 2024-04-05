@@ -1,6 +1,7 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/domain/entity/question.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
+import 'package:easy_cse/test_data/test_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,10 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_style.dart';
 import '../../../service/provider/question_prov.dart';
+import '../../widget/answer_tool_bar.dart';
 import '../../widget/buttons/colored_text_botton.dart';
+import '../../widget/info_display/answer_display.dart';
+import '../../widget/info_display/show_custom_bottom_sheet.dart';
 
 class QuestionDetailPage extends StatefulWidget{
   final int index;
@@ -18,9 +22,10 @@ class QuestionDetailPage extends StatefulWidget{
   State<QuestionDetailPage> createState()=>_QuestionDetailPageState();
 }
 class _QuestionDetailPageState extends State<QuestionDetailPage>{
-
+  late BuildContext Pagecontext;
   @override
   Widget build(BuildContext context){
+    Pagecontext=context;
     final QuestionProv qprov=ProvManager.questionProv;
     final Question ques=qprov.getQuestion(widget.index);
     return Scaffold(
@@ -63,7 +68,7 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
             SizedBox(height: 20.h),
             ColorTextButton(
               text: AppStrings.viewAnswer,
-              onPressed: () {},
+              onPressed: ()=>showQuesAnswer(widget.index),
               color: AppColors.purpleBlue,
             ),
           ],
@@ -76,6 +81,20 @@ class _QuestionDetailPageState extends State<QuestionDetailPage>{
       foregroundColor: isSelected?AppColors.white2:AppColors.darkText0,
       backgroundColor: isSelected?AppColors.purpleBlue:AppColors.white2,
       child: Text(String.fromCharCode(65+index)),
+    );
+  }
+  Future<void> showQuesAnswer(int ind) async {
+    PersistentBottomSheetController con=await showCustomBottomSheet(
+      Pagecontext,
+      height:MediaQuery.of(context).size.height / 1.2,
+      child:  Expanded(
+        child: AnswerDisplay(
+          question: TestData.quesSearchResList[ind].ques,
+          idea: TestData.quesSearchResList[ind].idea,
+          answer: TestData.quesSearchResList[ind].ans,
+        ),
+      ),
+      toolBar:const AnswerToolBar(),
     );
   }
 }

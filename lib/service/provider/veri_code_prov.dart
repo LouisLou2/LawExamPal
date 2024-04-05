@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_cse/constant/app_rule.dart';
+import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
 
 class VeriCodeProv extends ChangeNotifier {
@@ -12,6 +13,8 @@ class VeriCodeProv extends ChangeNotifier {
 
   late int pauseInterval;// 暂停间隔
   int? lastPauseTime;// 上次暂停的时间
+
+  String lastIdentifier='';// 上次发送验证码的标识符
 
   bool allowNextSend=false;
   Timer? timer;
@@ -27,13 +30,13 @@ class VeriCodeProv extends ChangeNotifier {
   }
 
   void startTimer(){
-    if(timer!=null&&timer!.isActive){
+    if(timer!=null&&timer!.isActive&&lastIdentifier==ProvManager.stateProv.user.email){
       return;
     }
     pauseInterval=0;
+    lastIdentifier=ProvManager.stateProv.user.email;
     // 计算距离上次发送验证码的时间
     left=gap;
-    print("@@@@@@@@@@@@@@@@ new timer instance");
     timer=Timer.periodic(const Duration(seconds: 1), (timer) {
       if(pauseInterval!=0){
         left-=pauseInterval;
@@ -59,8 +62,7 @@ class VeriCodeProv extends ChangeNotifier {
     if(allowNextSend==allow){
       return;
     }
-    // 将显示“重新发送”的按钮
-    allowNextSend=allow;
+    allowNextSend=allow;// 是否显示重新发送验证码按钮
     if(!allow){
       startTimer();
     }

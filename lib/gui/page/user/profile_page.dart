@@ -1,9 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:easy_cse/constant/app_style/app_color.dart';
+import 'package:easy_cse/constant/app_style/app_style.dart';
+import 'package:easy_cse/gui/widget/helper/dialog_helper.dart';
+import 'package:easy_cse/service/handler/auth_handler.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../constant/app_string.dart';
+import '../../../service/navigation/route_collector.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +20,19 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        title: const Text("PROFILE"),
+        foregroundColor: AppColors.darkText0,
+        surfaceTintColor: Colors.transparent,
+        title: const Text("个人信息"),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.settings_rounded),
-          )
+            icon: const Icon(
+              Icons.settings,
+              size: 30,
+            ),
+          ),
+          SizedBox(width: 15.w),
         ],
       ),
       body: ListView(
@@ -95,14 +109,12 @@ class ProfilePage extends StatelessWidget {
                       padding: const EdgeInsets.all(15),
                       child: Column(
                         children: [
-                          Icon(
-                            card.icon,
-                            size: 30,
-                          ),
+                          card.icon,
                           const SizedBox(height: 10),
                           Text(
                             card.title,
                             textAlign: TextAlign.center,
+                            style: AppStyles.bodySmallDark,
                           ),
                           const Spacer(),
                           ElevatedButton(
@@ -128,7 +140,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 35),
           ...List.generate(
             customListTiles.length,
-                (index) {
+              (index) {
               final tile = customListTiles[index];
               return Padding(
                 padding: const EdgeInsets.only(bottom: 5),
@@ -136,24 +148,39 @@ class ProfilePage extends StatelessWidget {
                   elevation: 4,
                   shadowColor: Colors.black12,
                   child: ListTile(
-                    leading: Icon(tile.icon),
-                    title: Text(tile.title),
+                    leading: tile.icon,
+                    title: Text(
+                      tile.title,
+                      style: AppStyles.bodySmallDark,
+                    ),
                     trailing: const Icon(Icons.chevron_right),
+                    onTap: tile.onTap,
                   ),
                 ),
               );
             },
-          )
+          ),
         ],
       ),
     );
   }
 }
 
+void logout() {
+  DialogHelper.showAskDialog(
+    title: AppStrings.sureToLogout,
+    text: AppStrings.eraseUserState,
+    onYes: () {
+      AuthHandler.logout();
+    },
+    willCloseDialog: true,
+  );
+}
+
 class ProfileCompletionCard {
   final String title;
   final String buttonText;
-  final IconData icon;
+  final Icon icon;
   ProfileCompletionCard({
     required this.title,
     required this.buttonText,
@@ -164,45 +191,56 @@ class ProfileCompletionCard {
 List<ProfileCompletionCard> profileCompletionCards = [
   ProfileCompletionCard(
     title: "Set Your Profile Details",
-    icon: CupertinoIcons.person_circle,
+    icon: const Icon(CupertinoIcons.person_circle),
     buttonText: "Continue",
   ),
   ProfileCompletionCard(
     title: "Upload your resume",
-    icon: CupertinoIcons.doc,
+    icon: const Icon(CupertinoIcons.doc),
     buttonText: "Upload",
   ),
   ProfileCompletionCard(
     title: "Add your skills",
-    icon: CupertinoIcons.square_list,
+    icon: const Icon(CupertinoIcons.square_list),
     buttonText: "Add",
   ),
 ];
 
 class CustomListTile {
-  final IconData icon;
+  final Icon icon;
   final String title;
+  final VoidCallback? onTap;
   CustomListTile({
     required this.icon,
     required this.title,
+    this.onTap,
   });
 }
 
 List<CustomListTile> customListTiles = [
   CustomListTile(
-    icon: Icons.insights,
+    icon: const Icon(Icons.person),
+    title: "个人信息",
+    onTap: ()=>NavigationHelper.pushNamed(RouteCollector.edit_profile),
+  ),
+  CustomListTile(
+    icon: const Icon(Icons.insights),
     title: "Activity",
   ),
   CustomListTile(
-    icon: Icons.location_on_outlined,
+    icon: const Icon(Icons.location_on_outlined),
     title: "Location",
   ),
   CustomListTile(
     title: "Notifications",
-    icon: CupertinoIcons.bell,
+    icon: const Icon(CupertinoIcons.bell),
   ),
   CustomListTile(
     title: "Logout",
-    icon: CupertinoIcons.arrow_right_arrow_left,
+    icon: const Icon(
+      Icons.exit_to_app,
+      color: AppColors.thickRed,
+    ),
+    onTap: logout,
   ),
 ];

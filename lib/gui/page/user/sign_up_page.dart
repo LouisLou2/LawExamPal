@@ -6,11 +6,15 @@ import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../constant/app_rule.dart';
+import '../../../constant/situation_enum.dart';
+import '../../../service/handler/auth_handler.dart';
 import '../../../service/navigation/navigation_helper.dart';
 import '../../../service/navigation/route_collector.dart';
+import '../../widget/helper/snackbar_helper.dart';
 
 class SignUpPage extends StatefulWidget{
-  const SignUpPage({Key? key}): super(key: key);
+  const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -22,69 +26,20 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final ValueNotifier<bool> pwdVisibleNotifier1 = ValueNotifier(true);
   final ValueNotifier<bool> pwdVisibleNotifier2 = ValueNotifier(true);
-  bool idenValid=false;
-  bool pwdValid=false;
 
   late final TextEditingController idenController;
   late final TextEditingController pwdController1;
   late final TextEditingController pwdController2;
 
-  void initializeControllers() {
-    //listener在文本更改时会被调用
-    idenController = TextEditingController()
-      ..addListener(controllerListener);
-    pwdController1 = TextEditingController()
-      ..addListener(controllerListener);
-    pwdController2 = TextEditingController()
-      ..addListener(controllerListener);
-  }
-
-  void disposeControllers() {
-    idenController.dispose();
-    pwdController1.dispose();
-    pwdController2.dispose();
-  }
-
-  bool allFieldValid(){
-    //return idenValid && pwdValid;
-    //或者使用_formKey.currentState.validate()来验证表单
-    return _formKey.currentState?.validate()??false;
-  }
-
-  String? validateEmail(String? value){
-    print("validateEmail");
-    if(value==null||value.isEmpty){
-      idenValid=false;
-      return AppStrings.pleaseEnterEmailAddress;
-    }else if(FormatTool.isEmailValid(value)){
-      idenValid=false;
-      return AppStrings.invalidEmailAddress;
-    }
-    idenValid=true;
-    return null;
-  }
-  String? validatePwd(String? value){
-    if(value==null||value.isEmpty){
-      pwdValid=false;
-      return AppStrings.pleaseEnterPassword;
-    }else if(FormatTool.isPwdValid(value)){
-      pwdValid=false;
-      return AppStrings.invalidPassword;
-    }
-    pwdValid=true;
-    return null;
-  }
-  String? validatePwd2(String? value){
-    // 对比两次密码是否一致
-    return pwdController1.text==value?null:AppStrings.passwordNotMatched;
-  }
-  void controllerListener() {
-    //validate此方法是结合表单所有validator得出的结果，返回true或false
-    _formKey.currentState?.validate();
-  }
+  late int lastTime;
+  String? emailTip;
+  String? pwdTip;
+  String? pwdTip2;
 
   @override
   void initState() {
+    lastTime=0;
+    emailTip=pwdTip=pwdTip2=null;
     initializeControllers();
     super.initState();
   }
@@ -93,6 +48,65 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     disposeControllers();
     super.dispose();
+  }
+  void initializeControllers() {
+    //listener在文本更改时会被调用
+    idenController = TextEditingController()
+      ..addListener(validateThrottle);
+    pwdController1 = TextEditingController()
+      ..addListener(validateThrottle);
+    pwdController2 = TextEditingController()
+      ..addListener(validateThrottle);
+  }
+
+  void validateThrottle(){
+    int now = DateTime.now().millisecondsSinceEpoch;
+    if(now-lastTime<AppRule.threshold)return;
+    lastTime=now;
+    _formKey.currentState?.validate()??false;
+  }
+  void disposeControllers() {
+    idenController.dispose();
+    pwdController1.dispose();
+    pwdController2.dispose();
+  }
+
+  // 此方法最后调用
+  bool allFieldValid(){
+    return _formKey.currentState?.validate()??false;
+  }
+
+  String? validateEmail(String? value){
+    if(value==null||value.isEmpty){
+      emailTip=AppStrings.pleaseEnterEmailAddress;
+    }else if(!FormatTool.isEmailValid(value)){
+     emailTip=AppStrings.invalidEmailAddress;
+    }else{
+      emailTip=null;
+    }
+    return emailTip;
+  }
+
+  String? validatePwd(String? value){
+    if(value==null||value.isEmpty){
+      pwdTip= AppStrings.pleaseEnterPassword;
+    }else if(!FormatTool.isPwdValid(value)){
+      pwdTip=AppStrings.invalidPassword;
+    }else{
+      pwdTip=null;
+    }
+    return pwdTip;
+  }
+
+  String? validatePwd2(String? value){
+    if(value==null||value.isEmpty){
+      pwdTip2=AppStrings.pleaseEnterPassword;
+    }else if(value!=pwdController1.text){
+      pwdTip2= AppStrings.notSamePassword;
+    }else{
+      pwdTip2=null;
+    }
+    return pwdTip2;
   }
 
   @override
@@ -205,8 +219,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
                         surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
                       ),
-                      onPressed: ()=>{null},
-                      child: Text(
+                      onPressed: signUpPressed,
+                      child: const Text(
                         AppStrings.signup,
                         style: AppStyles.textBtnOrLinkStyle,
                       ),
@@ -223,7 +237,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         TextButton(
                           onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_in),
                           child: Text(
-                            AppStrings.login,
+                            AppStrings.signin,
                             style: AppStyles.bodySmall.copyWith(color: AppColors.silentBlue),
                           ),
                         ),
@@ -237,5 +251,24 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+  // logic
+  String makeTip(){
+    return '${emailTip!=null?'$emailTip; ':''}${pwdTip!=null?'$pwdTip; ':''}${pwdTip2!=null?'$pwdTip2; ':''}${pwdTip!=null?AppStrings.passwordRule:''}';
+  }
+  void signUpPressed() async {
+    if(allFieldValid()) {
+      AuthHandler.executeSignUp(
+        email: idenController.text,
+        password: pwdController1.text,
+      );
+    }
+    else{
+      SnackbarHelper.showToaster(
+        title: AppStrings.badInput,
+        message: makeTip(),
+        kind: SituationEnum.ERROR,
+      );
+    }
   }
 }

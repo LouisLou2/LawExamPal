@@ -61,7 +61,7 @@ class _ChatPageState extends State<ChatPage>{
           ),
         ),
         title: Text(
-            AppStrings.aiTutor,
+            AppStrings.aiTutorEmoji,
             style:AppStyles.iconTextStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         surfaceTintColor: AppColors.discoBallBlue,
@@ -75,7 +75,7 @@ class _ChatPageState extends State<ChatPage>{
             child: Selector<ChatStateProv, bool>(
               selector: (context, prov)=> prov.chatRecords.isEmpty,
               builder: (context, isEmpty, child)=>isEmpty?
-              const EmptyChatWidget():
+              const EmptyWidget(text:AppStrings.emptyChat):
               Align(
                 alignment: Alignment.topCenter,
                 child: NotificationListener<ScrollEndNotification>(
@@ -206,7 +206,7 @@ class _ChatDrawerState extends State<ChatDrawer>{
             onTap: (){},
           ),
           NamedDivider(
-            name: AppStrings.history,
+            name: AppStrings.history_records,
             textColor: AppColors.darkText2,
             height: 20,
             fontSize: 40.sp,

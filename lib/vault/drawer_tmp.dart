@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../constant/app_style/app_color.dart';
-import '../gui/widget/circle_gradient_icon.dart';
+import '../gui/widget/decorations/circle_gradient_icon.dart';
 import 'task_group.dart';
 
 
@@ -40,7 +40,7 @@ class _TestHomeState extends State<TestHome2>{
                         Scaffold.of(context).openDrawer();
                       },
                       icon: const Icon(Icons.menu),
-                      color: AppColors.black0,
+                      color: AppColors.darkText0,
                       iconSize: 30,
                     ),
                   );
@@ -70,7 +70,7 @@ class _TestHomeState extends State<TestHome2>{
             child: Icon(
               Icons.history,
               size: 30,
-              color: AppColors.black0,
+              color: AppColors.darkText0,
             ),
           )
         ],
@@ -146,10 +146,10 @@ class _TestHomeState extends State<TestHome2>{
         const Spacer(),
         InkWell(
           onTap: () {},
-          child: Text(
+          child: const Text(
             "See all",
             style: TextStyle(
-              color: AppColors.primaryColor,
+              color: AppColors.iconBlue,
               fontWeight: FontWeight.w500,
             ),
           ),

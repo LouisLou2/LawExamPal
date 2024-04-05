@@ -5,7 +5,9 @@ class ChatStateProv extends ChangeNotifier {
   late bool _waitForAnswer;
   late bool _showJumpButton;// 是否显示跳至底部的按钮
   // 由于复用机制，这里chatRecords不可调整顺序，否则在ui呈现会乱
-  final List<ChatInfo> _chatRecords = [];
+  final List<ChatInfo> _chatRecords = [
+    ChatInfo(false, '☺️我已查看该题目，请问有什么问题？'),
+  ];
 
   ChatStateProv(){
     _waitForAnswer = false;

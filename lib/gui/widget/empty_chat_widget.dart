@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../../constant/app_style/app_color.dart';
 
-class EmptyChatWidget extends StatelessWidget {
-  const EmptyChatWidget({Key? key}) : super(key: key);
+class EmptyWidget extends StatelessWidget {
+  final String? text;
+  const EmptyWidget({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        AppStrings.emptyChat,
+        text ?? '',
         style: AppStyles.iconTextStyle.copyWith(
           color: AppColors.darkText1,
         ),

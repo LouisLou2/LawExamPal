@@ -1,5 +1,6 @@
 import 'package:easy_cse/gui/page/explanation/chat_page.dart';
 import 'package:easy_cse/gui/page/note/note_page.dart';
+import 'package:easy_cse/gui/page/user/profile_page.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/service/provider/page_change_prov.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import '../../constant/app_string.dart';
 import '../../constant/app_style/app_color.dart';
 import '../widget/nested_tab.dart';
 import 'explanation/home_page.dart';
@@ -33,24 +35,19 @@ class _MainTabsState extends State<MainTabs> {
 
   @override
   Widget build(BuildContext context) {
-    PageChangeProv pprov=ProvManager.pageChangeProvider;
+    PageChangeProv pprov=ProvManager.pageChangeProv;
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
       child: Scaffold(
         appBar: null,
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(), // 禁止滑动
+        body: const TabBarView(
+          physics: NeverScrollableScrollPhysics(), // 禁止滑动
           children: <Widget>[
-            const TestHome2(),
-            const Center(child: Text('Files')),
-            const NotePage(),
-            Center(
-              child: ElevatedButton(
-                onPressed: ()=>NavigationHelper.pushNamed(RouteCollector.sign_in),
-                child: const Center(child: Text('Profile'),),
-              ),
-            ),
+            TestHome2(),
+            Center(child: Text('Files')),
+            NotePage(),
+            ProfilePage(),
           ],
         ),
         bottomNavigationBar: ClipRRect(
@@ -88,7 +85,7 @@ class _MainTabsState extends State<MainTabs> {
               tabs: <Widget>[
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
-                  text: 'Home',
+                  text: AppStrings.home,
                   icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==0,
                     builder: (context, selec, child) => selec?const Icon(Icons.home,size: 29):const Icon(Icons.home_outlined,size: 29),
@@ -96,23 +93,23 @@ class _MainTabsState extends State<MainTabs> {
                 ),
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
-                  text: 'Practice',
+                  text: AppStrings.practice,
                   icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==1,
-                    builder: (context, selec, child) => selec?const Icon(CupertinoIcons.folder_fill,):const Icon(CupertinoIcons.folder),
+                    builder: (context, selec, child) => selec?const Icon(Icons.library_books_rounded,):const Icon(Icons.library_books_outlined),
                   ),
                 ),
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
-                  text: 'Notes',
+                  text: AppStrings.notes,
                   icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==2,
-                    builder: (context, selec, child) => selec?const Icon(CupertinoIcons.person_2_fill,size: 27):const Icon(CupertinoIcons.person_2,size: 27),
+                    builder: (context, selec, child) => selec?const Icon(Icons.book_rounded,):const Icon(Icons.book_outlined),
                   ),
                 ),
                 Tab(
                   iconMargin: const EdgeInsets.only(bottom: 3),
-                  text: 'Profile',
+                  text: AppStrings.profile,
                   icon: Selector<PageChangeProv, bool>(
                     selector: (context, provider) => provider.currentIndex==3,
                     builder: (context, selec, child) => selec?const Icon(CupertinoIcons.person_fill):const Icon(CupertinoIcons.person),

@@ -1,6 +1,7 @@
 import 'package:easy_cse/constant/app_rule.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/info_display/headline2.dart';
+import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:easy_cse/service/provider/veri_code_prov.dart';
 import 'package:easy_cse/util/format_tool.dart';
@@ -13,16 +14,8 @@ import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
 
 class EnterVeriCodePage extends StatefulWidget{
-  final int count;
-  final String email;
-  final Function(String code) onResult;
-  final Future<bool> Function() onRestart;
-  const EnterVeriCodePage({Key? key,
-    required this.count,
-    required this.email,
-    required this.onResult,
-    required this.onRestart})
-      :super(key:key);
+
+  const EnterVeriCodePage({super.key,});
   @override
   State<EnterVeriCodePage> createState()=>_EnterVeriCodePageState();
 }
@@ -30,10 +23,10 @@ class EnterVeriCodePage extends StatefulWidget{
 class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindingObserver{
   final TextEditingController _controller = TextEditingController();
   final FocusNode _inputFocus=FocusNode();
+  final vprov = ProvManager.veriCodeProv;
 
   @override
   void initState(){
-    print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage initState');
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -46,20 +39,17 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
   void didChangeAppLifecycleState(AppLifecycleState state){
     final vprov = ProvManager.veriCodeProv;
     if(state==AppLifecycleState.resumed){
-      print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage resumed');
       if(vprov.lastPauseTime!=null){
         vprov.pauseInterval += (DateTime.now().millisecondsSinceEpoch-vprov.lastPauseTime!)~/1000;
         vprov.lastPauseTime=null;
       }
     }
     else if(state==AppLifecycleState.paused){
-      print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage paused');
       vprov.lastPauseTime=DateTime.now().millisecondsSinceEpoch;
     }
   }
   @override
   void dispose(){
-    print('@@@@@@@@@@@@@@@@@@@@EnterVeriCodePage dispose');
     WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     _inputFocus.dispose();
@@ -69,7 +59,7 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
 
   @override
   Widget build(BuildContext context){
-    final vprov = Provider.of<VeriCodeProv>(context,listen: false);
+    final vprov = ProvManager.veriCodeProv;
     return Scaffold(
       backgroundColor: AppColors.white0,
       appBar: AppBar(
@@ -92,7 +82,7 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
             HeadLine2(
               title: AppStrings.enterVeriCode,
               size: 70.sp,
-              subTitle: '${AppStrings.veriCodeSended} ${widget.email}',
+              subTitle: '${AppStrings.veriCodeSentTo} ${ProvManager.stateProv.user.email}',
             ),
             SizedBox(height: 10.h),
             _getCodeInput(),
@@ -133,7 +123,7 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
       child: TextField(
         controller: _controller,
         focusNode: _inputFocus,
-        maxLength: widget.count,
+        maxLength: AppRule.veriCodeLength,
         keyboardType: TextInputType.number,
         enableInteractiveSelection: false,// 禁止长按弹出菜单
         inputFormatters: [
@@ -150,14 +140,14 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
   }
   Widget _getCodeBoxes(){
     return GridView.count(
-      crossAxisCount: widget.count,
+      crossAxisCount: AppRule.veriCodeLength,
       scrollDirection: Axis.vertical,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       crossAxisSpacing: 20.w,
       childAspectRatio: 0.95,
       children: List.generate(
-        widget.count,
+          AppRule.veriCodeLength,
         (index) => Selector<VeriCodeProv,bool>(
           key: ValueKey(index),
           selector: (_,prov)=>prov.index==index,
@@ -184,21 +174,17 @@ class _EnterVeriCodePageState extends State<EnterVeriCodePage> with WidgetsBindi
     );
   }
   void tyingCode(String code){
-    ProvManager.veriCodeProv.setVeriCode = code;
-    if(code.length==widget.count){
-      widget.onResult(code);
+    vprov.setVeriCode = code;
+    if(code.length==AppRule.veriCodeLength){
+      sendVeriCode(code);
     }
   }
-  void sendAgain(){
-    widget.onRestart().then((value){
-      if(value){
-        ProvManager.veriCodeProv.allowNext(false);
-      }
-    });
+  void sendVeriCode(String code){
+    AuthHandler.executeSendVeriCode(code);
   }
-  bool Function(int) equal(i){
-    return (x){
-      return x==i;
-    };
+  void sendAgain(){
+    print('@@@@@@@@@@@sendAgain');
+    vprov.allowNext(false);
+    AuthHandler.executeRequestVeriCode();
   }
 }

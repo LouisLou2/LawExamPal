@@ -1,9 +1,12 @@
-import 'package:easy_cse/constant/app_pic.dart';
+import 'package:easy_cse/constant/app_rule.dart';
+import 'package:easy_cse/constant/app_style/app_pic.dart';
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/gui/widget/decorations/linear_gradient_bg.dart';
+import 'package:easy_cse/gui/widget/helper/snackbar_helper.dart';
 import 'package:easy_cse/gui/widget/layout_helper_widget/named_divider.dart';
+import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/util/format_tool.dart';
@@ -11,8 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../constant/situation_enum.dart';
+
 class SignInPage extends StatefulWidget{
-  const SignInPage({Key? key}): super(key: key);
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -23,62 +28,18 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
 
   final ValueNotifier<bool> pwdVisibleNotifier = ValueNotifier(true);
-  bool idenValid=false;
-  bool pwdValid=false;
-
   late final TextEditingController idenController;
   late final TextEditingController pwdController;
 
-  void initializeControllers() {
-    //listener在文本更改时会被调用
-    idenController = TextEditingController()
-      ..addListener(controllerListener);
-    pwdController = TextEditingController()
-      ..addListener(controllerListener);
-  }
+  late int lastTime;
 
-  void disposeControllers() {
-    idenController.dispose();
-    pwdController.dispose();
-  }
-
-  bool allFieldValid(){
-    //return idenValid && pwdValid;
-    //或者使用_formKey.currentState.validate()来验证表单
-    return _formKey.currentState?.validate()??false;
-  }
-
-  String? validateEmail(String? value){
-  print("validateEmail");
-    if(value==null||value.isEmpty){
-      idenValid=false;
-      return AppStrings.pleaseEnterEmailAddress;
-    }else if(FormatTool.isEmailValid(value)){
-      idenValid=false;
-      return AppStrings.invalidEmailAddress;
-    }
-    idenValid=true;
-    return null;
-  }
-  String? validatePwd(String? value){
-    print("validatePwd");
-    if(value==null||value.isEmpty){
-      pwdValid=false;
-      return AppStrings.pleaseEnterPassword;
-    }else if(FormatTool.isPwdValid(value)){
-      pwdValid=false;
-      return AppStrings.invalidPassword;
-    }
-    pwdValid=true;
-    return null;
-  }
-  void controllerListener() {
-    //validate此方法是结合表单所有validator得出的结果，返回true或false
-    _formKey.currentState?.validate();
-  }
+  String? emailTip;
+  String? pwdTip;
 
   @override
   void initState() {
+    lastTime=0;
+    emailTip=pwdTip=null;
     initializeControllers();
     super.initState();
   }
@@ -87,6 +48,54 @@ class _SignInPageState extends State<SignInPage> {
   void dispose() {
     disposeControllers();
     super.dispose();
+  }
+
+  void initializeControllers() {
+    //listener在文本更改时会被调用
+    idenController = TextEditingController()
+      ..addListener(validateAllThrottle);
+    pwdController = TextEditingController()
+      ..addListener(validateAllThrottle);
+  }
+
+  void disposeControllers() {
+    idenController.dispose();
+    pwdController.dispose();
+  }
+
+  void validateAllThrottle(){
+    int now = DateTime.now().millisecondsSinceEpoch;
+    if(now-lastTime<AppRule.threshold)return;
+    lastTime=now;
+    _formKey.currentState?.validate();
+  }
+
+  // 此方法最后调用
+  bool allFieldValid(){
+    return _formKey.currentState?.validate()??false;
+  }
+
+
+  String? validatePwd(String? value){
+    if(value==null||value.isEmpty){
+      emailTip= AppStrings.pleaseEnterPassword;
+    }else if(!FormatTool.isPwdValid(value)){
+      emailTip=AppStrings.invalidPassword;
+    }else{
+      emailTip=null;
+    }
+    return emailTip;
+  }
+
+  String? validateEmail(String? value){
+    if(value==null||value.isEmpty){
+      pwdTip= AppStrings.pleaseEnterEmailAddress;
+    }else if(!FormatTool.isEmailValid(value)){
+      pwdTip= AppStrings.invalidEmailAddress;
+    }else{
+      pwdTip=null;
+    }
+    return pwdTip;
   }
 
   @override
@@ -104,7 +113,7 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children:[
                   Text(
-                    AppStrings.login,
+                    AppStrings.signin,
                     style: AppStyles.titleLarge.copyWith(color: AppColors.white1)
                   ),
                   SizedBox(height: 6.h),
@@ -142,7 +151,6 @@ class _SignInPageState extends State<SignInPage> {
                         controller: pwdController,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.visiblePassword,
-                        validator: validatePwd,
                         //onChanged: (_) => _formKey.currentState?.validate(),
                         decoration: InputDecoration(
                           labelText: AppStrings.password,
@@ -161,6 +169,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           border: AppStyles.textFormFieldBorder,
                         ),
+                        validator: validatePwd,
                       ),
                     ),
                     SizedBox(height: 5.h),
@@ -171,7 +180,7 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: (){},
                           child: Text(
                             AppStrings.forgotPassword,
-                            style: AppStyles.textBtnOrLinkStyle,
+                            style: AppStyles.bodySmall.copyWith(color: AppColors.silentBlue),
                           ),
                         ),
                       ],
@@ -182,9 +191,9 @@ class _SignInPageState extends State<SignInPage> {
                         padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
                         surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
                       ),
-                      onPressed: ()=>{null},
-                      child: Text(
-                        AppStrings.login,
+                      onPressed: signInPressed,
+                      child: const Text(
+                        AppStrings.signin,
                         style: AppStyles.textBtnOrLinkStyle,
                       ),
                     ),
@@ -251,5 +260,25 @@ class _SignInPageState extends State<SignInPage> {
         ),
       )
     );
+  }
+
+  // logic
+  String makeTip(){
+    return '${emailTip!=null?'$emailTip; ':''}${pwdTip!=null?'$pwdTip; ':''}${pwdTip!=null?AppStrings.passwordRule:''}';
+  }
+  void signInPressed() async {
+    if(allFieldValid()) {
+      AuthHandler.executeSignIn(
+        email: idenController.text,
+        password: pwdController.text,
+      );
+    }
+    else{
+      SnackbarHelper.showToaster(
+        title: AppStrings.badInput,
+        message: makeTip(),
+        kind: SituationEnum.ERROR,
+      );
+    }
   }
 }

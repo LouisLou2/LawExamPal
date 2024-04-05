@@ -28,7 +28,8 @@ class RouteGenerator {
         String imgPath = settings.arguments as String;
         return getRoute(widget: ExplanationPage(imgPath: imgPath,), settings: settings);
       case RouteCollector.file_preview:
-        return getRoute(widget: const FilePreviewPage(), settings: settings);
+        String path = settings.arguments as String;
+        return getRoute(widget: FilePreviewPage(path: path,), settings: settings);
       default:
         return getRoute(widget: const ErrorPage(), settings: settings);
     }

@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:io';
 
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import '../../../constant/app_style/app_color.dart';
 class DecoratedAvatar extends StatelessWidget {
   final String image;
   final double radius;
+  final bool fromAssets;
   final double? borderWidth;
   final Color? borderColor;
   final VoidCallback? onTap;
@@ -19,6 +20,7 @@ class DecoratedAvatar extends StatelessWidget {
     this.borderWidth,
     this.borderColor,
     this.onTap,
+    this.fromAssets=false,
   });
 
   @override
@@ -37,7 +39,7 @@ class DecoratedAvatar extends StatelessWidget {
         // 先用一个静态头像吧，真正使用时，图像可能还需要压缩后显示，有方便的库
         child: CircleAvatar(
           radius: radius,
-          backgroundImage: AssetImage(image),
+          backgroundImage: fromAssets?AssetImage(image):FileImage(File(image)) as ImageProvider,
         ),
       ),
     );

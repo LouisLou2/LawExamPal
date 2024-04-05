@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_cse/constant/app_string.dart';
+import 'package:easy_cse/service/file_manager/path_manager.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
@@ -13,28 +14,27 @@ import '../../constant/app_style/app_color.dart';
 class ImageManager {
   static ImagePicker imagePicker = ImagePicker();
   static const int _imageQuality = 50; // 1-100
-  static const int _compressQuality = 20; // 1-100
-  static late String lastImgPath;// 仅仅用于测试
+  static const int _compressQuality = 30; // 1-100
   /*
   * 选择图片
   * fromGallery: true 从相册选择，false 从相机选择
   */
-  static Future<void> editImg(bool fromGallery) async {
-    await imagePicker.pickImage(
+  static Future<String?> editImg(bool fromGallery) async {
+    XFile? file=await imagePicker.pickImage(
         source: fromGallery ? ImageSource.gallery : ImageSource.camera,
         imageQuality: _imageQuality
-    ).then((value) {
-      if (value != null) {
-        cropImage(value.path);
-      }
-    });
+    );
+    if(file!=null){
+      return file.path;
+    }
+    return null;
   }
 
-  static Future<void> editImgFromGallery() async {
-    await editImg(true);
+  static Future<String?> editImgFromGallery() async {
+    return await editImg(true);
   }
 
-  static Future<void> cropImage(String path) async {
+  static Future<String> cropImage(String path) async {
     final croppedFile = await ImageCropper().cropImage(
         sourcePath: path,
         aspectRatioPresets: Platform.isAndroid
@@ -73,27 +73,28 @@ class ImageManager {
           )
         ]
     );
-    if(croppedFile == null)return;
+    if(croppedFile == null)return '';
     imageCache.clear();
-    print('@@@@@@@@@@@@@@@@@@@@@');
-    print(croppedFile.path);
-    lastImgPath = croppedFile.path;
-    NavigationHelper.pushNamed(
-      RouteCollector.explanation,
-      arguments: croppedFile.path,
-    );
-    //reload();
+    return croppedFile.path;
   }
   // 2. compress file and get file.
   // 这里会返回一个压缩后的文件，targetPath是压缩后的文件路径，应该存储
-  Future<File> testCompressAndGetFile(File file, String targetPath) async {
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path, targetPath,
+  static Future<String?> compressAndGetPath(String sourcePath, String targetPath) async {
+    XFile? result = await FlutterImageCompress.compressAndGetFile(
+      sourcePath, targetPath,
       quality: _compressQuality,
       rotate: 0,
     );
-    print(file.lengthSync());
-    print(await result?.length());
-    return File(result!.path);
+    return result?.path;
+  }
+
+  static Future<String?> compressAndGetPathDefault(String sourcePath) async {
+    String targetPath = await PathManager.makeCompressImgPath();
+    XFile? result = await FlutterImageCompress.compressAndGetFile(
+      sourcePath, targetPath,
+      quality: _compressQuality,
+      rotate: 0,
+    );
+    return result?.path;
   }
 }
