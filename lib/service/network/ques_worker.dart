@@ -49,7 +49,7 @@ class QuesWorker{
         return const Tuple2(ResultCode.TIME_OUT, null);
       }
       return const Tuple2(ResultCode.ERROR, null);
-    } on Exception catch (e) {
+    } catch (e) {
       return const Tuple2(ResultCode.DEBUG_ERROR, null);
     }
   }
@@ -79,7 +79,7 @@ class QuesWorker{
         return const Tuple2(ResultCode.TIME_OUT, null);
       }
       return const Tuple2(ResultCode.ERROR, null);
-    } on Exception catch (e) {
+    } catch (e) {
       return const Tuple2(ResultCode.DEBUG_ERROR, null);
     }
   }
@@ -112,7 +112,7 @@ class QuesWorker{
         return const Tuple2(ResultCode.TIME_OUT, null);
       }
       return const Tuple2(ResultCode.ERROR, null);
-    } on Exception catch (e) {
+    } catch (e) {
       return const Tuple2(ResultCode.DEBUG_ERROR, null);
     }
   }

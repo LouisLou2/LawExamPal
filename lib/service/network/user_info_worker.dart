@@ -39,7 +39,7 @@ class UserInfoWorker{
         return ResultCode.TIME_OUT;
       }
       return ResultCode.ERROR;
-    } on Exception catch (e) {
+    } catch (e) {
       return ResultCode.DEBUG_ERROR;
     }
   }
