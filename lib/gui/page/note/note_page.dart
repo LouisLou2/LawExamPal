@@ -177,7 +177,7 @@ class _NotePageState extends State<NotePage> with WidgetsBindingObserver {
                         width: sheetw/3.5,
                         color: AppColors.iconBlue,
                         icon: CupertinoIcons.camera,
-                        onTap: ()=>NoteHandler.getNote(0),
+                        onTap: ()=>NoteHandler.getNote(FromType.camera),
                       ),
                       getSeleCard(
                         title: AppStrings.fromGallery,
@@ -185,7 +185,7 @@ class _NotePageState extends State<NotePage> with WidgetsBindingObserver {
                         width: sheetw/3.5,
                         color: AppColors.oilGreen,
                         icon: Icons.photo,
-                        onTap: ()=>NoteHandler.getNote(1),
+                        onTap: ()=>NoteHandler.getNote(FromType.gallery),
                       ),
                       getSeleCard(
                         title: AppStrings.fromFile,
@@ -193,7 +193,7 @@ class _NotePageState extends State<NotePage> with WidgetsBindingObserver {
                         width: sheetw/3.5,
                         color: AppColors.purpleBlue,
                         icon: Icons.file_open_rounded,
-                        onTap: ()=>NoteHandler.getNote(2),
+                        onTap: ()=>NoteHandler.getNote(FromType.file),
                       ),
                     ],
                   ),

@@ -33,6 +33,11 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
   final QuestionProv qprov=ProvManager.questionProv;
 
   @override
+  void dispose(){
+    qprov.disposeData();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
@@ -80,7 +85,7 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${AppStrings.problemTheme}(${qprov.topic ?? ''})',
+                          '${AppStrings.problemTheme}(${qprov.topic ?? AppStrings.chosen})',
                           style: AppStyles.tinyText,
                         ),
                         Row(
@@ -103,11 +108,12 @@ class _DoQuestionPageState extends State<DoQuestionPage>{
                   Flexible( // 使用 Expanded 包裹 PageView.custom
                     child: PageView.custom(
                       controller: _pageController,
+                      onPageChanged: (index)=>qprov.setQuesIndex=index,
                       childrenDelegate: SliverChildBuilderDelegate(
                             (context, index) {
                           return QuestionDetailPage(index: index);
                         },
-                        childCount: 4,
+                        childCount: qprov.quesList.length,
                       ),
                     ),
                   ),

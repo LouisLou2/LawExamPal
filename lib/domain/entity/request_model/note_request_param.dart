@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 
 class NoteReqParam{
   final String token;
-  final String picPath;
+  final String filePath;
   NoteReqParam({
     required this.token,
-    required this.picPath,
+    required this.filePath,
   });
 
   Future<Map<String, dynamic>> toJson() async{
-    MultipartFile pic=await MultipartFile.fromFile(picPath);
+    MultipartFile pic=await MultipartFile.fromFile(filePath);
     return {
       'token': token,
-      'pic':pic,
+      'file':pic,
     };
   }
 }

@@ -201,4 +201,8 @@ class AppStrings {
 
   static const String imageError = '图片处理错误';
   static const String fileError = '文件处理错误';
+  static const String fileGenerateFailed = '文件生成失败';
+
+  static const String shareText = '分享';
+  static const String shareDone = '分享成功';
 }

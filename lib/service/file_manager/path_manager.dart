@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:easy_cse/constant/app_properties.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../domain/entity/persistence_kind/user.dart';
+
 class PathManager{
   static bool _inited = false;
 
@@ -82,5 +84,9 @@ class PathManager{
 
   static Future<String> makeCompressImgPath() async {
     return '${compressImgDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
+  }
+
+  static String makeDefaultNotePath(User user) {
+    return '${noteDir.path}/${user.email}/${DateTime.now().millisecondsSinceEpoch}.pdf';
   }
 }

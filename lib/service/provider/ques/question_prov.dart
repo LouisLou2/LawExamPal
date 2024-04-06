@@ -10,7 +10,7 @@ class QuestionProv extends ChangeNotifier {
   late List<int> quesPageStates;
   String? topic;
   late List<Question> quesList;// 总共的题目
-  late int quesIndex;// 现在处于第几道
+  late int _quesIndex;// 现在处于第几道
   late List<int> userChoice;// 对于选择题的用户的答案
 
   late List<QuesSearchRes?> searchResList;// 这些推荐题目的搜索结果，null表示未搜索
@@ -20,7 +20,7 @@ class QuestionProv extends ChangeNotifier {
     quesList = [];
     userChoice = [];
     searchResList = [];
-    quesIndex = 0;
+    _quesIndex = 0;
     pageState=UIStateEnum.DONE;
   }
   QuestionProv(){
@@ -32,10 +32,11 @@ class QuestionProv extends ChangeNotifier {
     quesList.clear();
     userChoice.clear();
     searchResList.clear();
-    quesIndex = 0;
+    _quesIndex = 0;
   }
 
-  get nowQuestion => quesList[quesIndex];
+  get nowQuestion => quesList[_quesIndex];
+  get quesIndex => _quesIndex;
 
   Question getQuestion(int index){
     return quesList[index];
@@ -61,7 +62,7 @@ class QuestionProv extends ChangeNotifier {
     notifyListeners();
   }
   set setQuesIndex(int index){
-    quesIndex = index;
+    _quesIndex = index;
     notifyListeners();
   }
   void setUserChoice(int index,int choice){

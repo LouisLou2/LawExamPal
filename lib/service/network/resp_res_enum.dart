@@ -6,11 +6,13 @@ import '../../domain/entity/code_desc.dart';
 
 class ResultCode{
   // 前端自定义的状态码
-  static const int USER_CANCELED = 8;
-  static const int TIME_OUT = 9;
-  static const int ERROR = 10;
-  static const int DEBUG_ERROR = 11;
-  static const int IMAGE_ERROR = 12;
+  static const int USER_CANCELED = 9;
+  static const int TIME_OUT = 10;
+  static const int ERROR = 11;
+  static const int DEBUG_ERROR = 12;
+  static const int IMAGE_ERROR = 13;
+  static const int DATA_ERROR = 14;
+
   // 后端返回的状态码
   static const int SUCCESS = 0;
 
@@ -23,6 +25,8 @@ class ResultCode{
 
   static const int NOT_FOUND = 6;
   static const int SERVER_ERROR = 7;
+
+  static const int FILE_GENERATE_FAILED = 8;
 
   static final generalNetworkError=CodeDesc(SituationEnum.ERROR,AppStrings.somethingWentWrong,AppStrings.tryAgain);
 
@@ -37,11 +41,14 @@ class ResultCode{
     NOT_FOUND:CodeDesc(SituationEnum.ERROR,AppStrings.checkInput,AppStrings.checkInput),
     SERVER_ERROR:CodeDesc(SituationEnum.ERROR,AppStrings.serverError,AppStrings.tryLater),
     TIME_OUT:CodeDesc(SituationEnum.ERROR,AppStrings.poorNetwork,AppStrings.checkNetwork),
+    // 文件生成失败
+    FILE_GENERATE_FAILED:CodeDesc(SituationEnum.ERROR,AppStrings.fileGenerateFailed,AppStrings.checkNetwork),
 
     // 客户端可能的错误
     DEBUG_ERROR:CodeDesc(SituationEnum.ERROR,AppStrings.debugError,''),
     USER_CANCELED:CodeDesc(SituationEnum.INFO,AppStrings.cancel,''),
     IMAGE_ERROR:CodeDesc(SituationEnum.ERROR,AppStrings.imageError,''),
+    DATA_ERROR:CodeDesc(SituationEnum.ERROR,AppStrings.badData,AppStrings.checkData),
   };
   static CodeDesc getDesc(int code){
     return CodeDescs[code]??CodeDesc(SituationEnum.ERROR,AppStrings.somethingWentWrong,AppStrings.tryAgain);
