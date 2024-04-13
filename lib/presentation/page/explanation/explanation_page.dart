@@ -1,14 +1,12 @@
 import 'package:easy_cse/constant/situation_enum.dart';
-import 'package:easy_cse/gui/widget/info_display/answer_display.dart';
-import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
-import 'package:easy_cse/gui/widget/try_again.dart';
-import 'package:easy_cse/gui/widget/ui_kitbag.dart';
+import 'package:easy_cse/presentation/widget/info_display/answer_display.dart';
+import 'package:easy_cse/presentation/widget/info_display/show_custom_bottom_sheet.dart';
+import 'package:easy_cse/presentation/widget/try_again.dart';
+import 'package:easy_cse/presentation/widget/ui_kitbag.dart';
 import 'package:easy_cse/service/handler/ques_handler.dart';
 import 'package:easy_cse/service/provider/ques/explanation_provider.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constant/app_string.dart';

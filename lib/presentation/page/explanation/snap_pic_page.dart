@@ -1,7 +1,6 @@
 import 'package:camerawesome/camerawesome_plugin.dart';
-import 'package:easy_cse/gui/widget/decorations/guide_line.dart';
-import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
-import 'package:easy_cse/gui/widget/ui_kitbag.dart';
+import 'package:easy_cse/presentation/widget/buttons/icon_text_button.dart';
+import 'package:easy_cse/presentation/widget/ui_kitbag.dart';
 import 'package:easy_cse/service/file_manager/image_manger.dart';
 import 'package:easy_cse/service/file_manager/path_manager.dart';
 import 'package:easy_cse/service/handler/ques_handler.dart';
@@ -12,6 +11,7 @@ import 'package:open_file/open_file.dart';
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_color.dart';
 import '../../../dependency_change/camerawesome/awesome_capture_button.dart';
+import '../../widget/decorations/guide_line.dart';
 class SnapPicPage extends StatefulWidget {
   const SnapPicPage({super.key});
 

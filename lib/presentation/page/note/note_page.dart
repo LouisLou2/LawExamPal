@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:easy_cse/constant/app_style/app_pic.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/widget/info_display/show_custom_bottom_sheet.dart';
-import 'package:easy_cse/gui/widget/info_display/title_with_image.dart';
-import 'package:easy_cse/service/file_manager/image_manger.dart';
+import 'package:easy_cse/presentation/widget/info_display/show_custom_bottom_sheet.dart';
+import 'package:easy_cse/presentation/widget/info_display/title_with_image.dart';
 import 'package:easy_cse/service/handler/note_handler.dart';
 import 'package:easy_cse/service/provider/note/note_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';

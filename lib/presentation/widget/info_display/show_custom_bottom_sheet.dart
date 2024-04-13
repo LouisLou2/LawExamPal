@@ -1,8 +1,8 @@
-import 'package:easy_cse/gui/widget/decorations/color_bar.dart';
 import 'package:easy_cse/util/extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constant/app_style/app_color.dart';
+import '../decorations/color_bar.dart';
 
 Future<PersistentBottomSheetController> showCustomBottomSheet(
     BuildContext context,

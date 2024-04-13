@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:easy_cse/service/network/network_route_collector.dart';
 
+import '../../config/config.dart';
+
 class NetWorkWorker {
-  static Duration defaultTimeout = const Duration(milliseconds: 100000);
-  static Duration longerTimeout = const Duration(milliseconds: 20000);
+  static Duration defaultTimeout = const Duration(milliseconds: Configs.TIMEOUT);
+  static Duration longerTimeout = const Duration(milliseconds: Configs.TIMEOUT*2);
 
   static final Options formdata_json = Options(
     contentType: Headers.multipartFormDataContentType,
@@ -37,9 +39,5 @@ class NetWorkWorker {
       ),
     );
     return _chatDio!;
-  }
-
-  Future<void> fetch() async {
-    // Fetch data from network
   }
 }

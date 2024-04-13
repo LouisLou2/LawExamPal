@@ -1,9 +1,7 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
-import 'package:easy_cse/gui/widget/info_display/alert_bar.dart';
-import 'package:easy_cse/gui/widget/info_display/summary_card.dart';
-import 'package:easy_cse/gui/widget/info_display/text_section.dart';
+import 'package:easy_cse/presentation/widget/info_display/summary_card.dart';
+import 'package:easy_cse/presentation/widget/info_display/text_section.dart';
 import 'package:easy_cse/service/handler/chat_handler.dart';
 import 'package:easy_cse/service/handler/ques_handler.dart';
 import 'package:easy_cse/service/knowledge/basic_knowledge.dart';
@@ -16,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../service/provider/ques/explanation_provider.dart';
+import '../buttons/colored_text_botton.dart';
+import 'alert_bar.dart';
 
 class AnswerDisplay extends StatefulWidget {
   final String question;

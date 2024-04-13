@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_cse/constant/app_style/app_icons.dart';
-import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
+import 'package:easy_cse/presentation/widget/buttons/icon_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:printing/printing.dart';

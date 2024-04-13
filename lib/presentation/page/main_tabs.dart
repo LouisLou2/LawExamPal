@@ -1,8 +1,4 @@
-import 'package:easy_cse/gui/page/explanation/chat_page.dart';
-import 'package:easy_cse/gui/page/note/note_page.dart';
-import 'package:easy_cse/gui/page/user/profile_page.dart';
-import 'package:easy_cse/service/navigation/navigation_helper.dart';
-import 'package:easy_cse/service/navigation/route_collector.dart';
+import 'package:easy_cse/presentation/page/user/profile_page.dart';
 import 'package:easy_cse/service/provider/page_change_prov.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../constant/app_string.dart';
 import '../../constant/app_style/app_color.dart';
-import '../widget/nested_tab.dart';
 import 'explanation/home_page.dart';
+import 'note/note_page.dart';
 
 class MainTabs extends StatefulWidget {
   const MainTabs({Key? key}) : super(key: key);

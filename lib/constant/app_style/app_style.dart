@@ -2,7 +2,17 @@ import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
 import 'package:flutter/material.dart';
 
-import '../../gui/widget/helper/snackbar_helper.dart';
+
+class ColorGroup{
+  final Color backC;
+  final Color foreC;
+  final Color hoverC;
+  const ColorGroup({
+    required this.backC,
+    required this.foreC,
+    required this.hoverC,
+  });
+}
 
 class AppStyles {
   static const String defFontFamily = "NotoSansSC";

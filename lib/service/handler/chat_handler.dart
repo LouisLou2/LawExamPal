@@ -1,6 +1,5 @@
 import 'package:easy_cse/domain/entity/resp_model/chat_session.dart';
 import 'package:easy_cse/domain/entity/resp_model/new_chat_resp.dart';
-import 'package:easy_cse/gui/widget/helper/snackbar_helper.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/service/network/chat_bot.dart';
@@ -10,6 +9,8 @@ import 'package:easy_cse/service/provider/chat/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/global/state_manager.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:tuple/tuple.dart';
+
+import '../../presentation/widget/helper/snackbar_helper.dart';
 
 class ChatHandler {
   static final ChatSessionProv csprov=ProvManager.chatSessionProv;

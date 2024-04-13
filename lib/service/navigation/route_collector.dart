@@ -1,19 +1,17 @@
-import 'package:easy_cse/gui/page/explanation/chat_page.dart';
-import 'package:easy_cse/gui/page/onboarding.dart';
-import 'package:easy_cse/gui/page/ques/do_questions_page.dart';
-import 'package:easy_cse/gui/page/error/error_page.dart';
-import 'package:easy_cse/gui/page/explanation/explanation_page.dart';
-import 'package:easy_cse/gui/page/ques/ques_history_page.dart';
-import 'package:easy_cse/gui/page/user/edit_account_page.dart';
-import 'package:easy_cse/gui/page/user/enter_veri_code_page.dart';
-import 'package:easy_cse/gui/page/user/sign_in_page.dart';
-import 'package:easy_cse/gui/page/explanation/snap_pic_page.dart';
+import 'package:easy_cse/presentation/page/explanation/chat_page.dart';
+import 'package:easy_cse/presentation/page/onboarding.dart';
+import 'package:easy_cse/presentation/page/ques/do_questions_page.dart';
+import 'package:easy_cse/presentation/page/error/error_page.dart';
+import 'package:easy_cse/presentation/page/ques/ques_history_page.dart';
+import 'package:easy_cse/presentation/page/user/edit_account_page.dart';
+import 'package:easy_cse/presentation/page/user/enter_veri_code_page.dart';
+import 'package:easy_cse/presentation/page/user/sign_in_page.dart';
+import 'package:easy_cse/presentation/page/explanation/snap_pic_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../gui/page/main_tabs.dart';
-import '../../gui/page/user/profile_page.dart';
-import '../../gui/page/user/sign_up_page.dart';
-import '../../gui/page/user/veripage.dart';
+import '../../presentation/page/main_tabs.dart';
+import '../../presentation/page/user/profile_page.dart';
+import '../../presentation/page/user/sign_up_page.dart';
 
 class RouteCollector {
   static const String onboarding = '/onboarding';

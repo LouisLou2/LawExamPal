@@ -1,11 +1,10 @@
-import 'package:easy_cse/constant/situation_enum.dart';
 import 'package:easy_cse/service/file_manager/image_manger.dart';
 import 'package:easy_cse/service/network/user_info_worker.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:easy_cse/service/provider/global/state_manager.dart';
 import '../../constant/app_style/ui_fitter.dart';
-import '../../gui/widget/helper/dialog_helper.dart';
-import '../../gui/widget/helper/snackbar_helper.dart';
+import '../../presentation/widget/helper/dialog_helper.dart';
+import '../../presentation/widget/helper/snackbar_helper.dart';
 import '../navigation/navigation_helper.dart';
 import '../navigation/route_collector.dart';
 import '../network/auth_worker.dart';

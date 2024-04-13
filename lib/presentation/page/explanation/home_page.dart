@@ -1,8 +1,8 @@
 import 'package:easy_cse/constant/app_style/ui_params.dart';
-import 'package:easy_cse/gui/widget/info_display/color_box.dart';
-import 'package:easy_cse/gui/widget/decorations/decorated_avatar.dart';
-import 'package:easy_cse/gui/widget/info_display/headline.dart';
-import 'package:easy_cse/gui/widget/info_display/short_info_tile.dart';
+import 'package:easy_cse/presentation/widget/info_display/color_box.dart';
+import 'package:easy_cse/presentation/widget/decorations/decorated_avatar.dart';
+import 'package:easy_cse/presentation/widget/info_display/headline.dart';
+import 'package:easy_cse/presentation/widget/info_display/short_info_tile.dart';
 import 'package:easy_cse/service/handler/chat_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';

@@ -1,8 +1,8 @@
 import 'package:easy_cse/constant/app_style/app_style.dart';
 import 'package:easy_cse/constant/app_style/ui_fitter.dart';
 import 'package:easy_cse/constant/app_style/ui_params.dart';
-import 'package:easy_cse/gui/page/ques/question_page.dart';
-import 'package:easy_cse/gui/widget/ui_kitbag.dart';
+import 'package:easy_cse/presentation/page/ques/question_page.dart';
+import 'package:easy_cse/presentation/widget/ui_kitbag.dart';
 import 'package:easy_cse/service/provider/ques/question_prov.dart';
 import 'package:easy_cse/util/extensions.dart';
 import 'package:flutter/cupertino.dart';

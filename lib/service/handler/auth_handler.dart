@@ -4,8 +4,8 @@ import 'package:easy_cse/service/provider/prov_manager.dart';
 
 import '../../constant/app_string.dart';
 import '../../domain/entity/persistence_kind/user.dart';
-import '../../gui/widget/helper/dialog_helper.dart';
-import '../../gui/widget/helper/snackbar_helper.dart';
+import '../../presentation/widget/helper/dialog_helper.dart';
+import '../../presentation/widget/helper/snackbar_helper.dart';
 import '../navigation/navigation_helper.dart';
 import '../navigation/route_collector.dart';
 import '../network/auth_worker.dart';

@@ -1,7 +1,6 @@
 import 'package:camerawesome/camerawesome_plugin.dart';
 import 'package:easy_cse/domain/entity/persistence_kind/ques_history.dart';
 import 'package:easy_cse/domain/entity/resp_model/ques_search_res.dart';
-import 'package:easy_cse/gui/widget/helper/snackbar_helper.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/network/resp_res_enum.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
@@ -13,6 +12,7 @@ import 'package:tuple/tuple.dart';
 
 import '../../constant/situation_enum.dart';
 import '../../domain/entity/resp_model/recommend_ques.dart';
+import '../../presentation/widget/helper/snackbar_helper.dart';
 import '../file_manager/image_manger.dart';
 import '../file_manager/path_manager.dart';
 import '../navigation/route_collector.dart';

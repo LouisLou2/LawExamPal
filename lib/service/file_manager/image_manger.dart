@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/service/file_manager/path_manager.dart';
-import 'package:easy_cse/service/navigation/navigation_helper.dart';
-import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_cropper/image_cropper.dart';

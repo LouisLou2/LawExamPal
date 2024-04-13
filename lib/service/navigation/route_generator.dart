@@ -1,8 +1,8 @@
-import 'package:easy_cse/gui/page/explanation/explanation_page.dart';
-import 'package:easy_cse/gui/page/note/file_preview.dart';
+import 'package:easy_cse/presentation/page/explanation/explanation_page.dart';
+import 'package:easy_cse/presentation/page/note/file_preview.dart';
 import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_cse/gui/page/error/error_page.dart';
+import 'package:easy_cse/presentation/page/error/error_page.dart';
 
 class RouteGenerator {
 

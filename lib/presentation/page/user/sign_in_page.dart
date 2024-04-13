@@ -1,45 +1,45 @@
+import 'package:easy_cse/constant/app_rule.dart';
+import 'package:easy_cse/constant/app_style/app_pic.dart';
 import 'package:easy_cse/constant/app_string.dart';
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/widget/decorations/linear_gradient_bg.dart';
+import 'package:easy_cse/presentation/widget/decorations/linear_gradient_bg.dart';
+import 'package:easy_cse/presentation/widget/helper/snackbar_helper.dart';
+import 'package:easy_cse/presentation/widget/layout_helper_widget/named_divider.dart';
+import 'package:easy_cse/service/handler/auth_handler.dart';
+import 'package:easy_cse/service/navigation/navigation_helper.dart';
+import 'package:easy_cse/service/navigation/route_collector.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
-import '../../../constant/app_rule.dart';
 import '../../../constant/situation_enum.dart';
-import '../../../service/handler/auth_handler.dart';
-import '../../../service/navigation/navigation_helper.dart';
-import '../../../service/navigation/route_collector.dart';
-import '../../widget/helper/snackbar_helper.dart';
 
-class SignUpPage extends StatefulWidget{
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget{
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   //使用它，可以在表单组件的外部使用表单状态
   final _formKey = GlobalKey<FormState>();
 
-  final ValueNotifier<bool> pwdVisibleNotifier1 = ValueNotifier(true);
-  final ValueNotifier<bool> pwdVisibleNotifier2 = ValueNotifier(true);
-
+  final ValueNotifier<bool> pwdVisibleNotifier = ValueNotifier(true);
   late final TextEditingController idenController;
-  late final TextEditingController pwdController1;
-  late final TextEditingController pwdController2;
+  late final TextEditingController pwdController;
 
   late int lastTime;
+
   String? emailTip;
   String? pwdTip;
-  String? pwdTip2;
 
   @override
   void initState() {
     lastTime=0;
-    emailTip=pwdTip=pwdTip2=null;
+    emailTip=pwdTip=null;
     initializeControllers();
     super.initState();
   }
@@ -49,26 +49,25 @@ class _SignUpPageState extends State<SignUpPage> {
     disposeControllers();
     super.dispose();
   }
+
   void initializeControllers() {
     //listener在文本更改时会被调用
     idenController = TextEditingController()
-      ..addListener(validateThrottle);
-    pwdController1 = TextEditingController()
-      ..addListener(validateThrottle);
-    pwdController2 = TextEditingController()
-      ..addListener(validateThrottle);
+      ..addListener(validateAllThrottle);
+    pwdController = TextEditingController()
+      ..addListener(validateAllThrottle);
   }
 
-  void validateThrottle(){
+  void disposeControllers() {
+    idenController.dispose();
+    pwdController.dispose();
+  }
+
+  void validateAllThrottle(){
     int now = DateTime.now().millisecondsSinceEpoch;
     if(now-lastTime<AppRule.threshold)return;
     lastTime=now;
-    _formKey.currentState?.validate()??false;
-  }
-  void disposeControllers() {
-    idenController.dispose();
-    pwdController1.dispose();
-    pwdController2.dispose();
+    _formKey.currentState?.validate();
   }
 
   // 此方法最后调用
@@ -76,37 +75,27 @@ class _SignUpPageState extends State<SignUpPage> {
     return _formKey.currentState?.validate()??false;
   }
 
-  String? validateEmail(String? value){
+
+  String? validatePwd(String? value){
     if(value==null||value.isEmpty){
-      emailTip=AppStrings.pleaseEnterEmailAddress;
-    }else if(!FormatTool.isEmailValid(value)){
-     emailTip=AppStrings.invalidEmailAddress;
+      emailTip= AppStrings.pleaseEnterPassword;
+    }else if(!FormatTool.isPwdValid(value)){
+      emailTip=AppStrings.invalidPassword;
     }else{
       emailTip=null;
     }
     return emailTip;
   }
 
-  String? validatePwd(String? value){
+  String? validateEmail(String? value){
     if(value==null||value.isEmpty){
-      pwdTip= AppStrings.pleaseEnterPassword;
-    }else if(!FormatTool.isPwdValid(value)){
-      pwdTip=AppStrings.invalidPassword;
+      pwdTip= AppStrings.pleaseEnterEmailAddress;
+    }else if(!FormatTool.isEmailValid(value)){
+      pwdTip= AppStrings.invalidEmailAddress;
     }else{
       pwdTip=null;
     }
     return pwdTip;
-  }
-
-  String? validatePwd2(String? value){
-    if(value==null||value.isEmpty){
-      pwdTip2=AppStrings.pleaseEnterPassword;
-    }else if(value!=pwdController1.text){
-      pwdTip2= AppStrings.notSamePassword;
-    }else{
-      pwdTip2=null;
-    }
-    return pwdTip2;
   }
 
   @override
@@ -124,18 +113,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children:[
                   Text(
-                      AppStrings.signup,
-                      style: AppStyles.titleLarge.copyWith(color: AppColors.white1)
+                    AppStrings.signin,
+                    style: AppStyles.titleLarge.copyWith(color: AppColors.white1)
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    AppStrings.signUpAccount,
+                    AppStrings.signInToYourAccount,
                     style: AppStyles.bodySmall.copyWith(color: AppColors.white1),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10.h),
             Form(
               key:_formKey,
               child: Padding(
@@ -149,21 +137,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         labelText: AppStrings.email,
                         hintText: AppStrings.email,
                         prefixIcon: Icon(Icons.email),
-                        border: AppStyles.textFormFieldBorder,
+                        border: AppStyles.textFormFieldBorder
                       ),
                       keyboardType: TextInputType.emailAddress,
                       controller: idenController,
                       validator: validateEmail,
                     ),
-                    SizedBox(height: 15.h),
+                    SizedBox(height: 20.h),
                     ValueListenableBuilder(
-                      valueListenable: pwdVisibleNotifier1,
+                      valueListenable: pwdVisibleNotifier,
                       builder: (_, pwdObscure, __)=>TextFormField(
                         obscureText: pwdObscure,
-                        controller: pwdController1,
+                        controller: pwdController,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.visiblePassword,
-                        validator: validatePwd,
                         //onChanged: (_) => _formKey.currentState?.validate(),
                         decoration: InputDecoration(
                           labelText: AppStrings.password,
@@ -175,92 +162,115 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Colors.black,
                               size: 20,
                             ),
-                            onPressed: () => pwdVisibleNotifier1.value = !pwdObscure,
+                            onPressed: () => pwdVisibleNotifier.value = !pwdObscure,
                             style: IconButton.styleFrom(
                               minimumSize: const Size.square(48),
                             ),
                           ),
                           border: AppStyles.textFormFieldBorder,
                         ),
+                        validator: validatePwd,
                       ),
                     ),
-                    SizedBox(height: 15.h),
-                    ValueListenableBuilder(
-                      valueListenable: pwdVisibleNotifier2,
-                      builder: (_, pwdObscure, __)=>TextFormField(
-                        obscureText: pwdObscure,
-                        controller: pwdController2,
-                        textInputAction: TextInputAction.done,
-                        keyboardType: TextInputType.visiblePassword,
-                        validator: validatePwd2,
-                        //onChanged: (_) => _formKey.currentState?.validate(),
-                        decoration: InputDecoration(
-                          labelText: AppStrings.confirmPassword,
-                          hintText: AppStrings.confirmPassword,
-                          prefixIcon: const Icon(Icons.lock),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              pwdObscure ? Icons.visibility : Icons.visibility_off,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                            onPressed: () => pwdVisibleNotifier2.value = !pwdObscure,
-                            style: IconButton.styleFrom(
-                              minimumSize: const Size.square(48),
-                            ),
-                          ),
-                          border: AppStyles.textFormFieldBorder,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15.h),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
-                        surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
-                      ),
-                      onPressed: signUpPressed,
-                      child: const Text(
-                        AppStrings.signup,
-                        style: AppStyles.textBtnOrLinkStyle,
-                      ),
-                    ),
-                    SizedBox(height: 10.h,),
+                    SizedBox(height: 5.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          AppStrings.iHaveAnAccount,
-                          style: AppStyles.bodySmall.copyWith(color: AppColors.darkText0),
-                        ),
-                        const SizedBox(width: 4),
                         TextButton(
-                          onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_in),
+                          onPressed: (){},
                           child: Text(
-                            AppStrings.signin,
+                            AppStrings.forgotPassword,
                             style: AppStyles.bodySmall.copyWith(color: AppColors.silentBlue),
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            ),
+                    SizedBox(height: 5.h,),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 8.h)),
+                        surfaceTintColor: MaterialStateProperty.all(AppColors.silentBlue),
+                      ),
+                      onPressed: signInPressed,
+                      child: const Text(
+                        AppStrings.signin,
+                        style: AppStyles.textBtnOrLinkStyle,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 13.h,
+                    ),
+                    NamedDivider(
+                      height: 20.h,
+                      name: AppStrings.orLoginWith,
+                      dividerHeight: 1,
+                      dividerColor: AppColors.silenceColor,
+                      textColor: AppColors.silenceColor,
+                    ),
+                    SizedBox(height: 8.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: (){},
+                            icon: SvgPicture.asset(AppPic.google, width: 14),
+                            label: const Text(
+                                AppStrings.facebook,
+                                style: TextStyle(color: Colors.black)
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: (){},
+                            icon: SvgPicture.asset(AppPic.facebook, width: 14),
+                            label: const Text(
+                              AppStrings.facebook,
+                              style: TextStyle(color: AppColors.darkText0),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppStrings.doNotHaveAnAccount,
+                          style: AppStyles.bodySmall.copyWith(color: AppColors.darkText0),
+                        ),
+                        const SizedBox(width: 4),
+                        TextButton(
+                          onPressed: ()=>NavigationHelper.pushReplacementNamed(RouteCollector.sign_up),
+                          child: Text(
+                            AppStrings.signup,
+                            style: AppStyles.bodySmall.copyWith(color: AppColors.silentBlue),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]
+                )
+              )
+            )
           ],
         ),
-      ),
+      )
     );
   }
+
   // logic
   String makeTip(){
-    return '${emailTip!=null?'$emailTip; ':''}${pwdTip!=null?'$pwdTip; ':''}${pwdTip2!=null?'$pwdTip2; ':''}${pwdTip!=null?AppStrings.passwordRule:''}';
+    return '${emailTip!=null?'$emailTip; ':''}${pwdTip!=null?'$pwdTip; ':''}${pwdTip!=null?AppStrings.passwordRule:''}';
   }
-  void signUpPressed() async {
+  void signInPressed() async {
     if(allFieldValid()) {
-      AuthHandler.executeSignUp(
+      AuthHandler.executeSignIn(
         email: idenController.text,
-        password: pwdController1.text,
+        password: pwdController.text,
       );
     }
     else{

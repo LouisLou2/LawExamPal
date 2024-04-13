@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../constant/situation_enum.dart';
 import '../../../domain/entity/persistence_kind/note.dart';
-import '../../../domain/entity/persistence_kind/ques_history.dart';
 
 class NoteProv with ChangeNotifier {
 

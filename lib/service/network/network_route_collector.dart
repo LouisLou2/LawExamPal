@@ -1,7 +1,9 @@
 
 // 这些route是需要持久化保存的，以应对后端api的变化,但是目前先不做这些了
+import 'package:easy_cse/config/config.dart';
+
 class NetworkPathCollector {
-  static const String host = "http://192.168.5.101:8091";
+  static const String host = Configs.BASE_URL;
   // 分类
   static const String account = "/account";
   static const String content = "/content";

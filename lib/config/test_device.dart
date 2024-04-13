@@ -3,7 +3,10 @@ class TestDevice{
   double dp2;
   TestDevice({required this.dp1, required this.dp2});
 }
-// Redmi K60 Ultra 宽度973.38dp，高度大约为438.02dp
+/*测试机型1: Redmi K60 Ultra
+ 宽度: 973.38dp，
+ 高度: 438.02dp
+*/
 class TestDeviceCollection{
   static late TestDevice mobile;
   static late TestDevice desktop;

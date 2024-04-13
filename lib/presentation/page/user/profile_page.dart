@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/widget/helper/dialog_helper.dart';
+import 'package:easy_cse/presentation/widget/helper/dialog_helper.dart';
 import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/navigation/navigation_helper.dart';
 import 'package:easy_cse/service/provider/global/state_manager.dart';

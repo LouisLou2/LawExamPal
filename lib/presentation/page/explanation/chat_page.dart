@@ -1,11 +1,10 @@
 import "package:easy_cse/constant/app_rule.dart";
 import "package:easy_cse/constant/app_string.dart";
 import "package:easy_cse/constant/app_style/app_style.dart";
-import "package:easy_cse/constant/app_style/ui_params.dart";
-import "package:easy_cse/gui/widget/buttons/jump_button.dart";
-import "package:easy_cse/gui/widget/chat_item.dart";
-import "package:easy_cse/gui/widget/config/floating_location.dart";
-import "package:easy_cse/gui/widget/layout_helper_widget/named_divider.dart";
+import "package:easy_cse/presentation/widget/buttons/jump_button.dart";
+import "package:easy_cse/presentation/widget/chat_item.dart";
+import "package:easy_cse/presentation/widget/config/floating_location.dart";
+import "package:easy_cse/presentation/widget/layout_helper_widget/named_divider.dart";
 import "package:easy_cse/service/file_manager/image_manger.dart";
 import "package:easy_cse/service/handler/chat_handler.dart";
 import "package:easy_cse/service/provider/chat/chat_state_prov.dart";

@@ -1,6 +1,6 @@
 import 'package:easy_cse/constant/app_rule.dart';
 import 'package:easy_cse/constant/app_style/app_style.dart';
-import 'package:easy_cse/gui/widget/info_display/headline2.dart';
+import 'package:easy_cse/presentation/widget/info_display/headline2.dart';
 import 'package:easy_cse/service/handler/auth_handler.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:easy_cse/service/provider/user/veri_code_prov.dart';

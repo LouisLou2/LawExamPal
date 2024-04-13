@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_cse/service/file_manager/path_manager.dart';
 import 'package:easy_cse/util/format_tool.dart';
 import 'package:file_picker/file_picker.dart';
@@ -8,8 +6,8 @@ import 'package:tuple/tuple.dart';
 import '../../constant/app_rule.dart';
 import '../../constant/app_style/ui_fitter.dart';
 import '../../domain/entity/persistence_kind/note.dart';
-import '../../gui/widget/helper/dialog_helper.dart';
-import '../../gui/widget/helper/snackbar_helper.dart';
+import '../../presentation/widget/helper/dialog_helper.dart';
+import '../../presentation/widget/helper/snackbar_helper.dart';
 import '../file_manager/image_manger.dart';
 import '../navigation/navigation_helper.dart';
 import '../navigation/route_collector.dart';

@@ -1,4 +1,3 @@
-import 'package:easy_cse/domain/entity/persistence_kind/ques_history.dart';
 import 'package:easy_cse/service/provider/chat/chat_session_prov.dart';
 import 'package:easy_cse/service/provider/chat/chat_state_prov.dart';
 import 'package:easy_cse/service/provider/ques/explanation_provider.dart';
@@ -8,7 +7,6 @@ import 'package:easy_cse/service/provider/ques/ques_history_prov.dart';
 import 'package:easy_cse/service/provider/ques/question_prov.dart';
 import 'package:easy_cse/service/provider/global/state_manager.dart';
 import 'package:easy_cse/service/provider/user/veri_code_prov.dart';
-import 'package:easy_cse/vault/style_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -28,7 +26,6 @@ class ProvManager {
   static late NoteProv noteProv;
   // page and ui
   static late PageChangeProv pageChangeProv;
-  static late StyleProv styleProv;
 
   static void init(){
     // global
@@ -46,7 +43,6 @@ class ProvManager {
     noteProv = NoteProv();
     // page and ui
     pageChangeProv = PageChangeProv();
-    styleProv = StyleProv();
   }
   // 必须是List<SingleChildWidget>
   static List<SingleChildWidget> get getProvList{
@@ -66,7 +62,6 @@ class ProvManager {
       ChangeNotifierProvider(create: (context) => noteProv),
       // page and ui
       ChangeNotifierProvider(create: (context) => pageChangeProv),
-      ChangeNotifierProvider(create: (context) => styleProv),
     ];
   }
 }

@@ -6,16 +6,7 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_style.dart';
-class ColorGroup{
-  final Color backC;
-  final Color foreC;
-  final Color hoverC;
-  const ColorGroup({
-    required this.backC,
-    required this.foreC,
-    required this.hoverC,
-  });
-}
+
 class SnackbarHelper {
   const SnackbarHelper._();
   static final _key = GlobalKey<ScaffoldMessengerState>();

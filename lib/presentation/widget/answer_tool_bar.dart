@@ -1,10 +1,10 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
-import 'package:easy_cse/gui/widget/buttons/colored_text_botton.dart';
-import 'package:easy_cse/gui/widget/buttons/icon_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constant/app_string.dart';
+import 'buttons/colored_text_botton.dart';
+import 'buttons/icon_text_button.dart';
 // !!!!注意这个只是将页面分出的类，不是可以复用的组件！！！！！！
 class AnswerToolBar extends StatelessWidget {
   const AnswerToolBar({super.key});
