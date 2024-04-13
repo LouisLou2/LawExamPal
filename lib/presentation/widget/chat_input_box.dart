@@ -1,6 +1,5 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/service/provider/chat/chat_state_prov.dart';
-import 'package:easy_cse/service/provider/prov_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

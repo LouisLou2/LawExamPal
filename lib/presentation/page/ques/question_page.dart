@@ -1,7 +1,6 @@
 import 'package:easy_cse/constant/app_style/app_color.dart';
 import 'package:easy_cse/domain/entity/resp_model/question.dart';
 import 'package:easy_cse/service/provider/prov_manager.dart';
-import 'package:easy_cse/test_data/test_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,6 @@ import '../../../constant/app_string.dart';
 import '../../../constant/app_style/app_style.dart';
 import '../../../constant/situation_enum.dart';
 import '../../../service/handler/ques_handler.dart';
-import '../../../service/provider/ques/explanation_provider.dart';
 import '../../../service/provider/ques/question_prov.dart';
 import '../../widget/answer_tool_bar.dart';
 import '../../widget/buttons/colored_text_botton.dart';
