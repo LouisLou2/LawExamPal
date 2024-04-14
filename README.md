@@ -67,7 +67,7 @@
 
 1. 克隆 `LawExamPal` 仓库
 2. 在 `lib/config/config.dart`中修改配置，例如服务端主机地址等
-3. 运行 `cd app` 进入应用程序目录
+3. 运行 `cd LawExamPal` 进入应用程序目录
 4. 运行 `flutter pub get` 以下载必要的依赖项
 5. 运行 `flutter run` 在debug模式下启动应用程序
 
