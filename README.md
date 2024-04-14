@@ -60,13 +60,11 @@
 
 将“邓析法学”从源码编译运行，请按照以下步骤：
 
-1. 安装 [Flutter](https://flutter.dev)
-2. 跟随 [Flutter官方文档](https://docs.flutter.dev/get-started/install)或者[Flutter中国开发者文档](https://flutter.cn/community/china)配置环境
-3. 克隆 `LawExamPal` 仓库
-4. 在 `lib/config/config.dart`中修改配置，例如服务端主机地址等
-5. 运行 `cd app` 进入应用程序目录
-6. 运行 `flutter pub get` 以下载必要的依赖项
-7. 运行 `flutter run` 在debug模式下启动应用程序
+1. 克隆 `LawExamPal` 仓库
+2. 在 `lib/config/config.dart`中修改配置，例如服务端主机地址等
+3. 运行 `cd app` 进入应用程序目录
+4. 运行 `flutter pub get` 以下载必要的依赖项
+5. 运行 `flutter run` 在debug模式下启动应用程序
 
 考虑构建release版本？查看[构建](#构建)
 > [!NOTE]

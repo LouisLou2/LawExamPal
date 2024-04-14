@@ -52,13 +52,11 @@ To compile the source code and run it, please refer to [Getting Started](#gettin
 
 To compile and run LawExamPal from the source code, follow these steps:
 
-1. Install [Flutter](https://flutter.dev).
-2. Follow the [Flutter official documentation](https://docs.flutter.dev/get-started/install) or [Flutter Chinese developer documentation](https://flutter.cn/community/china) to set up the environment.
-3. Clone the `LawExamPal` repository.
-4. Modify the configuration in `lib/config/config.dart`, such as the server's host address.
-5. Run `cd app` to enter the app directory.
-6. Run `flutter pub get` to download the necessary dependencies.
-7. Run `flutter run` to start the app in debug mode.
+1. Clone the `LawExamPal` repository.
+2. Modify the configuration in `lib/config/config.dart`, such as the server's host address.
+3. Run `cd app` to enter the app directory.
+4. Run `flutter pub get` to download the necessary dependencies.
+5. Run `flutter run` to start the app in debug mode.
 
 Considering building a release version? Check out [Building](#building).
 
