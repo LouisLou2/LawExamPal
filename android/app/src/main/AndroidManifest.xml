@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:label="easy_cse"
+        android:label="邓析法学"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
