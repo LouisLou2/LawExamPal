@@ -1,18 +1,23 @@
 # 邓析法学
+[English](https://github.com/LouisLou2/LawExamPal/blob/master/README_EN.md)
 
 [本项目GitHub][github] • [Gitee][gitee]
 
-[服务端仓库地址][server_repo]
+#### 本项目其他端的仓库地址
 
-[English](https://github.com/LouisLou2/LawExamPal/blob/master/README_EN.md)
+[服务端][server_repo]
+
+[AI模型][ai_model]
 
 [github]: https://github.com/LouisLou2/LawExamPal
 [gitee]: https://gitee.com/giteeleoleo/LawExamPal
 [server_repo]: https://github.com/vaporhug/AI_Helper/tree/master
+[ai_model]: https://github.com/LiangYeJing/dengxi_Law_Learn
 
 一个专为法考考生设计的AI助手，提供基于图片的问题解答、AI问答、个性化推荐和笔记整理等功能，帮助考生高效备考。
 
 - [邓析法学](#邓析法学)
+      - [本项目其他端的仓库地址](#本项目其他端的仓库地址)
   - [关于](#关于)
   - [截图](#截图)
   - [下载](#下载)

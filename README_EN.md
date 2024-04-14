@@ -1,14 +1,18 @@
 # LawExamPal
-
-[GitHub for this project][github] • [Gitee][gitee]
-
-[Server Repository][server_repo]
-
 [中文版](https://github.com/LouisLou2/LawExamPal/blob/master/README.md)
+
+[GitHub][github] • [Gitee][gitee]
+
+#### Links to other repositories of this project
+
+[Server][server_repo]
+
+[AI Model][ai_model]
 
 [github]: https://github.com/LouisLou2/LawExamPal
 [gitee]: https://gitee.com/giteeleoleo/LawExamPal
 [server_repo]: https://github.com/vaporhug/AI_Helper/tree/master
+[ai_model]: https://github.com/LiangYeJing/dengxi_Law_Learn
 
 LawExamPal is an AI assistant designed specifically for legal exam candidates. It offers features such as photo-based question answering, AI Q&A, personalized question recommendations, and note organization to help candidates prepare efficiently for their exams.
 
